@@ -6,5 +6,4 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(offlinedata);
 
     return a.exec();
-    //testi
 }
