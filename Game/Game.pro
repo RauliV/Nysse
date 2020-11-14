@@ -6,6 +6,8 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
+    city.cc \
+    creategame.cc \
     main.cc
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -31,3 +33,6 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/debug/CourseLib.lib
 else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
+
+HEADERS += \
+    city.hh
