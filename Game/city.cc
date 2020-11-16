@@ -92,8 +92,9 @@ void City::startGame()
 
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
-{
-
+{/*
+    auto location = newactor->IActor::giveLocation(); //undefined referense. Linkitys?
+    CourseSide::SimpleActorItem toimija(location.giveX(), location.giveY(), 0);*/
 };
 
 

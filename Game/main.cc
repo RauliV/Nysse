@@ -9,7 +9,6 @@
 
 
 
-std::shared_ptr<Interface::ICity> pointer;
 
 int main(int argc, char *argv[])
 {
@@ -17,22 +16,27 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     Q_INIT_RESOURCE(offlinedata);
 
-
-
     std::shared_ptr<Interface::ICity> pointer;
-    //qDebug() << "Tuleeko tähän";
+
+    CourseSide::SimpleMainWindow* window = new CourseSide::SimpleMainWindow[1];
+    window->show();
+
+    QString file_iso = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
+    QString file_pieni = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
+    QImage tausta_iso (file_iso);
+    QImage tausta_pieni (file_pieni);
 
 
-    CourseSide::SimpleMainWindow window;
-    window.show();
-
-    //pointer = Interface::createGame(); //slot?   TÄSSÄ ROPLEEMI.
-    // Miksi createGame ei ole käytettävissä täällä? Ajon aikainen linkitysvirhe?
+    //pointer = Interface::createGame(); //   TÄSSÄ ROPLEEMI.
+    // Miksi createGame ei ole käytettävissä täällä? Ajonaikainen linkitysvirhe?
+    // Sama tiedostossa city.cc 94
 
 
 
-    //Ei toimi, koska pointteri viittaa jonnekin(tm). Kts. edellä.
-    //pointer->startGame();
+    //Jumittavat, koska pointteri viittaa jonnekin(tm). Kts. edellä.
+    //pointer->setBackground(tausta_iso, tausta_pieni);
+    //pointer->setClock(QTime::currentTime());
+    //pointer->startGame(); //slot
 
     // pelimoottori
 
@@ -42,26 +46,21 @@ int main(int argc, char *argv[])
 
 
 
-    //for tests
+// Miten ikkunaolio näkyviin missä tarvitaan / globaaliksi vai tarvitaanko muualla kuin mainissa.
+// (Esim. City::setBackground city.cc 45)
 
-    //pointer->setClock(QTime::currentTime());  //Eivät toimi, koska createGame
-    //pointer->setBackground(QImage xxxx);
-
-
-
-
-// Miten ikkunaolio näkyviin missä tarvitaan / globaaliksi?
-// Esim. City::setBackground city.cc 45
+// Toimijatyypit (int)? IActorista periytetty valmiiksi IVechile ja IPassenger.
+// Valitaanko tyyppinumerot itse vai hä?
 
 
     return a.exec();
 
 }
-
+/*
 namespace name {
 
 //std::shared_ptr<CourseSide::SimpleMainWindow> ikkuna_osoite = new (CourseSide::SimpleMainWindow);
 CourseSide::SimpleMainWindow *ikkuna_osoite =  new CourseSide::SimpleMainWindow;
 
 
-};
+}*/
