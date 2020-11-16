@@ -37,4 +37,10 @@ else:unix: PRE_TARGETDEPS += \
 
 HEADERS += \
     city.hh \
+<<<<<<< HEAD
     statistics.hh
+=======
+    $$PWD/../Course/CourseLib/creategame.hh
+
+
+>>>>>>> 075f965f8cee9722b3bc1b9a03902ea8e4d68bce
