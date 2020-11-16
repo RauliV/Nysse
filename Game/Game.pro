@@ -8,7 +8,8 @@ CONFIG += c++14
 SOURCES += \
     city.cc \
     creategame.cc \
-    main.cc
+    main.cc \
+    statistics.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -35,4 +36,5 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 HEADERS += \
-    city.hh
+    city.hh \
+    statistics.hh
