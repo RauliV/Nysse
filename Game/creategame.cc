@@ -2,6 +2,7 @@
 #include "city.hh"
 #include <QTime>
 #include <QDebug>
+#include <memory>
 
 
 std::shared_ptr<Interface::ICity> createGame()
@@ -13,6 +14,8 @@ std::shared_ptr<Interface::ICity> createGame()
     City tampere;
     tampere.setBackground(tausta_pieni, tausta_iso);
     tampere.setClock(QTime::currentTime());
+
+    //extern ?? Osoite globaaliksi/näkymään Cityn metodeissa?
     std::shared_ptr<Interface::ICity> kaupunki_osoite;
     *kaupunki_osoite = tampere;
     return kaupunki_osoite;

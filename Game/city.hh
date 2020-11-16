@@ -1,14 +1,15 @@
 #ifndef CITY_HH
 #define CITY_HH
 
+#include "graphics/simplemainwindow.hh"
+
 #include "interfaces/icity.hh"
 #include <QTime>
 
-
-class City : public Interface::ICity{
+class City : public Interface::ICity
+{
 
 public:
-
 
     void setBackground(QImage& basicbackground, QImage& bigbackground);
 

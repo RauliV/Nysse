@@ -35,4 +35,7 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 HEADERS += \
-    city.hh
+    city.hh \
+    $$PWD/../Course/CourseLib/creategame.hh
+
+
