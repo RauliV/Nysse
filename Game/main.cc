@@ -42,15 +42,7 @@ int main(int argc, char *argv[])
 
     // Game Over
 
-    // statistics
-
-
-
-// Miten ikkunaolio näkyviin missä tarvitaan / globaaliksi vai tarvitaanko muualla kuin mainissa.
-// (Esim. City::setBackground city.cc 45)
-
-// Toimijatyypit (int)? IActorista periytetty valmiiksi IVechile ja IPassenger.
-// Valitaanko tyyppinumerot itse vai hä?
+    // statistics -> save stats
 
 
     return a.exec();
@@ -64,3 +56,14 @@ CourseSide::SimpleMainWindow *ikkuna_osoite =  new CourseSide::SimpleMainWindow;
 
 
 }*/
+
+
+// Kommentit/kysymykset jne...
+
+// Miten ikkunaolio näkyviin missä tarvitaan / globaaliksi vai tarvitaanko muualla kuin mainissa.
+// (Esim. City::setBackground city.cc 45)
+
+// Toimijatyypit (int)? IActorista periytetty valmiiksi IVechile ja IPassenger.
+// Valitaanko tyyppinumerot itse vai hä?
+
+

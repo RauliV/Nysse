@@ -4,6 +4,7 @@
 #include "interfaces/iactor.hh"
 #include "interfaces/istop.hh"
 #include "actors/stop.hh"
+#include "errors/gameerror.hh"
 #include <QDebug>
 #include <QTime>
 #include <memory>
@@ -101,20 +102,35 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    actor->destroy();
+    if  (not actor->isDestroyed())
+    {
+        actor->destroy();
+    };
+
 };
 
 
 
 void City::actorDestroyed(std::shared_ptr<Interface::IActor> actor)
 {
-
+    actor->isDestroyed();
 };
 
 
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
+    try
+    {
+        actor->giveLocation();
+    }
+    catch (Interface::GameError error)
+    {
+        error.giveMessage();
+        return false;
+
+    }
+    return true;
 
 };
 
