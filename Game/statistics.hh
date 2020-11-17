@@ -7,6 +7,12 @@ class statistics : public Interface::IStatistics
 {
 public:
     statistics();
+
+    void startTimer();
+
+    void stopTimer();
+
+
 };
 
 #endif // STATISTICS_HH
