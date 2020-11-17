@@ -3,7 +3,6 @@
 
 #include "interfaces/istatistics.hh"
 
-
 class statistics : public Interface::IStatistics
 {
 public:
