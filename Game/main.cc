@@ -1,5 +1,6 @@
 #include "creategame.hh"
 #include "city.hh"
+#include "player.hh"
 #include "statistics.hh"
 #include "graphics/simplemainwindow.hh"
 #include <QApplication>
