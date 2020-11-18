@@ -15,5 +15,8 @@ settingsDialog::~settingsDialog()
 
 void settingsDialog::on_buttonBox_accepted()
 {
-
+    int numberOfPlayers = ui->NumberOfPlayersSpinBox->value();
+    for (int i = 0;i < numberOfPlayers;i++){
+        player newplayer;
+    }
 }
