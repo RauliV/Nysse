@@ -10,6 +10,7 @@ SOURCES += \
     creategame.cc \
     main.cc \
     player.cpp \
+    settingsdialog.cpp \
     statistics.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -39,7 +40,9 @@ else:unix: PRE_TARGETDEPS += \
 HEADERS += \
     city.hh \
     player.hh \
+    settingsdialog.hh \
     statistics.hh\
     $$PWD/../Course/CourseLib/creategame.hh
 
-FORMS +=
+FORMS += \
+    settingsdialog.ui
