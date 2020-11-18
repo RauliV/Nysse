@@ -1,19 +1,21 @@
-//#include "city.hh"
+#include "city.hh"
 //#include "interfaces/icity.hh"
 #include "graphics/simplemainwindow.hh"
-#include "interfaces/iactor.hh"
-#include "interfaces/istop.hh"
+//#include "interfaces/iactor.hh"
+#include "creategame.hh"
+//#include "interfaces/istop.hh"
 #include "actors/stop.hh"
+#include "errors/gameerror.hh"
 #include <QDebug>
 #include <QTime>
 #include <memory>
 
 
-class City : public Interface::ICity
+/*class City : public Interface::ICity
 
 {
 
-public:
+public:*/
 
 
     void setBackground(QImage& basicbackground, QImage& bigbackground);
@@ -30,16 +32,16 @@ public:
 
     void actorDestroyed(std::shared_ptr<Interface::IActor> actor);
 
-    bool findActor(std::shared_ptr<Interface::IActor> actor) const;
+    bool findActor(std::shared_ptr<Interface::IActor> actor);// const;
 
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
 
-    std::vector<std::shared_ptr<Interface::IActor>> getNearbyActors(Interface::Location loc) const;
+    std::vector<std::shared_ptr<Interface::IActor>> getNearbyActors(Interface::Location loc);// const;
 
-    bool isGameOver() const;
+    bool isGameOver();// const;
 
 
-};
+//};
 
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground){
@@ -47,13 +49,17 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground){
     // Taustan asettamisessa ongelma, koska pitäisi käyttää toisessa instanssissa
     // (main.cc) luotua ikkunaoliota
 
+    CourseSide::SimpleMainWindow window;
     //name::window.setSize(1095,592);
-    //window.setPicture(basicbackground);
+    window.setPicture(basicbackground);
     //QPointer<QWindow>
     //>extern CourseSide::SimpleMainWindow window;
     //window.setPicture(bigbackground);
     qDebug() << "nyt näkyviin";
-    //window.show();
+    //std::shared_ptr<Interface::ICity> pointer;
+    //pointer = Interface::createGame();
+    window.show();
+
 
 };
 
@@ -92,29 +98,45 @@ void City::startGame()
 
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
-{/*
-    auto location = newactor->IActor::giveLocation(); //undefined referense. Linkitys?
-    CourseSide::SimpleActorItem toimija(location.giveX(), location.giveY(), 0);*/
+{
+
+    auto location = newactor->giveLocation(); //undefined referense. Linkitys?
+    CourseSide::SimpleActorItem toimija(location.giveX(), location.giveY(), 0);
 };
 
 
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    actor->destroy();
+    if  (not actor->isDestroyed())
+    {
+        actor->destroy();
+    };
+
 };
 
 
 
 void City::actorDestroyed(std::shared_ptr<Interface::IActor> actor)
 {
-
+    actor->isDestroyed();
 };
 
 
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
+    try
+    {
+        actor->giveLocation();
+    }
+    catch (Interface::GameError error)
+    {
+        error.giveMessage();
+        return false;
+
+    }
+    return true;
 
 };
 
