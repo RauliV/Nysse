@@ -4,19 +4,30 @@
 #include <QDebug>
 #include <memory>
 
+namespace Interface {
 
-std::shared_ptr<Interface::ICity> createGame()
+
+
+void init_screen(std::shared_ptr<City> city)
 {
-    /*QString file_iso = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
+    QString file_iso = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
     QString file_pieni = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
     QImage tausta_iso (file_iso);
-    QImage tausta_pieni (file_pieni);*/
-    City tampere;
-    /*tampere.setBackground(tausta_pieni, tausta_iso);
-    tampere.setClock(QTime::currentTime());
+    QImage tausta_pieni (file_pieni);
+    city->setBackground(tausta_iso, tausta_pieni);
 
-    //extern ?? Osoite globaaliksi/näkymään Cityn metodeissa?*/
-    std::shared_ptr<Interface::ICity> kaupunki_osoite;
-    *kaupunki_osoite = tampere;
-    return kaupunki_osoite;
+    city->get_window()->show();
+}
+
+
+
+std::shared_ptr<ICity> createGame()
+// Tätä ei ajeta vielä, koska errorerror
+
+{   std::shared_ptr<City> pointer = std::make_shared<City>();
+    Interface::init_screen(pointer);
+    pointer -> setClock(QTime::currentTime());
+
+    return pointer;
+}
 }

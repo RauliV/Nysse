@@ -12,6 +12,16 @@ class City : public Interface::ICity
 
 public:
 
+    void set_window (std::shared_ptr<CourseSide::SimpleMainWindow> ikkuna_osoite)
+    {
+        ikkuna = ikkuna_osoite;
+    }
+
+    std::shared_ptr<CourseSide::SimpleMainWindow> get_window ()
+    {
+        return ikkuna;
+    }
+
     void setBackground(QImage& basicbackground, QImage& bigbackground);
 
     void setClock(QTime clock);
@@ -41,6 +51,9 @@ public:
     {
         return false;
     };*/
+
+private:
+    std::shared_ptr <CourseSide::SimpleMainWindow> ikkuna;
 };
 
 #endif // CITY_HH
