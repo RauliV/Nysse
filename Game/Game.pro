@@ -9,7 +9,6 @@ SOURCES += \
     city.cc \
     creategame.cc \
     main.cc \
-    player.cpp \
     statistics.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -38,11 +37,5 @@ else:unix: PRE_TARGETDEPS += \
 
 HEADERS += \
     city.hh \
-<<<<<<< HEAD \
-    player.hh \
-    statistics.hh
-=======
+    statistics.hh\
     $$PWD/../Course/CourseLib/creategame.hh
-
-
->>>>>>> 075f965f8cee9722b3bc1b9a03902ea8e4d68bce
