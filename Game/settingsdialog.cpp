@@ -4,6 +4,7 @@
 settingsDialog::settingsDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::settingsDialog)
+
 {
     ui->setupUi(this);
 }
@@ -17,3 +18,4 @@ void settingsDialog::on_buttonBox_accepted()
 {
 
 }
+

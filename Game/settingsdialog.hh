@@ -2,6 +2,7 @@
 #define SETTINGSDIALOG_HH
 
 #include <QDialog>
+#include "player.hh"
 
 namespace Ui {
 class settingsDialog;
@@ -14,6 +15,9 @@ class settingsDialog : public QDialog
 public:
     explicit settingsDialog(QWidget *parent = nullptr);
     ~settingsDialog();
+
+private slots:
+    void on_buttonBox_accepted();
 
 private:
     Ui::settingsDialog *ui;

@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>settingsDialog</class>
  <widget class="QDialog" name="settingsDialog">
+=======
+<ui version="4.0">
+ <author/>
+ <comment/>
+ <exportmacro/>
+ <class>SettingsDialog</class>
+ <widget name="SettingsDialog" class="QDialog">
+>>>>>>> 27038a60059c83f95e02c386ea7f02c15c90e39d
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,7 +22,11 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+<<<<<<< HEAD
   <widget class="QDialogButtonBox" name="buttonBox">
+=======
+  <widget name="buttonBox" class="QDialogButtonBox">
+>>>>>>> 27038a60059c83f95e02c386ea7f02c15c90e39d
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -29,6 +42,7 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
+<<<<<<< HEAD
   <widget class="QSpinBox" name="NumberOfPlayersSpinBox">
    <property name="geometry">
     <rect>
@@ -171,12 +185,20 @@
    </layout>
   </widget>
  </widget>
+=======
+ </widget>
+ <pixmapfunction/>
+>>>>>>> 27038a60059c83f95e02c386ea7f02c15c90e39d
  <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
+<<<<<<< HEAD
    <receiver>settingsDialog</receiver>
+=======
+   <receiver>SettingsDialog</receiver>
+>>>>>>> 27038a60059c83f95e02c386ea7f02c15c90e39d
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -192,7 +214,11 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
+<<<<<<< HEAD
    <receiver>settingsDialog</receiver>
+=======
+   <receiver>SettingsDialog</receiver>
+>>>>>>> 27038a60059c83f95e02c386ea7f02c15c90e39d
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -1,12 +1,12 @@
 #include "creategame.hh"
 #include "city.hh"
+#include "interfaces/icity.hh"
 #include "player.hh"
 #include "statistics.hh"
 #include "graphics/simplemainwindow.hh"
 #include <QApplication>
 #include <QDebug>
 #include <memory>
-
 
 
 
@@ -18,40 +18,19 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(offlinedata);
 
 
+    //Miksi paluuarvona createGamessa on osoite ICity -abstraktiin luokkaan, eikä
+    //staattiseen Cityyn, josta olisi luotavissa olio?
 
-    //CourseSide::SimpleMainWindow window;
-   //CourseSide::SimpleMainWindow* window = new CourseSide::SimpleMainWindow[1];
-    //window.show();
+    //pointer = Interface::createGame(); //Em. ristiriidasta johtuen tässä sekoaa?
 
-    QString file_iso = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
-    QString file_pieni = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
-    QImage tausta_iso (file_iso);
-    QImage tausta_pieni (file_pieni);
-    std::shared_ptr<Interface::ICity> pointer;
-    //std::make_sha
-    //pointer.get->  ;
-    //pointer = std::make_shared <Interface::ICity> (Interface::createGame());
-    //auto point Interface::ICity = Interface::createGame();
-    //pointer = new std::shared_ptr<Interface::createGame()>;
-    //std::shared_ptr<Interface::ICity> point(new <std::shared_ptr>Interface::createGame());
-    //auto p = new auto (Interface::createGame());
-    //qDebug() << Interface::createGame()->isGameOver();
+    auto pointer = std::make_shared <City> (); //koeajoja varten korvataan se tällä
 
-    //pointer =  Interface::createGame(); //   TÄSSÄ ROPLEEMI.
-
-    // Miksi createGame ei ole käytettävissä täällä? Ajonaikainen linkitysvirhe?
-    // Sama tiedostossa city.cc 94
-
-    //Jumittavat, koska pointteri viittaa jonnekin(tm). Kts. edellä.
-    //pointer->setBackground(tausta_iso, tausta_pieni);
-    //pointer->setClock(QTime::currentTime());
-    //pointer->startGame(); //slot
+    // Koeajoja - oikeastaan funktiokutsuja, mitkä olisivat createGamessa
+    auto ikkuna_osoitin = std::make_shared<CourseSide::SimpleMainWindow> ();
+    pointer->set_window(ikkuna_osoitin); //Atribuutiksi ikkunaolio
+    Interface::init_screen(pointer);     //createGame.cc funktio
 
     return a.exec();
 
 
 }
-
-
-
-
