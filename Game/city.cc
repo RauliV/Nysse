@@ -8,12 +8,13 @@
 #include <memory>
 
 
+
+
 void City::setBackground(QImage &basicbackground, QImage &bigbackground){
 
 
-    //name::window.setSize(1095,592);
+    //window.setSize(1095,592);
     ikkuna->setPicture(basicbackground);
-    qDebug() << "nyt näkyviin";
 
 };
 
@@ -21,7 +22,8 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground){
 
 void City::setClock(QTime clock){
 
-    //QTime::    setHMS(clock) clock  = clock;
+    QTime peliaika;
+    peliaika.setHMS(0,0,0);//QTime::    setHMS(clock) clock  = clock;
     qDebug() << clock;
 
 };
@@ -49,7 +51,12 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
 
     auto location = newactor->giveLocation(); //undefined referense. Linkitys?
-    CourseSide::SimpleActorItem toimija(location.giveX(), location.giveY(), 0);
+    CourseSide::SimpleActorItem toimija(location.giveX(), location.giveY(), 1);
+    QPainter p;
+    //QStyleOptionGraphicsItem;
+
+
+    //toimija.paint(p, QWidget *);
 };
 
 
@@ -59,6 +66,7 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
     if  (not actor->isDestroyed())
     {
         actor->destroy();
+        qDebug() << "tuhotaan";
     };
 
 };

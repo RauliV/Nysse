@@ -1,4 +1,4 @@
-#include "creategame.hh"
+ #include "creategame.hh"
 #include "city.hh"
 #include "interfaces/icity.hh"
 #include "player.hh"
@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
     // Koeajoja - oikeastaan funktiokutsuja, mitkä olisivat createGamessa
     auto ikkuna_osoitin = std::make_shared<CourseSide::SimpleMainWindow> ();
     pointer->set_window(ikkuna_osoitin); //Atribuutiksi ikkunaolio
-    Interface::init_screen(pointer);     //createGame.cc funktio
-
+    init_screen(pointer);     //createGame.cc funktio
+    addActors(pointer);
     return a.exec();
 
 
