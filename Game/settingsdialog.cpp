@@ -15,6 +15,7 @@ settingsDialog::~settingsDialog()
 
 void settingsDialog::on_NumberOfPlayersSpinBox_valueChanged(int arg1)
 {
+    //Riippuen pelaajien määrästä
     switch(arg1){
         case 0: ui->PlayerNameLineEdit_1->setEnabled(false);
                 ui->PlayerNameLineEdit_2->setEnabled(false);
@@ -65,5 +66,14 @@ void settingsDialog::on_NumberOfPlayersSpinBox_valueChanged(int arg1)
                 ui->PlayerColorComboBox_2->setEnabled(true);
                 ui->PlayerColorComboBox_3->setEnabled(true);
                 ui->PlayerColorComboBox_4->setEnabled(true);
+    }
+}
+
+void settingsDialog::on_buttonBox_accepted()
+{
+    int players = ui->NumberOfPlayersSpinBox->value();
+    switch (players) {
+    case 0:;
+
     }
 }
