@@ -1,14 +1,14 @@
 #include "settingsdialog.hh"
 #include "ui_settingsdialog.h"
 
-SettingsDialog::SettingsDialog(QWidget *parent) :
+settingsDialog::settingsDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::SettingsDialog)
+    ui(new Ui::settingsDialog)
 {
     ui->setupUi(this);
 }
 
-SettingsDialog::~SettingsDialog()
+settingsDialog::~settingsDialog()
 {
     delete ui;
 }
