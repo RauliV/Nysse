@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SettingsDialog</class>
- <widget class="QDialog" name="SettingsDialog">
+ <class>settingsDialog</class>
+ <widget class="QDialog" name="settingsDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>414</width>
-    <height>356</height>
+    <width>478</width>
+    <height>374</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>300</y>
+     <x>120</x>
+     <y>340</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -33,59 +33,60 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>20</y>
-     <width>123</width>
+     <y>100</y>
+     <width>124</width>
      <height>57</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_11">
+   <layout class="QVBoxLayout" name="verticalLayout_6">
     <item>
-     <widget class="QLabel" name="label_9">
+     <widget class="QLabel" name="label_5">
       <property name="text">
-       <string>Number of Players</string>
+       <string>Number of players</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QSpinBox" name="NumberOfPlayersSpinBox"/>
+     <widget class="QSpinBox" name="NumberOfPlayersSpinBox">
+      <property name="maximum">
+       <number>4</number>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>230</x>
      <y>20</y>
      <width>220</width>
-     <height>258</height>
+     <height>246</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_10">
-      <property name="spacing">
-       <number>10</number>
-      </property>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
+       <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QLabel" name="label_5">
+         <widget class="QLabel" name="label">
           <property name="text">
-           <string>Name</string>
+           <string>Player1 name</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="PlayerNameLineEdit"/>
+         <widget class="QLineEdit" name="PlayerNameLineEdit_1"/>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_7">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLabel" name="label_6">
+         <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Name</string>
+           <string>Player2 name</string>
           </property>
          </widget>
         </item>
@@ -95,11 +96,11 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_8">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QLabel" name="label_7">
+         <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Name</string>
+           <string>Player3 name</string>
           </property>
          </widget>
         </item>
@@ -109,11 +110,11 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_9">
+       <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QLabel" name="label_8">
+         <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>Name</string>
+           <string>Player4 name</string>
           </property>
          </widget>
         </item>
@@ -125,21 +126,18 @@
      </layout>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_5">
-      <property name="spacing">
-       <number>10</number>
-      </property>
+     <layout class="QVBoxLayout" name="verticalLayout_11">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout">
+       <layout class="QVBoxLayout" name="verticalLayout_7">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="label_6">
           <property name="text">
            <string>Color</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="PlayerColourComboBox">
+         <widget class="QComboBox" name="PlayerColorComboBox_1">
           <item>
            <property name="text">
             <string>Blue</string>
@@ -152,12 +150,12 @@
           </item>
           <item>
            <property name="text">
-            <string>Green</string>
+            <string>Yellow</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Yellow</string>
+            <string>Green</string>
            </property>
           </item>
          </widget>
@@ -165,16 +163,16 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="label_7">
           <property name="text">
            <string>Color</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="PlayerColourComboBox_2">
+         <widget class="QComboBox" name="PlayerColorComboBox_2">
           <item>
            <property name="text">
             <string>Blue</string>
@@ -187,12 +185,12 @@
           </item>
           <item>
            <property name="text">
-            <string>Green</string>
+            <string>Yellow</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Yellow</string>
+            <string>Green</string>
            </property>
           </item>
          </widget>
@@ -200,16 +198,16 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <layout class="QVBoxLayout" name="verticalLayout_9">
         <item>
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="label_8">
           <property name="text">
            <string>Color</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="PlayerColourComboBox_3">
+         <widget class="QComboBox" name="PlayerColorComboBox_3">
           <item>
            <property name="text">
             <string>Blue</string>
@@ -222,12 +220,12 @@
           </item>
           <item>
            <property name="text">
-            <string>Green</string>
+            <string>Yellow</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Yellow</string>
+            <string>Green</string>
            </property>
           </item>
          </widget>
@@ -235,16 +233,16 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <layout class="QVBoxLayout" name="verticalLayout_10">
         <item>
-         <widget class="QLabel" name="label_4">
+         <widget class="QLabel" name="label_9">
           <property name="text">
            <string>Color</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="PlayerColourComboBox_4">
+         <widget class="QComboBox" name="PlayerColorComboBox_4">
           <item>
            <property name="text">
             <string>Blue</string>
@@ -257,12 +255,12 @@
           </item>
           <item>
            <property name="text">
-            <string>Green</string>
+            <string>Yellow</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Yellow</string>
+            <string>Green</string>
            </property>
           </item>
          </widget>
@@ -279,7 +277,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>SettingsDialog</receiver>
+   <receiver>settingsDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -295,7 +293,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>SettingsDialog</receiver>
+   <receiver>settingsDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
