@@ -15,6 +15,9 @@ public:
     explicit settingsDialog(QWidget *parent = nullptr);
     ~settingsDialog();
 
+private slots:
+    void on_NumberOfPlayersSpinBox_valueChanged(int arg1);
+
 private:
     Ui::settingsDialog *ui;
 };
