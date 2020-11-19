@@ -11,7 +11,8 @@ SOURCES += \
     main.cc \
     player.cpp \
     settingsdialog.cpp \
-    statistics.cpp
+    statistics.cpp \
+    test_func_runs.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -42,7 +43,8 @@ HEADERS += \
     player.hh \
     settingsdialog.hh \
     statistics.hh\
-    $$PWD/../Course/CourseLib/creategame.hh
+    $$PWD/../Course/CourseLib/creategame.hh \
+    test_func_runs.h
 
 FORMS += \
     settingsdialog.ui
