@@ -1,8 +1,10 @@
 #include "city.hh"
 #include "graphics/simplemainwindow.hh"
-//#include "creategame.hh"
+#include "test_func_runs.h"
+#include "creategame.hh"
 #include "actors/stop.hh"
 #include "errors/gameerror.hh"
+#include "core/logic.hh"
 #include <QDebug>
 #include <QTime>
 #include <memory>
@@ -22,8 +24,10 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground){
 
 void City::setClock(QTime clock){
 
-    QTime peliaika;
-    peliaika.setHMS(0,0,0);//QTime::    setHMS(clock) clock  = clock;
+    short int hours = clock.minute();
+    short int minutes = clock.hour();
+    //setTime(hours, minutes);
+    clock.setHMS(hours, minutes, 0);
     qDebug() << clock;
 
 };

@@ -12,6 +12,9 @@ class City : public Interface::ICity
 
 public:
 
+    //City () :ICity(){};
+
+
     void set_window (std::shared_ptr<CourseSide::SimpleMainWindow> ikkuna_osoite)
     {
         ikkuna = ikkuna_osoite;
@@ -53,7 +56,7 @@ public:
     };*/
 
 private:
-    std::shared_ptr <CourseSide::SimpleMainWindow> ikkuna;
+   std::shared_ptr <CourseSide::SimpleMainWindow> ikkuna;
 };
 
 #endif // CITY_HH

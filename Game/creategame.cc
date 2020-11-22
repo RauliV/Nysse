@@ -1,19 +1,32 @@
+#include "test_func_runs.h"
 #include "creategame.hh"
+#include "city.hh"
+#include "core/logic.hh"
+#include "interfaces/icity.hh"
+#include "statistics.hh"
+#include <memory>
 
 
 
 
 std::shared_ptr<Interface::ICity> createGame()
-// Tätä ei ajeta vielä, koska errorerror
 
 {
+    Interface::ICity* icity_pointer;
+    //icity_pointer->startGame();
+    City* city_pointer = dynamic_cast<City*>(icity_pointer);//icity_pointer);
+    std::shared_ptr<Interface::ICity> shared_ic_ptr(icity_pointer);
+    std::shared_ptr<City> city_shared_ptr(city_pointer);
+    city_pointer->get_window()->show();
 
-    std::shared_ptr<Interface::ICity> iCity;
-    // std::shared_ptr<Interface::City> pointer = std::make_shared<City>();
-    //init_screen(pointer);
-    iCity -> setClock(QTime::currentTime());
-    iCity ->startGame();
+    CourseSide::Logic game();
+    QTime pelikello;
 
-    return iCity;
+    init_screen(city_shared_ptr);
+    addActors(city_shared_ptr);
+
+    return shared_ic_ptr;
+
+            //std::shared_ptr<Interface::ICity>  (tampere );
 }
 

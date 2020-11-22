@@ -43,8 +43,9 @@ HEADERS += \
     player.hh \
     settingsdialog.hh \
     statistics.hh\
-    $$PWD/../Course/CourseLib/creategame.hh \
+
     test_func_runs.h
 
 FORMS += \
+    mainwindow.ui \
     settingsdialog.ui
