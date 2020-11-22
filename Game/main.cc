@@ -1,5 +1,5 @@
 #include "test_func_runs.h"
-#include "creategame.hh"
+#include "../Course/CourseLib/creategame.hh"
 #include "city.hh"
 #include "interfaces/icity.hh"
 #include "player.hh"
@@ -18,7 +18,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     Q_INIT_RESOURCE(offlinedata);
 
-
+    std::shared_ptr<Interface::ICity> pCity = Interface::createGame();
+/*
     //Miksi paluuarvona createGamessa on osoite ICity -abstraktiin luokkaan, eikä
     //staattiseen Cityyn, josta olisi luotavissa olio?
 
@@ -32,5 +33,5 @@ int main(int argc, char *argv[])
     addActors(pointer);
     return a.exec();
 
-
+*/
 }

@@ -7,7 +7,7 @@ CONFIG += c++14
 
 SOURCES += \
     city.cc \
-    creategame.cc \
+    creategame.cpp \
     main.cc \
     player.cpp \
     settingsdialog.cpp \
