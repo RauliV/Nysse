@@ -6,9 +6,10 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
-    city.cc \
-    creategame.cc \
+    city.cpp \
+    creategame.cpp \
     main.cc \
+    mainwindow.cpp \
     player.cpp \
     settingsdialog.cpp \
     statistics.cpp \
@@ -40,12 +41,15 @@ else:unix: PRE_TARGETDEPS += \
 
 HEADERS += \
     city.hh \
+    mainwindow.h \
     player.hh \
     settingsdialog.hh \
     statistics.hh\
-
     test_func_runs.h
 
 FORMS += \
     mainwindow.ui \
     settingsdialog.ui
+
+RESOURCES += \
+    graphics/

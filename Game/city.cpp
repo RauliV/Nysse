@@ -1,5 +1,5 @@
 #include "city.hh"
-#include "graphics/simplemainwindow.hh"
+#include "mainwindow.h"
 #include "test_func_runs.h"
 #include "creategame.hh"
 #include "actors/stop.hh"
@@ -24,10 +24,9 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground){
 
 void City::setClock(QTime clock){
 
-    short int hours = clock.minute();
-    short int minutes = clock.hour();
-    //setTime(hours, minutes);
-    clock.setHMS(hours, minutes, 0);
+    short int hours = QTime::currentTime().minute();
+    short int minutes = QTime::currentTime().hour();
+    clock.setHMS(minutes, hours, 0);
     qDebug() << clock;
 
 };
@@ -36,6 +35,7 @@ void City::setClock(QTime clock){
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
+
     int id = stop->getId();
     QString nimi = stop->getName();
     Interface::Location paikka = stop->getLocation();
@@ -47,6 +47,8 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 void City::startGame()
 {
 
+CourseSide::SimpleMainWindow ikkuna;
+ikkuna.show();
 
 };
 
@@ -54,13 +56,8 @@ void City::startGame()
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
 
-    auto location = newactor->giveLocation(); //undefined referense. Linkitys?
-    CourseSide::SimpleActorItem toimija(location.giveX(), location.giveY(), 1);
-    QPainter p;
-    //QStyleOptionGraphicsItem;
+    city_actors.push_back(newactor);
 
-
-    //toimija.paint(p, QWidget *);
 };
 
 
@@ -86,6 +83,17 @@ void City::actorDestroyed(std::shared_ptr<Interface::IActor> actor)
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
+
+    if ( std::find(city_actors.begin(), city_actors.end(), actor) != city_actors.end())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+    /*
     try
     {
         actor->giveLocation();
@@ -96,7 +104,7 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
         return false;
 
     }
-    return true;
+    return true;*/
 
 };
 
@@ -111,8 +119,17 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 
 std::vector<std::shared_ptr<Interface::IActor>> City::getNearbyActors(Interface::Location loc) const
 {
-    std::vector<std::shared_ptr<Interface::IActor>> hamyosoite;
-    return hamyosoite;
+    std::vector<std::shared_ptr<Interface::IActor>> nearby_actors = {};
+
+    for (unsigned i=0; i < city_actors.size(); i++) {
+        if (city_actors.at(i)->giveLocation() == loc)
+        {
+            nearby_actors.push_back(city_actors.at(1));
+        }
+    }
+
+
+    return nearby_actors;
 };
 
 

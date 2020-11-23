@@ -5,7 +5,7 @@
 #include "interfaces/icity.hh"
 #include "player.hh"
 #include "statistics.hh"
-#include "graphics/simplemainwindow.hh"
+#include "mainwindow.h"
 #include <QApplication>
 #include <QDebug>
 #include <memory>
@@ -18,12 +18,23 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     Q_INIT_RESOURCE(offlinedata);
 
+
+    //std::shared_ptr<Interface::ICity> Tampere = Interface::createGame();
+
+    //!!EI TOIMI!!
+
+    std::shared_ptr<City> Tampere = std::make_shared<City> ();
+
+    // Korvataan täällä kunnnes toimii
+
+
+
+    std::shared_ptr<CourseSide::Logic> Game = std::make_shared<CourseSide::Logic> ();
+
+    read_given_data(Game);
+    Tampere->startGame();
     //auto pointer = Interface::createGame();
-    auto city_pointer = std::make_shared <City> ();
-    auto ikkuna_osoitin = std::make_shared<CourseSide::SimpleMainWindow> ();
-    city_pointer->set_window(ikkuna_osoitin);
-    init_screen(city_pointer);
-    addActors(city_pointer);
+
 
     return a.exec();
 
