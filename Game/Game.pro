@@ -10,6 +10,7 @@ SOURCES += \
     creategame.cpp \
     main.cc \
     player.cpp \
+    playerturndialog.cpp \
     settingsdialog.cpp \
     statistics.cpp \
     test_func_runs.cpp
@@ -41,10 +42,12 @@ else:unix: PRE_TARGETDEPS += \
 HEADERS += \
     city.hh \
     player.hh \
+    playerturndialog.hh \
     settingsdialog.hh \
     statistics.hh\
     $$PWD/../Course/CourseLib/creategame.hh \
     test_func_runs.h
 
 FORMS += \
+    playerturndialog.ui \
     settingsdialog.ui
