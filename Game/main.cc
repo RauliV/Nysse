@@ -1,15 +1,15 @@
 #include "test_func_runs.h"
-#include "../Course/CourseLib/creategame.hh"
+#include "core/logic.hh"
+#include "creategame.hh"
 #include "city.hh"
-#include "interfaces/icity.hh"
-#include "player.hh"
+#include "game_engine.h"
+//#include "interfaces/icity.hh"
+/*#include "player.hh"
 #include "statistics.hh"
-#include "graphics/simplemainwindow.hh"
+#include "mainwindow.h"*/
 #include <QApplication>
 #include <QDebug>
 #include <memory>
-
-
 
 
 int main(int argc, char *argv[])
@@ -18,20 +18,19 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     Q_INIT_RESOURCE(offlinedata);
 
-    std::shared_ptr<Interface::ICity> pCity = Interface::createGame();
-/*
-    //Miksi paluuarvona createGamessa on osoite ICity -abstraktiin luokkaan, eikä
-    //staattiseen Cityyn, josta olisi luotavissa olio?
 
-    //auto pointer = Interface::createGame(); //Em. ristiriidasta johtuen tässä sekoaa?
-    auto pointer = std::make_shared <City> (); //koeajoja varten korvataan se tällä
+    std::shared_ptr<Interface::ICity> Tampere = Interface::createGame();
 
-    // Koeajoja - oikeastaan funktiokutsuja, mitkä olisivat createGamessa
-    auto ikkuna_osoitin = std::make_shared<CourseSide::SimpleMainWindow> ();
-    pointer->set_window(ikkuna_osoitin); //Atribuutiksi ikkunaolio
-    init_screen(pointer);     //createGame.cc funktio
-    addActors(pointer);
+
+    MainWindow ikkuna;
+    ikkuna.show();
+
+
+    std::shared_ptr<CourseSide::Logic> Game = std::make_shared<CourseSide::Logic> ();
+
+    //make_game(Tampere);
+
+
     return a.exec();
 
-*/
 }

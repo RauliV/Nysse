@@ -1,37 +1,33 @@
-#include "../Course/CourseLib/creategame.hh"
+
+//#include "test_func_runs.h"
+#include "creategame.hh"
 #include "city.hh"
+//#include "core/logic.hh"
+//#include "interfaces/icity.hh"
+//#include "statistics.hh"
 
 
-
+namespace Interface {
 
 
 std::shared_ptr<Interface::ICity> createGame()
-// Tätä ei ajeta vielä, koska errorerror
+
 {
-    City tampere;
-    auto ikkuna_osoitin = std::make_shared<CourseSide::SimpleMainWindow> ();
-    tampere.set_window(ikkuna_osoitin);
+    //Interface::ICity* icity_pointer;
+    //icity_pointer->startGame();
+    //City* city_pointer = dynamic_cast<City*>(icity_pointer);//icity_pointer);
+    //std::shared_ptr<Interface::ICity> shared_ic_ptr(icity_pointer);
+    std::shared_ptr<Interface::ICity> city_ptr = std::make_shared<City> ();
+    //std::shared_ptr<CourseSide::Logic> game_ptr = std::make_shared<CourseSide::Logic> ();
+   /* game_ptr->takeCity(city_ptr);
+    game_ptr->finalizeGameStart();
+    QTime pelikello;
 
-    QString file_iso = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
-    QString file_pieni = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
-    QImage tausta_iso (file_iso);
-    QImage tausta_pieni (file_pieni);
-    tampere.setBackground(tausta_iso, tausta_pieni);
-    tampere.get_window()->show();
+    init_screen(city_ptr);
+    addActors(city_ptr);*/
 
-    std::shared_ptr<Interface::ICity> pCity = std::make_shared<City>(tampere);
-    return pCity;
+    return city_ptr;
 
+    //pelilogiikkaolio omaan muuttujaan engineen
 }
-
-/*{
-
-    std::shared_ptr<Interface::ICity> iCity;
-    // std::shared_ptr<Interface::City> pointer = std::make_shared<City>();
-    //init_screen(pointer);
-    iCity -> setClock(QTime::currentTime());
-    iCity ->startGame();
-
-    return iCity;
 }
-*/
