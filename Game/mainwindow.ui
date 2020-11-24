@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QScrollArea" name="MapScrollArea">
     <property name="geometry">
@@ -51,8 +54,8 @@
     <property name="geometry">
      <rect>
       <x>530</x>
-      <y>260</y>
-      <width>151</width>
+      <y>230</y>
+      <width>125</width>
       <height>81</height>
      </rect>
     </property>
@@ -62,18 +65,28 @@
     <widget class="QLCDNumber" name="travelTimeLcd">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>40</y>
+       <x>20</x>
+       <y>20</y>
        <width>71</width>
        <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QTimeEdit" name="timeEdit">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>118</width>
+       <height>26</height>
       </rect>
      </property>
     </widget>
     <widget class="QLabel" name="travelTime">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>10</y>
+       <x>10</x>
+       <y>0</y>
        <width>101</width>
        <height>21</height>
       </rect>
@@ -87,9 +100,9 @@
     <property name="geometry">
      <rect>
       <x>530</x>
-      <y>340</y>
-      <width>151</width>
-      <height>191</height>
+      <y>310</y>
+      <width>125</width>
+      <height>171</height>
      </rect>
     </property>
     <property name="title">
@@ -98,8 +111,8 @@
     <widget class="QPushButton" name="endTurn">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>40</y>
+       <x>20</x>
+       <y>30</y>
        <width>89</width>
        <height>25</height>
       </rect>
@@ -111,8 +124,8 @@
     <widget class="QPushButton" name="quitGame">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>110</y>
+       <x>20</x>
+       <y>90</y>
        <width>89</width>
        <height>25</height>
       </rect>
@@ -122,25 +135,115 @@
      </property>
     </widget>
    </widget>
-   <widget class="QColumnView" name="statsView">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>150</y>
-      <width>151</width>
-      <height>111</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QGraphicsView" name="PortraitView">
     <property name="geometry">
      <rect>
       <x>530</x>
       <y>0</y>
-      <width>150</width>
-      <height>150</height>
+      <width>125</width>
+      <height>125</height>
      </rect>
     </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+    <property name="lineWidth">
+     <number>10</number>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>120</y>
+      <width>125</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>41</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cash</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>67</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Speed</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>41</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Drunkenness</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="cash_value">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>20</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="drunk_value">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>50</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="speed_value">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>80</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

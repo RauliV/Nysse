@@ -8,12 +8,14 @@ CONFIG += c++14
 SOURCES += \
     city.cpp \
     creategame.cpp \
+    game_engine.cpp \
     main.cc \
     mainwindow.cpp \
     player.cpp \
     settingsdialog.cpp \
     statistics.cpp \
-    test_func_runs.cpp
+    test_func_runs.cpp \
+    game_engine.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -41,11 +43,13 @@ else:unix: PRE_TARGETDEPS += \
 
 HEADERS += \
     city.hh \
+    game_engine.h \
     mainwindow.h \
     player.hh \
     settingsdialog.hh \
     statistics.hh\
-    test_func_runs.h
+    test_func_runs.h\
+    game_engine.h
 
 FORMS += \
     mainwindow.ui \
