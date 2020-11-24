@@ -19,14 +19,17 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(offlinedata);
 
 
-    //std::shared_ptr<Interface::ICity> Tampere = Interface::createGame();
+    std::shared_ptr<Interface::ICity> Tampere = Interface::createGame();
 
     //!!EI TOIMI!!
 
-    std::shared_ptr<City> Tampere = std::make_shared<City> ();
+    //std::shared_ptr<City> Tampere = std::make_shared<City> ();
 
     // Korvataan täällä kunnnes toimii
 
+
+    MainWindow ikkuna;
+    ikkuna.show();
 
 
     std::shared_ptr<CourseSide::Logic> Game = std::make_shared<CourseSide::Logic> ();

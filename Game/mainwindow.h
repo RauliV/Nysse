@@ -46,7 +46,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene *map;
+    QGraphicsScene *portrait;
+    QScrollArea *map;
     QTimer *timer;
     QVector<QGraphicsItem*> actors_;
     //SimpleActorItem* last_;

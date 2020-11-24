@@ -9,45 +9,65 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
-    QPixmap pixmapItem(":/graphics/oprom.png");
-    QPixmap pixmapItems = pixmapItem.scaled(QSize(150,150),  Qt::KeepAspectRatio);
-
-    ui->PortraitView->setBackgroundBrush(pixmapItem);
-    ui->PortraitView->show();
-    /*QGraphicsScene* map = new QGraphicsScene(this);
-
-    QGraphicsView* view = new QGraphicsView(this);
-    setup PortalView
-    map->addPixmap(pixmapItems);
-    view->setScene(map);
-    QScrollArea()
-    QAbstractScrollArea(Graphicso)
-    setCentralWidget(view);
-            */
-
-    //gameView->setFixedSize(width_, height_);
     //ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING, height_ + PADDING);
 
     //ui->startButton->move(width_ + PADDING , PADDING);
-
     //map = new QGraphicsScene(this);
-    //ui->gameView->setScene(map);
-    //map->setSceneRect(0,0,width_,height_);
-    //ui->MapScrollArea->scroll   setWidget()
-    //resize(minimumSizeHint());
-    //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
-/*
-    timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
-    timer->start(tick_);/*
-}
+    //ui->MapScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    //ui->MapScrollArea->setWidgetResizable(false);
 
-/*MainWindow::~MainWindow()
+    //ui->MapScrollArea->setGeometry(0,0,510,500);
+
+    QString file = (":/offlinedata/offlinedata/kartta_pieni_500x500.png");
+    //QPixmap pixmapItem(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
+    ui->scrollAreaWidgetContents->setWindowFilePath(file);
+    //ui->scrollAreaWidgetContents->show();
+    auto city_map = new QGraphicsView(this);
+    ui->mapView->setViewport(city_map);
+
+    timer = new QTimer(this);
+
+    //connect   (timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+    timer->start(tick_);
+
+
+
+    QString display_value = "00:00";
+    //ui->partyTimeLcd->setPalette(Qt::red);
+    ui->travelTimeLcd->setPalette(Qt::red);
+    //ui->totalTimeLcd->setPalette(Qt::red);
+    //ui->partyTimeLcd->setStyleSheet("QLabel { background-color : rgba(0,0,255));
+    //ui->partyTimeLcd->display(display_value);
+    ui->travelTimeLcd->display(timer->remainingTime());
+    //ui->totalTimeLcd->display(display_value);
+    //this->setCentralWidget(ui->MapScrollArea);
+
+    //map->setSceneRect(0,0,150,150);
+
+    portrait = new QGraphicsScene(this);
+    ui->PortraitView->setScene(portrait);
+    portrait->setSceneRect(0,0,150,150);
+
+    QPixmap pixmapItem(":/graphics/0prom_small.png");
+    QPixmap pixmapItems = pixmapItem.scaled(QSize(130,130),  Qt::KeepAspectRatio);
+    ui->PortraitView->setBackgroundBrush(pixmapItem);
+
+    ui->MapScrollArea->show();
+    //ui->PortraitView->setFixedSize(150,150);
+    ui->PortraitView->show();
+
+
+
+
+}
+/*
+MainWindow::~MainWindow()
 {
     delete ui;
 }*/
-}
+
 void MainWindow::setSize(int w, int h)
 {
     width_ = w;
