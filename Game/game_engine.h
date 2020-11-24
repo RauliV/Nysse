@@ -16,7 +16,7 @@
 
 */
 
-
+// Tässäkin kiukuttelee joku
 
 void make_game(std::shared_ptr<Interface::ICity> city);
 /*

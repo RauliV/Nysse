@@ -14,31 +14,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    ui->MapScrollArea->setGeometry(0,0,529,529);
+    // MAP
 
+    ui->MapScrollArea->setGeometry(0,0,529,529);
     QPixmap pixmapItem_map(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
     ui->mapView->setBackgroundBrush(pixmapItem_map);
     auto map_scene = new QGraphicsScene(this);
     ui->mapView->setScene(map_scene);
     map_scene->setSceneRect(0,0,1095,592);
-/*
-    QPixmap pixmapItem(":/graphics/1prom2.png");
-    pixmapItem= pixmapItem.scaled(ui->PortraitView->size(), Qt::IgnoreAspectRatio);
 
-*/
+
     //STAT LABELS
 
     ui->cash_value->setText(QString("120"));
     ui->drunk_value->setText(QString("1"));
     ui->speed_value->setText(QString("50"));
 
-
-    /* e_timer for elapsed timer if needed
-    auto e_timer = new QElapsedTimer();
-    e_timer->start();
-    std::string elapsed_str = std::to_string(e_timer->elapsed());
-    QString elapsed = QString::fromStdString(elapsed_str);
-    ui->travelTimeLcd->display(elapsed); */
 
 
     //TIMER
@@ -53,6 +44,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->travelTimeLcd->display(time1);
     });
 
+
+    /* e_timer for elapsed timer if needed
+    auto e_timer = new QElapsedTimer();
+    e_timer->start();
+    std::string elapsed_str = std::to_string(e_timer->elapsed());
+    QString elapsed = QString::fromStdString(elapsed_str);
+    ui->travelTimeLcd->display(elapsed); */
 
 
     //PORTRAIT
@@ -72,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 /*
-MainWindow::~MainWindow()
+MainWindow::~MainWindow() // Mikä on, kun ei suksi kulje?
 {
     delete ui;
 }*/

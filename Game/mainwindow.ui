@@ -130,7 +130,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>END TURN</string>
+      <string>SAVE GAME</string>
      </property>
     </widget>
     <widget class="QPushButton" name="quitGame">
