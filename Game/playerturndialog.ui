@@ -29,50 +29,49 @@
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>50</y>
-     <width>331</width>
+     <x>40</x>
+     <y>80</y>
+     <width>329</width>
      <height>164</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_6">
+     <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
-        <item>
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Current cash: 100€</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Bank balance: 250€</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Drunkness: 5.0</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QPushButton" name="WithdrawPushButton">
-          <property name="text">
-           <string>Withdraw cash</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="EnterBarPushButton_3">
-          <property name="text">
-           <string>Enter bar</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Current cash: 100€</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Bank balance: 250€</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="WithdrawPushButton">
+        <property name="text">
+         <string>Withdraw cash</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="EnterBarPushButton_3">
+        <property name="text">
+         <string>Enter bar</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -83,7 +82,7 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QCheckBox" name="checkBox">
+           <widget class="QCheckBox" name="WalkcheckBox">
             <property name="text">
              <string>Walk</string>
             </property>
@@ -93,21 +92,21 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkBox_2">
+           <widget class="QCheckBox" name="ScootercheckBox_2">
             <property name="text">
              <string>Scooter</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkBox_3">
+           <widget class="QCheckBox" name="NyssecheckBox_3">
             <property name="text">
              <string>Nysse</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkBox_4">
+           <widget class="QCheckBox" name="TaxicheckBox_4">
             <property name="text">
              <string>Taxi</string>
             </property>
