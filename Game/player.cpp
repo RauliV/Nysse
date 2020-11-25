@@ -7,7 +7,12 @@ player::player()
 
 void player::move(Interface::Location loc)
 {
+    loc_ = loc;
+}
 
+Interface::Location player::giveLocation() const
+{
+   return loc_;
 }
 
 bool player::spendCash(int amount)
@@ -35,4 +40,14 @@ void player::drink(int amount)
 void player::soberUp(int amount)
 {
     drunkness_ -= amount;
+}
+
+void player::setIdle(bool state)
+{
+    idle_ = state;
+}
+
+bool player::isIdle()
+{
+    return idle_;
 }

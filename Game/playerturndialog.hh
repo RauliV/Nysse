@@ -17,7 +17,6 @@ public:
     ~PlayerTurnDialog();
 
 private slots:
-   /* void on_checkBox_toggled(bool checked);
 
     void on_WalkcheckBox_toggled(bool checked);
 
@@ -27,7 +26,7 @@ private slots:
 
     void on_TaxicheckBox_4_toggled(bool checked);
 
-    void on_WithdrawPushButton_clicked();*/
+    void on_WithdrawPushButton_clicked();
 
 private:
     Ui::PlayerTurnDialog *ui;

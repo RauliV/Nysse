@@ -12,7 +12,7 @@ PlayerTurnDialog::~PlayerTurnDialog()
 {
     delete ui;
 }
-/*
+
 void PlayerTurnDialog::on_WalkcheckBox_toggled(bool checked)
 {
     if (checked) {
@@ -57,4 +57,4 @@ void PlayerTurnDialog::on_WithdrawPushButton_clicked()
 {
     ui->WithdrawPushButton->setDisabled(true);
 }
-*/
+
