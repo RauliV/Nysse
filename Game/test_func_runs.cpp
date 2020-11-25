@@ -73,6 +73,7 @@ void addActors(std::shared_ptr<Interface::ICity> city)
 
 
 
+
 }
 
 void init_screen(std::shared_ptr<Interface::ICity> city)

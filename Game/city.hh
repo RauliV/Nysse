@@ -2,7 +2,7 @@
 #define CITY_HH
 
 #include "mainwindow.h"
-
+#include "game_engine.h"
 #include "interfaces/icity.hh"
 #include <QTime>
 #include <memory>
@@ -13,7 +13,13 @@ class City : public Interface::ICity
 
 public:
 
-    //City () :ICity(){};
+    void setGame (std::shared_ptr<CourseSide::Logic> gamePtr){
+        std::shared_ptr<CourseSide::Logic> gamePtr_ = gamePtr;
+    }
+
+    std::shared_ptr<CourseSide::Logic> getGame(){
+        return gamePtr_;
+    }
 
 
     void set_window (std::shared_ptr<MainWindow> ikkuna_osoite)
@@ -56,10 +62,11 @@ public:
         return false;
     };*/
 
-    std::vector<std::shared_ptr<Interface::IActor>> city_actors = {};
+    //const std::vector<std::shared_ptr<Interface::IActor>> city_actors = {};
 
 private:
    std::shared_ptr <MainWindow> ikkuna;
+   std::shared_ptr<CourseSide::Logic> gamePtr_;
 };
 
 #endif // CITY_HH

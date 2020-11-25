@@ -50,6 +50,9 @@
        <height>529</height>
       </rect>
      </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
      <widget class="QGraphicsView" name="mapView">
       <property name="geometry">
        <rect>
