@@ -47,7 +47,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 void City::startGame()
 {
 
-CourseSide::SimpleMainWindow ikkuna;
+MainWindow ikkuna;
 ikkuna.show();
 
 };
