@@ -12,6 +12,7 @@ SOURCES += \
     main.cc \
     mainwindow.cpp \
     player.cpp \
+    playerturndialog.cpp \
     settingsdialog.cpp \
     statistics.cpp \
     test_func_runs.cpp
@@ -45,11 +46,13 @@ HEADERS += \
     game_engine.h \
     mainwindow.h \
     player.hh \
+    playerturndialog.hh \
     settingsdialog.hh \
     statistics.hh\
     test_func_runs.h
 
 FORMS += \
+    playerturndialog.ui \
     mainwindow.ui \
     settingsdialog.ui
 

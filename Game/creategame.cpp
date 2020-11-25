@@ -1,3 +1,4 @@
+
 //#include "test_func_runs.h"
 #include "creategame.hh"
 #include "city.hh"
@@ -30,4 +31,3 @@ std::shared_ptr<Interface::ICity> createGame()
     //pelilogiikkaolio omaan muuttujaan engineen
 }
 }
-
