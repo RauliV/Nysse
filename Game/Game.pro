@@ -15,8 +15,7 @@ SOURCES += \
     playerturndialog.cpp \
     settingsdialog.cpp \
     statistics.cpp \
-    test_func_runs.cpp \
-    game_engine.cpp
+    test_func_runs.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -50,8 +49,7 @@ HEADERS += \
     playerturndialog.hh \
     settingsdialog.hh \
     statistics.hh\
-    test_func_runs.h\
-    game_engine.h
+    test_func_runs.h
 
 FORMS += \
     playerturndialog.ui \

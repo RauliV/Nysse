@@ -17,16 +17,16 @@ std::shared_ptr<Interface::ICity> createGame()
     //icity_pointer->startGame();
     //City* city_pointer = dynamic_cast<City*>(icity_pointer);//icity_pointer);
     //std::shared_ptr<Interface::ICity> shared_ic_ptr(icity_pointer);
-    std::shared_ptr<Interface::ICity> city_ptr = std::make_shared<City> ();
-    //std::shared_ptr<CourseSide::Logic> game_ptr = std::make_shared<CourseSide::Logic> ();
-   /* game_ptr->takeCity(city_ptr);
-    game_ptr->finalizeGameStart();
-    QTime pelikello;
+    std::shared_ptr<City> cityPtr = std::make_shared<City> ();
+    std::shared_ptr<Interface::ICity> icityPtr = cityPtr;
+    std::shared_ptr<CourseSide::Logic> game_ptr = std::make_shared<CourseSide::Logic> ();
+    cityPtr->setGame(game_ptr);
+    game_ptr->takeCity(icityPtr);
+    //game_ptr->finalizeGameStart();
+    init_screen(icityPtr);
+    addActors(icityPtr);
 
-    init_screen(city_ptr);
-    addActors(city_ptr);*/
-
-    return city_ptr;
+    return icityPtr;
 
     //pelilogiikkaolio omaan muuttujaan engineen
 }
