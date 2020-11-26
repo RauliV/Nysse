@@ -2,8 +2,10 @@
 #include "ui_mainwindow.h"
 #include "QElapsedTimer"
 #include "QTime"
-#include <QDebug>
 
+#include <QDebug>
+#include <QLayout>
+#include <QWidget>
 const int PADDING = 10;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -122,7 +124,8 @@ void MainWindow::on_PortraitView_rubberBandChanged(const QRect &viewportRect, co
 
 void MainWindow::on_pushButton_clicked()
 {
-    settingsDialog PDialog;
-    PDialog.setModal(true);
-    PDialog.exec();
+    settingsDialog sDialog;
+    sDialog.setModal(true);
+    //QObject::connect(&sDialog, &sDialog::settingsSet, this, &MainWindow::createPlayers);
+    sDialog.exec();
 }
