@@ -3,25 +3,26 @@
 #include "interfaces/iactor.hh"
 #include "core/location.hh"
 
-class player : public  Interface::IActor
+class Player : public  Interface::IActor
 {
 public:
-    player();
-    //void destroy() override;
+    Player();
+    void destroy() override;
     void move(Interface::Location loc) override;
     Interface::Location giveLocation() const override;
-    //bool isDestroyed() const override;
-    //~player() override;
+    bool isDestroyed() const override;
+    ~Player() override;
 
     bool spendCash(int amount);
-    void withdrawCash(int amount);
+    bool withdrawCash(int amount);
     int getCash();
+    int getBank();
 
     void drink(int amount);
     void soberUp(int amount);
     int getDrunkness();
 
-    void setIdle(bool idle);
+    void setIdle(bool state);
     bool isIdle();
 
 
@@ -29,6 +30,7 @@ public:
 private:
     int cash_;
     int drunkness_;
+    int bank_;
     Interface::Location loc_;
     bool idle_ = true;
 };

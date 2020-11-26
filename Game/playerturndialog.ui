@@ -26,7 +26,7 @@
     <string>Player X's turn</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -39,21 +39,21 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="DrunknessLabel_4">
         <property name="text">
          <string>Drunkness: 5.0</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="CashLabel_2">
         <property name="text">
          <string>Current cash: 100€</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_3">
+       <widget class="QLabel" name="BankBalanceLabel_3">
         <property name="text">
          <string>Bank balance: 250€</string>
         </property>
@@ -119,28 +119,28 @@
           <item>
            <widget class="QCheckBox" name="DirectionCheckBox">
             <property name="text">
-             <string>Direction 1</string>
+             <string>Location 1</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="DirectionCheckBox_2">
             <property name="text">
-             <string>Direction 2</string>
+             <string>Location 2</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="DirectionCheckBox_3">
             <property name="text">
-             <string>Direction 3</string>
+             <string>Location 3</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="DirectionCheckBox_4">
             <property name="text">
-             <string>Direction 4</string>
+             <string>Location 4</string>
             </property>
            </widget>
           </item>

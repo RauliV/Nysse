@@ -1,21 +1,38 @@
  #include "player.hh"
 
-player::player()
+Player::Player()
+{
+    cash_ = 20;
+    bank_ = 100;
+    drunkness_ = 0;
+}
+
+void Player::destroy()
 {
 
 }
 
-void player::move(Interface::Location loc)
+void Player::move(Interface::Location loc)
 {
     loc_ = loc;
 }
 
-Interface::Location player::giveLocation() const
+Interface::Location Player::giveLocation() const
 {
-   return loc_;
+    return loc_;
 }
 
-bool player::spendCash(int amount)
+bool Player::isDestroyed() const
+{
+
+}
+
+Player::~Player()
+{
+
+}
+
+bool Player::spendCash(int amount)
 {
     if(amount < cash_){
         cash_ -= amount;
@@ -27,27 +44,51 @@ bool player::spendCash(int amount)
     }
 }
 
-void player::withdrawCash(int amount)
+bool Player::withdrawCash(int amount)
 {
-    cash_ += amount;
+    if(amount < bank_)
+    {
+        bank_ -= amount;
+        cash_ += amount;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-void player::drink(int amount)
+int Player::getCash()
+{
+    return cash_;
+}
+
+int Player::getBank()
+{
+    return bank_;
+}
+
+void Player::drink(int amount)
 {
     drunkness_ += amount;
 }
 
-void player::soberUp(int amount)
+void Player::soberUp(int amount)
 {
     drunkness_ -= amount;
 }
 
-void player::setIdle(bool state)
+int Player::getDrunkness()
+{
+    return drunkness_;
+}
+
+void Player::setIdle(bool state)
 {
     idle_ = state;
 }
 
-bool player::isIdle()
+bool Player::isIdle()
 {
     return idle_;
 }
