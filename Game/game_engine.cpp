@@ -19,7 +19,7 @@ std::shared_ptr<City> kaupunki = std::dynamic_pointer_cast<City>(city);
 
 
 //kaupunki->getGame()->finalizeGameStart();
-
+kaupunki->get_window()->show();
 
 
 
