@@ -68,6 +68,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->PortraitView->show();
     //(this)->show();
 
+
 }
 /*
 MainWindow::~MainWindow() // Mikä on, kun ei suksi kulje?
@@ -117,4 +118,11 @@ void MainWindow::on_startButton_clicked()
 void MainWindow::on_PortraitView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint)
 {
 
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    settingsDialog PDialog;
+    PDialog.setModal(true);
+    PDialog.exec();
 }
