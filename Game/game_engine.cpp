@@ -14,15 +14,36 @@
 
 void make_game(std::shared_ptr<Interface::ICity> city){
 
+
+std::shared_ptr<City> kaupunki = std::dynamic_pointer_cast<City>(city);
+
+
+//kaupunki->getGame()->finalizeGameStart();
+
+
+
+
+
+
+
+
+
+//Yksittäisiä kokeiluja
+
+
 //std::shared_ptr<CourseSide::Logic> game = std::make_shared<CourseSide::Logic> ();
-std::shared_ptr<CourseSide::Logic> gameObjectPtr {std::make_shared<CourseSide::Logic> ()};
+//
+
+//city->gameObjectPtr->takeCity(city);
+
+ //std::shared_ptr<CourseSide::Logic> gameObjectPtr = std::make_shared<CourseSide::Logic>();
 
 //&gameObjectPtr(game);
-gameObjectPtr->takeCity(city);
+//gameObjectPtr->takeCity(city);
 
  //City *d = dynamic_cast<Derived*>(b);
 //City *city_object = dynamic_cast<std::shared_ptr<Interface::ICity*>> (city.get());
-addActors(city);
+//addActors(city);
 
 //std::shared_ptr <City> new_d = dynamic_cast<std::shared_ptr <City>>
  //                              (std::shared_ptr<Interface::ICity>);
