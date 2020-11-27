@@ -88,7 +88,7 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
 
-    //if (actor->giveLocation() !=
+
     //liikutettu ylipäätään?
 };
 
@@ -113,7 +113,7 @@ std::vector<std::shared_ptr<Interface::IActor>> City::getNearbyActors(Interface:
 bool City::isGameOver() const
 {
 
-    //if target_location == player_location
+    //if (target_location == player_location
 
     return false;
 };

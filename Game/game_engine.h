@@ -3,9 +3,10 @@
 
 #include "mainwindow.h"
 #include "core/logic.hh"
-//#include "test_func_runs.h"
+#include "player.hh"
 #include "city.hh"
 #include "interfaces/icity.hh"
+#include <random>
 
 
 
