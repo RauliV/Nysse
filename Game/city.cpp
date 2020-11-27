@@ -33,8 +33,8 @@ void City::setClock(QTime clock){
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
-
-    this->setStops(stop);
+    stopsList_.push_back(stop);
+    //this->setStops(stop);
     //cityStopsPtr->push_back(stop);
     /*int id = stop->getId();
     QString nimi = stop->getName();
@@ -57,9 +57,8 @@ ikkuna->show();
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
 
-    setActors(newactor);
+    actorsList_.push_back(newactor);
 
-    //cityActorsPtr->push_back(newactor);
 
     qDebug() << "actor";
 
@@ -69,12 +68,14 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
    //cityActorsPtr->remove_if(actor);
-  std::list<std::shared_ptr<Interface::IActor>>::iterator position =
+
+    actorsList_.remove(actor);
+ /* std::list<std::shared_ptr<Interface::IActor>>::iterator position =
     std::find(actorsList_.begin(), actorsList_.end(), actor);
     if (position != actorsList_.end())
     {
         actorsList_.erase(position);
-    }
+    }*/
     qDebug() << "rm actor";
 
 };
@@ -118,19 +119,13 @@ std::vector<std::shared_ptr<Interface::IActor>> City::getNearbyActors(Interface:
 {
     std::vector<std::shared_ptr<Interface::IActor>> nearby_actors = {};
 
-    std::list<std::shared_ptr<Interface::IActor>>::iterator ite;
-  /*  for(ite = actorsList_.begin(); ite != actorsList_.end(); ++ite)
-    {
-        std::shared_ptr<Interface::IActor> item = *ite;
-
-        //nyt sama lokaatio. Mikä on "lähellä"?
-
-        if (item->giveLocation() == loc)
-        {
-            nearby_actors.push_back(item);
+    for (auto const& actor : actorsList_){
+        if (actor->giveLocation() == loc) {
+            nearby_actors.push_back(actor);
         }
-    }*/
+    }
 
+      //nyt sama lokaatio. Mikä on "lähellä"
 
     return nearby_actors;
 };

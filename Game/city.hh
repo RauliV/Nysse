@@ -13,7 +13,7 @@ class City : public Interface::ICity
 
 public:
 
-    std::list<std::shared_ptr<Interface::IStop>> getStops(){
+    std::vector<std::shared_ptr<Interface::IStop>> getStops(){
 
         return stopsList_;
     };
@@ -103,7 +103,7 @@ public:
 private:
    std::shared_ptr <MainWindow> ikkuna;
    std::shared_ptr<CourseSide::Logic> gamePtr_;
-   std::list<std::shared_ptr<Interface::IStop>> stopsList_;
+   std::vector<std::shared_ptr<Interface::IStop>> stopsList_;
    std::list<std::shared_ptr<Interface::IActor>> actorsList_;
    std::shared_ptr<QTime> gameClock_;
 

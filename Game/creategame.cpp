@@ -21,8 +21,12 @@ std::shared_ptr<Interface::ICity> createGame()
     //QTime ugfc(0,0,0);
    // ugfc.currentTime();
     //aseteaan tiedot City -olion sisään
+
+
     cityPtr->setGameClock(gameClk);
     cityPtr->setGame(game_ptr);
+
+    game_ptr->fileConfig();
 
 
     game_ptr->takeCity(icityPtr);
