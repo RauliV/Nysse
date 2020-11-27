@@ -1,14 +1,13 @@
 #include "test_func_runs.h"
-#include "core/logic.hh"
+//#include "core/logic.hh"
 #include "actors/nysse.hh"
 #include "actors/passenger.hh"
 #include "actors/stop.hh"
 #include "mainwindow.h"
-#include "city.hh"
+//#include "city.hh"
 #include <QTime>
 #include <QDebug>
 #include <memory>
-#include <QStyleOptionGraphicsItem>
 
 
 

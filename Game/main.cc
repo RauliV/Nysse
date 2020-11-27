@@ -1,4 +1,4 @@
-#include "test_func_runs.h"
+//#include "test_func_runs.h"
 #include "core/logic.hh"
 #include "creategame.hh"
 #include "city.hh"
@@ -26,10 +26,13 @@ int main(int argc, char *argv[])
 
     std::shared_ptr<City> kaupunki = std::dynamic_pointer_cast<City>(Tampere);
     kaupunki->set_window(ikkuna);
-    std::shared_ptr<CourseSide::Logic> Game = std::make_shared<CourseSide::Logic> ();
+    make_game(kaupunki);
 
+
+   /* std::shared_ptr<CourseSide::Logic> Game = std::make_shared<CourseSide::Logic> ();
+    kaupunki->setGame(Game);
     make_game(Tampere);
-    kaupunki->startGame();
+    kaupunki->startGame();*/
 
 
     return a.exec();

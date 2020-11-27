@@ -106,7 +106,7 @@ void MainWindow::setPicture(QImage &img)
 {
     //Ui_MainWindow::PortraitView::
     //menuNysse  PortraitView()
-    //map->setBackgroundBrush(img);
+    ui->mapView->setBackgroundBrush(img);
     //map->
 }
 
