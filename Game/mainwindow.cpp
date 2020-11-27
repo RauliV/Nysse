@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
+
     //STAT LABELS
 
     ui->cash_value->setText(QString("120"));
@@ -27,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer = new QTimer(this);
     timer->start(tick_);
-    //connect   (timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+    connect(timer, &QTimer::timeout, map_scene, &QGraphicsScene::advance);
     ui->travelTimeLcd->setPalette(Qt::red);
     timer->setInterval(1000);
     connect(timer, &QTimer::timeout, [&]() {
@@ -59,13 +60,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->PortraitView->show();
     //(this)->show();
 
-
 }
-/*
-MainWindow::~MainWindow() // Mikä on, kun ei suksi kulje?
+
+MainWindow::~MainWindow()
 {
     delete ui;
-}*/
+}
 
 void MainWindow::setSize(int w, int h)
 {
@@ -80,19 +80,20 @@ void MainWindow::setTick(int t)
 
 void MainWindow::addActor(int locX, int locY, int type)
 {
-    /*SimpleActorItem* nActor = new SimpleActorItem(locX, locY, type);
+    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
     actors_.push_back(nActor);
-    map->addItem(nActor);
-    last_ = nActor; */
+    map_scene->addItem(nActor);
+    last_ = nActor;
 }
 
 void MainWindow::updateCoords(int nX, int nY)
 {
-    //last_->setCoord(nX, nY);
+    last_->setCoord(nX, nY);
 }
 
 void MainWindow::setPicture(QImage &img)
 {
+<<<<<<< HEAD
     //Ui_MainWindow::PortraitView::
     //menuNysse  PortraitView()
     //ui->mapView->setBackgroundBrush(img);
@@ -102,6 +103,11 @@ void MainWindow::setPicture(QImage &img)
     mapScene->setSceneRect(0,0,500,500);
     mapScene->setBackgroundBrush(img);
     ui->mapView->setScene(mapScene);
+=======
+
+    ui->mapView->setBackgroundBrush(img);
+
+>>>>>>> e1127dc20e7fb5af5a260e88d9f5e503301b88dc
 }
 
 
@@ -115,6 +121,7 @@ void MainWindow::on_PortraitView_rubberBandChanged(const QRect &viewportRect, co
 {
 
 }
+<<<<<<< HEAD
 
 void MainWindow::on_pushButton_clicked()
 {
@@ -143,3 +150,5 @@ void MainWindow::on_pushButton_clicked()
        )
    );
 }*/
+=======
+>>>>>>> e1127dc20e7fb5af5a260e88d9f5e503301b88dc

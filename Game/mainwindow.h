@@ -3,8 +3,6 @@
 
 #include "interfaces/iactor.hh"
 #include "graphics/simpleactoritem.hh"
-#include "playerturndialog.hh"
-#include "settingsdialog.hh"
 
 #include <QGraphicsView>
 #include <QMainWindow>
@@ -27,7 +25,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
 
-    //virtual ~SimpleMainWindow();
+    virtual ~MainWindow();
 
     void setSize(int w, int h);
     void setTick(int t);
@@ -49,13 +47,15 @@ private slots:
     void on_pushButton_clicked();
     //void centerAndResize();
 
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *portrait;
+    QGraphicsScene *map_scene;
     QScrollArea *map;
     QTimer *timer;
     QVector<QGraphicsItem*> actors_;
-    //SimpleActorItem* last_;
+    CourseSide::SimpleActorItem* last_;
 
     int width_ = 500; //pxls
     int height_ = 500;
