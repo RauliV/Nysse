@@ -26,7 +26,6 @@ void City::setClock(QTime clock){
     short int minutes = clock.minute();
     gameClock_->setHMS(hours,minutes,0);
 
-    qDebug() << "clock";
 };
 
 
@@ -34,14 +33,7 @@ void City::setClock(QTime clock){
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     stopsList_.push_back(stop);
-    //this->setStops(stop);
-    //cityStopsPtr->push_back(stop);
-    /*int id = stop->getId();
-    QString nimi = stop->getName();
-    Interface::Location paikka = stop->getLocation();
-    CourseSide::Stop  uusi_pysakki(paikka, nimi, id);*/
 
-    qDebug() << "stop";
 
 };
 
@@ -59,28 +51,14 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
     actorsList_.push_back(newactor);
 
-
-    qDebug() << "actor";
-
 };
 
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-   //cityActorsPtr->remove_if(actor);
 
     actorsList_.remove(actor);
- /* std::list<std::shared_ptr<Interface::IActor>>::iterator position =
-    std::find(actorsList_.begin(), actorsList_.end(), actor);
-    if (position != actorsList_.end())
-    {
-        actorsList_.erase(position);
-    }*/
-    qDebug() << "rm actor";
-
-};
-
-
+}
 
 void City::actorDestroyed(std::shared_ptr<Interface::IActor> actor)
 {
@@ -110,6 +88,7 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
 
+    //if (actor->giveLocation() !=
     //liikutettu ylipäätään?
 };
 
@@ -120,12 +99,11 @@ std::vector<std::shared_ptr<Interface::IActor>> City::getNearbyActors(Interface:
     std::vector<std::shared_ptr<Interface::IActor>> nearby_actors = {};
 
     for (auto const& actor : actorsList_){
-        if (actor->giveLocation() == loc) {
+        if (loc.calcDistance(actor->giveLocation(),loc) < 2) {
             nearby_actors.push_back(actor);
         }
     }
 
-      //nyt sama lokaatio. Mikä on "lähellä"
 
     return nearby_actors;
 };

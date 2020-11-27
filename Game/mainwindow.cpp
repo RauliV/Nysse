@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->MapScrollArea->setGeometry(0,0,529,529);
     QPixmap pixmapItem_map(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
     ui->mapView->setBackgroundBrush(pixmapItem_map);
-    auto map_scene = new QGraphicsScene(this);
+    map_scene = new QGraphicsScene(this);
     ui->mapView->setScene(map_scene);
     map_scene->setSceneRect(0,0,1095,592);
 
@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer = new QTimer(this);
     timer->start(tick_);
-    //connect   (timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+    connect(timer, &QTimer::timeout, map_scene, &QGraphicsScene::advance);
     ui->travelTimeLcd->setPalette(Qt::red);
     timer->setInterval(1000);
     connect(timer, &QTimer::timeout, [&]() {
@@ -68,13 +68,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->PortraitView->show();
     //(this)->show();
 
-
 }
-/*
-MainWindow::~MainWindow() // Mikä on, kun ei suksi kulje?
+
+MainWindow::~MainWindow()
 {
     delete ui;
-}*/
+}
 
 void MainWindow::setSize(int w, int h)
 {
@@ -89,23 +88,22 @@ void MainWindow::setTick(int t)
 
 void MainWindow::addActor(int locX, int locY, int type)
 {
-    /*SimpleActorItem* nActor = new SimpleActorItem(locX, locY, type);
+    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
     actors_.push_back(nActor);
-    map->addItem(nActor);
-    last_ = nActor; */
+    map_scene->addItem(nActor);
+    last_ = nActor;
 }
 
 void MainWindow::updateCoords(int nX, int nY)
 {
-    //last_->setCoord(nX, nY);
+    last_->setCoord(nX, nY);
 }
 
 void MainWindow::setPicture(QImage &img)
 {
-    //Ui_MainWindow::PortraitView::
-    //menuNysse  PortraitView()
+
     ui->mapView->setBackgroundBrush(img);
-    //map->
+
 }
 
 
@@ -118,11 +116,4 @@ void MainWindow::on_startButton_clicked()
 void MainWindow::on_PortraitView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint)
 {
 
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    settingsDialog PDialog;
-    PDialog.setModal(true);
-    PDialog.exec();
 }
