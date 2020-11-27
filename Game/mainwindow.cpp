@@ -14,15 +14,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    // MAP
-
-    ui->MapScrollArea->setGeometry(0,0,529,529);
-    QPixmap pixmapItem_map(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
-    ui->mapView->setBackgroundBrush(pixmapItem_map);
-    auto map_scene = new QGraphicsScene(this);
-    ui->mapView->setScene(map_scene);
-    map_scene->setSceneRect(0,0,1095,592);
-
 
     //STAT LABELS
 
@@ -104,8 +95,13 @@ void MainWindow::setPicture(QImage &img)
 {
     //Ui_MainWindow::PortraitView::
     //menuNysse  PortraitView()
-    ui->mapView->setBackgroundBrush(img);
+    //ui->mapView->setBackgroundBrush(img);
     //map->
+
+    QGraphicsScene* mapScene = new QGraphicsScene;
+    mapScene->setSceneRect(0,0,500,500);
+    mapScene->setBackgroundBrush(img);
+    ui->mapView->setScene(mapScene);
 }
 
 
@@ -126,3 +122,24 @@ void MainWindow::on_pushButton_clicked()
     PDialog.setModal(true);
     PDialog.exec();
 }
+
+/*void MainWindow::centerAndResize() {
+
+   // get the dimension available on this screen
+   QSize availableSize = qApp->desktop()->availableGeometry().size();
+   int width = availableSize.width();
+   int height = availableSize.height();
+   qDebug() << "Available dimensions " << width << "x" << height;
+   width *= 0.9; // 90% of the screen size
+   height *= 0.9; // 90% of the screen size
+   qDebug() << "Computed dimensions " << width << "x" << height;
+   QSize newSize( width, height );
+   setGeometry(
+       QStyle::alignedRect(
+           Qt::LeftToRight,
+           Qt::AlignCenter,
+           newSize,
+           qApp->desktop()->availableGeometry()
+       )
+   );
+}*/
