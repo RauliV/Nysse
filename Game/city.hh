@@ -13,20 +13,11 @@ class City : public Interface::ICity
 
 public:
 
+
+
     std::vector<std::shared_ptr<Interface::IStop>> getStops(){
 
         return stopsList_;
-    };
-
-
-    std::list<std::shared_ptr<Interface::IActor>> getActors() const{
-
-        return actorsList_;
-    };
-
-    void setActors (std::shared_ptr<Interface::IActor> actorPtr){
-
-        actorsList_.push_back(actorPtr);
     };
 
 
@@ -68,6 +59,10 @@ public:
         return ikkuna;
     }
 
+
+
+
+
     void setBackground(QImage& basicbackground, QImage& bigbackground);
 
     void setClock(QTime clock);
@@ -105,6 +100,7 @@ private:
    std::shared_ptr<CourseSide::Logic> gamePtr_;
    std::vector<std::shared_ptr<Interface::IStop>> stopsList_;
    std::list<std::shared_ptr<Interface::IActor>> actorsList_;
+   std::list<std::shared_ptr<Interface::IActor>> movedActors_;
    std::shared_ptr<QTime> gameClock_;
 
 };

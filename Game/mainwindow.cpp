@@ -16,14 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-    // MAP
-
-    ui->MapScrollArea->setGeometry(0,0,529,529);
-    QPixmap pixmapItem_map(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
-    ui->mapView->setBackgroundBrush(pixmapItem_map);
-    auto map_scene = new QGraphicsScene(this);
-    ui->mapView->setScene(map_scene);
-    map_scene->setSceneRect(0,0,1095,592);
 
 
     //STAT LABELS
@@ -38,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer = new QTimer(this);
     timer->start(tick_);
-    //connect   (timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+    connect(timer, &QTimer::timeout, map_scene, &QGraphicsScene::advance);
     ui->travelTimeLcd->setPalette(Qt::red);
     timer->setInterval(1000);
     connect(timer, &QTimer::timeout, [&]() {
@@ -70,13 +62,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->PortraitView->show();
     //(this)->show();
 
-
 }
-/*
-MainWindow::~MainWindow() // Mikä on, kun ei suksi kulje?
+
+MainWindow::~MainWindow()
 {
     delete ui;
-}*/
+}
 
 void MainWindow::setSize(int w, int h)
 {
@@ -91,23 +82,25 @@ void MainWindow::setTick(int t)
 
 void MainWindow::addActor(int locX, int locY, int type)
 {
-    /*SimpleActorItem* nActor = new SimpleActorItem(locX, locY, type);
+    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
     actors_.push_back(nActor);
-    map->addItem(nActor);
-    last_ = nActor; */
+    map_scene->addItem(nActor);
+    last_ = nActor;
 }
 
 void MainWindow::updateCoords(int nX, int nY)
 {
-    //last_->setCoord(nX, nY);
+    last_->setCoord(nX, nY);
 }
 
 void MainWindow::setPicture(QImage &img)
 {
-    //Ui_MainWindow::PortraitView::
-    //menuNysse  PortraitView()
-    ui->mapView->setBackgroundBrush(img);
-    //map->
+
+    QGraphicsScene* mapScene = new QGraphicsScene;
+    mapScene->setSceneRect(0,0,500,500);
+    mapScene->setBackgroundBrush(img);
+    ui->mapView->setScene(mapScene);
+
 }
 
 
@@ -122,6 +115,7 @@ void MainWindow::on_PortraitView_rubberBandChanged(const QRect &viewportRect, co
 
 }
 
+
 void MainWindow::on_pushButton_clicked()
 {
     settingsDialog sDialog;
@@ -129,3 +123,25 @@ void MainWindow::on_pushButton_clicked()
     //QObject::connect(&sDialog, &sDialog::settingsSet, this, &MainWindow::createPlayers);
     sDialog.exec();
 }
+
+/*void MainWindow::centerAndResize() {
+
+   // get the dimension available on this screen
+   QSize availableSize = qApp->desktop()->availableGeometry().size();
+   int width = availableSize.width();
+   int height = availableSize.height();
+   qDebug() << "Available dimensions " << width << "x" << height;
+   width *= 0.9; // 90% of the screen size
+   height *= 0.9; // 90% of the screen size
+   qDebug() << "Computed dimensions " << width << "x" << height;
+   QSize newSize( width, height );
+   setGeometry(
+       QStyle::alignedRect(
+           Qt::LeftToRight,
+           Qt::AlignCenter,
+           newSize,
+           qApp->desktop()->availableGeometry()
+       )
+   );
+}*/
+
