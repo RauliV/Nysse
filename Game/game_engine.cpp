@@ -18,8 +18,22 @@ void make_game(std::shared_ptr<Interface::ICity> city){
 std::shared_ptr<City> kaupunki = std::dynamic_pointer_cast<City>(city);
 
 
-//kaupunki->getGame()->finalizeGameStart();
+
+std::shared_ptr<Interface::IActor> nyse = std::make_shared<CourseSide::Nysse> (5);
+kaupunki->addActor(nyse);
+qDebug() << "Onko" <<  kaupunki->findActor(nyse);
+kaupunki->removeActor(nyse);
+qDebug() << "Onko" <<  kaupunki->findActor(nyse);
+
+kaupunki->addActor(nyse);
+
+
+
+kaupunki->getGame()->finalizeGameStart();
+
+
 kaupunki->get_window()->show();
+
 
 
 
