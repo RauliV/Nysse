@@ -39,8 +39,12 @@ void settingsDialog::on_ConfirmPushButton_clicked()
     ui->ConfirmPushButton->setDisabled(true);
 }
 
+
 std::tuple<QLineEdit*, QComboBox*> settingsDialog::createPlayerOptions()
 {
+    QWidget* widget = new QWidget;
+    widget->setMaximumSize(200, 80);
+    widget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
     //Creating widgets for player options
     QLineEdit *playerName = new QLineEdit();
     QLabel *label = new QLabel("Player Name");
@@ -57,7 +61,8 @@ std::tuple<QLineEdit*, QComboBox*> settingsDialog::createPlayerOptions()
     pLayout->addWidget(label);
     pLayout->addLayout(hNameColor);
     //Adding layout to ui
-    ui->verticalLayout->addLayout(pLayout);
+    widget->setLayout(pLayout);
+    ui->verticalLayout->addWidget(widget);
 
     return specs;
 }

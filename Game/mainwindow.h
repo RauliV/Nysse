@@ -3,6 +3,7 @@
 
 #include "interfaces/iactor.hh"
 #include "graphics/simpleactoritem.hh"
+#include "settingsdialog.hh"
 
 #include <QGraphicsView>
 #include <QMainWindow>
@@ -43,6 +44,7 @@ private slots:
 
 
     void on_PortraitView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
+
 
     void on_pushButton_clicked();
     //void centerAndResize();

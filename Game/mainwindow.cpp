@@ -93,21 +93,12 @@ void MainWindow::updateCoords(int nX, int nY)
 
 void MainWindow::setPicture(QImage &img)
 {
-<<<<<<< HEAD
-    //Ui_MainWindow::PortraitView::
-    //menuNysse  PortraitView()
-    //ui->mapView->setBackgroundBrush(img);
-    //map->
 
     QGraphicsScene* mapScene = new QGraphicsScene;
     mapScene->setSceneRect(0,0,500,500);
     mapScene->setBackgroundBrush(img);
     ui->mapView->setScene(mapScene);
-=======
 
-    ui->mapView->setBackgroundBrush(img);
-
->>>>>>> e1127dc20e7fb5af5a260e88d9f5e503301b88dc
 }
 
 
@@ -121,7 +112,7 @@ void MainWindow::on_PortraitView_rubberBandChanged(const QRect &viewportRect, co
 {
 
 }
-<<<<<<< HEAD
+
 
 void MainWindow::on_pushButton_clicked()
 {
@@ -150,5 +141,4 @@ void MainWindow::on_pushButton_clicked()
        )
    );
 }*/
-=======
->>>>>>> e1127dc20e7fb5af5a260e88d9f5e503301b88dc
+
