@@ -1,5 +1,6 @@
 #include "settingsdialog.hh"
 #include "mainwindow.h"
+#include "game_engine.h"
 #include "ui_mainwindow.h"
 #include "QElapsedTimer"
 #include "QTime"
@@ -119,8 +120,20 @@ void MainWindow::on_SettingsButton_clicked()
     sDialog.exec();
 }
 
+
 void MainWindow::on_StartButton_clicked()
 {
+   std::string nimi1 = "Jaakko";
+   std::string vari1 = "musta";
+   std::string nimi2 = "Teppo";
+   std::string vari2 = "vaaleanpunainen";
+
+   std::pair<std::string, std::string> pari1 = {nimi1,vari1};
+   std::pair<std::string, std::string> pari2 = {nimi2,vari2};
+
+   std::vector<std::pair<std::string, std::string>> vec = {pari1,pari2};
+   createPlayers(2,vec);
+
     //Tämä pitäisi saada toimimaan
     //createPlayers(playerCount_, playerSpecs_);
 }

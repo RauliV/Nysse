@@ -3,8 +3,8 @@
 
 
 
-
 std::shared_ptr<City> cityPtr;
+
 
 void initScreen(std::shared_ptr<Interface::ICity> city)
 {
@@ -80,6 +80,13 @@ Interface::Location getRandomLocation (){
 
 void createPlayers(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs)
 {
+    qDebug() << "Pelaajien lkm: " << playerCount;
+    for (auto const&  player : playerSpecs){
+
+        QString nimi = QString::fromStdString(player.first);
+        QString vari = QString::fromStdString(player.second);
+        qDebug() << "Pelaajan nimi: " << nimi << "Pelaajan väri: " << vari;
+    }
     //tänne tulee pelaajien määrä, nimet ja värit mainwindowista
 }
 
