@@ -12,7 +12,7 @@
 void City::setBackground(QImage &basicbackground, QImage &bigbackground){
 
 
-    ikkuna->setPicture(basicbackground);
+    mainWindow->setPicture(basicbackground);
     qDebug() << "picture";
 
 };
@@ -37,7 +37,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 void City::startGame()
 {
 
-//ikkuna->show();
+mainWindow->show();
 
 };
 

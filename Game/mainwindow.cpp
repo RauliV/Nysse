@@ -18,6 +18,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
+    //ui->MapScrollArea->setGeometry(0,0,529,529);
+    QPixmap pixmapItem_map(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
+    //auto map_scene = new QGraphicsScene(this);
+    map_scene = new QGraphicsScene(this);
+    ui->mapView->setScene(map_scene);
+    map_scene->setSceneRect(0,0,1095,592);
+    ui->mapView->setBackgroundBrush(pixmapItem_map);
+
+
 
     //STAT LABELS
 
@@ -97,10 +106,7 @@ void MainWindow::updateCoords(int nX, int nY)
 void MainWindow::setPicture(QImage &img)
 {
 
-    QGraphicsScene* mapScene = new QGraphicsScene;
-    mapScene->setSceneRect(0,0,500,500);
-    mapScene->setBackgroundBrush(img);
-    ui->mapView->setScene(mapScene);
+     //  map_scene->setBackgroundBrush(img);
 
 }
 

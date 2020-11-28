@@ -14,9 +14,9 @@ class City : public Interface::ICity
 public:
 
 
-    void setPlayerList (std::list<std::shared_ptr<Interface::IActor>> pList){
+    void setPlayerList (std::list<std::shared_ptr<Interface::IActor>> playerList){
 
-        playerList_ = pList;
+        playerList_ = playerList;
 
     }
 

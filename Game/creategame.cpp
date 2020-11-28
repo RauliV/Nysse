@@ -30,10 +30,8 @@ std::shared_ptr<Interface::ICity> createGame()
 
     game_ptr->fileConfig();
 
-
     game_ptr->takeCity(icityPtr);
 
-    make_game(icityPtr);
 
     return icityPtr;
 

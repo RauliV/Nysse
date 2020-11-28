@@ -112,7 +112,16 @@ void startingPointsSetup()
     cityPtr->setPlayerList(playerList);
 }
 
+void updateActors(){
 
+
+    for (auto const& actor : cityPtr->getStops()){
+        cityPtr->get_window()->addActor(actor->getLocation().giveX(),
+                                        actor->getLocation().giveY(),1);
+    }
+
+
+}
 
 void make_game(std::shared_ptr<Interface::ICity> icity){
 
@@ -124,8 +133,7 @@ cityPtr->getGame()->finalizeGameStart();
 startingPointsSetup();  // luo pelaajaoliot ja arpoo aloituspisteet.
                         // puuuttuu atm ja bar -oliot
 
-//while (not cityPtr->isGameOver()){
-
+cityPtr->get_window()->updateCoords(1,1);
 //jos pelaaja ei idle -> liikuta
 //muuten
 
