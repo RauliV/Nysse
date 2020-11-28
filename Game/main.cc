@@ -20,13 +20,13 @@ int main(int argc, char *argv[])
 
 
     std::shared_ptr<Interface::ICity> Tampere = Interface::createGame();
-    //addActors(Tampere);
 
-    std::shared_ptr<MainWindow> ikkuna = std::make_shared<MainWindow> ();
+    //std::shared_ptr<MainWindow> ikkuna = std::make_shared<MainWindow> ();
 
     std::shared_ptr<City> kaupunki = std::dynamic_pointer_cast<City>(Tampere);
-    kaupunki->set_window(ikkuna);
-    make_game(kaupunki);
+
+    //kaupunki->set_window(ikkuna);
+
 
 
    /* std::shared_ptr<CourseSide::Logic> Game = std::make_shared<CourseSide::Logic> ();

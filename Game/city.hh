@@ -14,6 +14,20 @@ class City : public Interface::ICity
 public:
 
 
+    void setPlayerList (std::list<std::shared_ptr<Interface::IActor>> pList){
+
+        playerList_ = pList;
+
+    }
+
+    std::list<std::shared_ptr<Interface::IActor>> getMovedActors(){
+        return movedActors_;
+    }
+
+    std::list<std::shared_ptr<Interface::IActor>> getPlayerList (){
+        return playerList_;
+    }
+
 
     std::vector<std::shared_ptr<Interface::IStop>> getStops(){
 
@@ -101,6 +115,7 @@ private:
    std::vector<std::shared_ptr<Interface::IStop>> stopsList_;
    std::list<std::shared_ptr<Interface::IActor>> actorsList_;
    std::list<std::shared_ptr<Interface::IActor>> movedActors_;
+   std::list<std::shared_ptr<Interface::IActor>> playerList_;
    std::shared_ptr<QTime> gameClock_;
 
 };

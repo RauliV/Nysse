@@ -12,12 +12,10 @@
 void City::setBackground(QImage &basicbackground, QImage &bigbackground){
 
 
-    //window.setSize(1095,592);
     ikkuna->setPicture(basicbackground);
     qDebug() << "picture";
 
 };
-
 
 
 void City::setClock(QTime clock){
@@ -29,11 +27,9 @@ void City::setClock(QTime clock){
 };
 
 
-
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     stopsList_.push_back(stop);
-
 
 };
 
@@ -41,7 +37,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 void City::startGame()
 {
 
-ikkuna->show();
+//ikkuna->show();
 
 };
 
@@ -78,9 +74,6 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
     {
         return false;
     }
-
-
-
 };
 
 
@@ -88,8 +81,8 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
 
+    movedActors_.push_back(actor);
 
-    //liikutettu ylipäätään?
 };
 
 
