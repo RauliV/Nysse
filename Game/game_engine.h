@@ -29,6 +29,7 @@ const std::shared_ptr<CourseSide::Logic> gameObjectPtr
 //const std::shared_ptr<QTime> gameClock = std::make_shared<QTime> (0,0,0);
 
 
-void make_game(std::shared_ptr<Interface::ICity> city);
+void startYourEngines(std::shared_ptr<Interface::ICity> city);
+void initScreen(std::shared_ptr<Interface::ICity> city);
 
 #endif // GAME_ENGINE_H

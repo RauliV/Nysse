@@ -75,22 +75,5 @@ void addActors(std::shared_ptr<Interface::ICity> city)
 
 }
 
-void init_screen(std::shared_ptr<Interface::ICity> city)
-{
-    QString file_iso = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
-    QString file_pieni = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
-    QImage tausta_iso (file_iso);
-    QImage tausta_pieni (file_pieni);
-    city->setBackground(tausta_iso, tausta_pieni);
 
-    QSize minsize;
-    minsize.setHeight(500);
-    minsize.setWidth(800);
-
-
-    //city->get_window()->menu;
-
-    //city->get_window()->centralWidget()->DrawWindowBackground z;
-
-}
 

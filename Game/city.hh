@@ -14,64 +14,6 @@ class City : public Interface::ICity
 public:
 
 
-    void setPlayerList (std::list<std::shared_ptr<Interface::IActor>> pList){
-
-        playerList_ = pList;
-
-    }
-
-    std::list<std::shared_ptr<Interface::IActor>> getMovedActors(){
-        return movedActors_;
-    }
-
-    std::list<std::shared_ptr<Interface::IActor>> getPlayerList (){
-        return playerList_;
-    }
-
-
-    std::vector<std::shared_ptr<Interface::IStop>> getStops(){
-
-        return stopsList_;
-    };
-
-
-    void setStops (std::shared_ptr<Interface::IStop> stopPtr){
-
-        stopsList_.push_back(stopPtr);
-
-    };
-
-
-    void setGame (std::shared_ptr<CourseSide::Logic> gamePtr){
-        //std::shared_ptr<CourseSide::Logic>
-        gamePtr_ = gamePtr;
-    }
-
-    std::shared_ptr<CourseSide::Logic> getGame (){
-
-        return gamePtr_;
-    }
-
-     void setGameClock(std::shared_ptr<QTime> clk){
-
-
-        gameClock_ = clk;
-    }
-
-    std::shared_ptr<QTime> getGameClock(){
-        return gameClock_;
-    }
-
-
-    void set_window (std::shared_ptr<MainWindow> ikkuna_osoite)
-    {
-        mainWindow = ikkuna_osoite;
-    }
-
-    std::shared_ptr<MainWindow> get_window ()
-    {
-        return mainWindow;
-    }
 
 
 
@@ -96,21 +38,87 @@ public:
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
 
     std::vector<std::shared_ptr<Interface::IActor>> getNearbyActors(Interface::Location loc) const;
-    /*{
-        std::vector<std::shared_ptr<Interface::IActor>> hamyosoite;
-        return hamyosoite;
-    };*/
 
     bool isGameOver() const;
-    /*
-    {
-        return false;
-    };*/
 
-    //const std::vector<std::shared_ptr<Interface::IActor>> city_actors = {};
+
+
+
+    //Omien metodien määrittely
+
+
+    void setPlayerList (std::list<std::shared_ptr<Interface::IActor>> playerList)
+    {
+        playerList_ = playerList;
+    }
+
+    std::list<std::shared_ptr<Interface::IActor>> getPlayerList (){
+        return playerList_;
+    }
+
+
+
+    std::list<std::shared_ptr<Interface::IActor>> getMovedActors(){
+        return movedActors_;
+    }
+
+
+
+    void setStops (std::shared_ptr<Interface::IStop> stopPtr)
+    {
+        stopsList_.push_back(stopPtr);
+    };
+
+    std::vector<std::shared_ptr<Interface::IStop>> getStops(){
+
+        return stopsList_;
+    };
+
+
+
+    void setGame (std::shared_ptr<CourseSide::Logic> gamePtr)
+    {
+        gamePtr_ = gamePtr;
+    }
+
+    std::shared_ptr<CourseSide::Logic> getGame ()
+    {
+        return gamePtr_;
+    }
+
+
+
+    void setGameClock(std::shared_ptr<QTime> gameClock)
+    {
+        gameClock_ = gameClock;
+    }
+
+    std::shared_ptr<QTime> getGameClock()
+    {
+        return gameClock_;
+    }
+
+
+
+    void setWindow (std::shared_ptr<MainWindow> mainWindowPtr)
+    {
+        mainWindowPtr_ = mainWindowPtr;
+    }
+
+    std::shared_ptr<MainWindow> getWindow ()
+    {
+        return mainWindowPtr_;
+    }
+
+
+    std::list<std::shared_ptr<Interface::IActor>> getActors(){
+        return actorsList_;
+
+    }
+
 
 private:
-   std::shared_ptr <MainWindow> mainWindow;
+   std::shared_ptr <MainWindow> mainWindowPtr_;
    std::shared_ptr<CourseSide::Logic> gamePtr_;
    std::vector<std::shared_ptr<Interface::IStop>> stopsList_;
    std::list<std::shared_ptr<Interface::IActor>> actorsList_;

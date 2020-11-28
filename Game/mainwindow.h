@@ -45,7 +45,7 @@ private slots:
 
     void on_PortraitView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
 
-private :
+private:
     Ui::MainWindow *ui;
     QGraphicsScene *portrait;
     QGraphicsScene *map_scene;

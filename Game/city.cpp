@@ -12,7 +12,7 @@
 void City::setBackground(QImage &basicbackground, QImage &bigbackground){
 
 
-    mainWindow->setPicture(basicbackground);
+    mainWindowPtr_->setPicture(basicbackground);
     qDebug() << "picture";
 
 };
@@ -37,7 +37,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 void City::startGame()
 {
 
-mainWindow->show();
+mainWindowPtr_->show();
 
 };
 
@@ -110,5 +110,8 @@ bool City::isGameOver() const
 
     return false;
 };
+
+
+
 
 

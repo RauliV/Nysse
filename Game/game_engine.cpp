@@ -6,6 +6,20 @@
 
 std::shared_ptr<City> cityPtr;
 
+void initScreen(std::shared_ptr<Interface::ICity> city)
+{
+    QString file_iso = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
+    QString file_pieni = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
+    QImage tausta_iso (file_iso);
+    QImage tausta_pieni (file_pieni);
+    city->setBackground(tausta_iso, tausta_pieni);
+
+
+    //city->get_window()->menu;
+
+    //city->get_window()->centralWidget()->DrawWindowBackground z;
+
+}
 
 
 
@@ -115,28 +129,28 @@ void startingPointsSetup()
 void updateActors(){
 
 
-    for (auto const& actor : cityPtr->getStops()){
-        cityPtr->get_window()->addActor(actor->getLocation().giveX(),
-                                        actor->getLocation().giveY(),1);
+    for (auto const& actor : cityPtr->getActors()){
+        cityPtr->getWindow()->addActor(actor->giveLocation().giveX(),
+                                        actor->giveLocation().giveY(),1);
     }
 
 
 }
 
-void make_game(std::shared_ptr<Interface::ICity> icity){
+void startYourEngines(std::shared_ptr<Interface::ICity> icity){
 
 
 cityPtr = std::dynamic_pointer_cast<City>(icity);
 
-cityPtr->getGame()->finalizeGameStart();
-
 startingPointsSetup();  // luo pelaajaoliot ja arpoo aloituspisteet.
                         // puuuttuu atm ja bar -oliot
 
+/*
+cityPtr->get_window()->setSize(500,500);
 cityPtr->get_window()->updateCoords(1,1);
 //jos pelaaja ei idle -> liikuta
 //muuten
-
+*/
 /*
  * Jos pelaajaActor on lähellä kohdetta
 std::vector<std::shared_ptr<Interface::IActor>> NbAct =
