@@ -7,6 +7,7 @@
 #include "city.hh"
 #include "interfaces/icity.hh"
 #include <random>
+#include <QtDebug>
 
 
 
@@ -31,5 +32,5 @@ const std::shared_ptr<CourseSide::Logic> gameObjectPtr
 
 void startYourEngines(std::shared_ptr<Interface::ICity> city);
 void initScreen(std::shared_ptr<Interface::ICity> city);
-
+void createPlayers(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs);
 #endif // GAME_ENGINE_H

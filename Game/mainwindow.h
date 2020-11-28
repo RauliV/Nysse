@@ -13,6 +13,7 @@
 #include <QVector>
 #include <map>
 
+//#include"game_engine.h"
 namespace Ui {
 
 class MainWindow;
@@ -39,11 +40,14 @@ signals:
 
 
 private slots:
-    void on_startButton_clicked();
-    void on_pushButton_clicked();
-
 
     void on_PortraitView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
+
+    void on_SettingsButton_clicked();
+
+    void on_StartButton_clicked();
+
+    void savePlayerInfo(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs);
 
 private:
     Ui::MainWindow *ui;
@@ -57,6 +61,9 @@ private:
     int width_ = 500; //pxls
     int height_ = 500;
     int tick_ = 500; //ms
+
+    int playerCount_;
+    std::vector<std::pair<std::string, std::string>> playerSpecs_;
 };
 
  //namespace

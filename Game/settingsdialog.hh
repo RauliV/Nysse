@@ -5,6 +5,7 @@
 #include <QDialog>
 #include <QtWidgets>
 #include <utility>
+#include <string>
 
 namespace Ui {
 class settingsDialog;
@@ -20,7 +21,7 @@ public:
     ~settingsDialog();
 
 signals:
-    void settingsSet(std::vector<std::pair<QString , QString>>);
+    void settingsSet(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs);
 
 private slots:
 
@@ -32,7 +33,9 @@ private slots:
 
 private:
     Ui::settingsDialog *ui;
+    int playerCount_;
     std::vector<std::pair<QLineEdit*, QComboBox*>> players_;
+    std::vector<std::pair<std::string, std::string>> playerSpecs_;
 
 
 };

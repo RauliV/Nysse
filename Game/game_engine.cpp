@@ -78,6 +78,10 @@ Interface::Location getRandomLocation (){
 
 }
 
+void createPlayers(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs)
+{
+    //tänne tulee pelaajien määrä, nimet ja värit mainwindowista
+}
 
 void startingPointsSetup()
 {

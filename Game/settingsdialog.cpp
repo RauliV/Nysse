@@ -24,15 +24,18 @@ void settingsDialog::on_buttonBox_accepted()
         QLineEdit* nameEdit = std::get<0>(players_.at(i));
         QComboBox* colorEdit = std::get<1>(players_.at(i));
         QString name = nameEdit->text();
+        std::string sName = name.toUtf8().constData();
         QString color = colorEdit->currentText();
-        std::pair<QString, QString>(name,color);
+        std::string sColor = color.toUtf8().constData();
+        playerSpecs_.push_back(std::pair<std::string, std::string>(sName,sColor));
     }
+    emit(settingsSet(playerCount_, playerSpecs_));
 }
 
 void settingsDialog::on_ConfirmPushButton_clicked()
 {
-    int numberOfPlayers = ui->NumberOfPlayersSpinBox->value();
-    for(int i = 0; i< numberOfPlayers; i++)
+    playerCount_ = ui->NumberOfPlayersSpinBox->value();
+    for(int i = 0; i< playerCount_; i++)
     {
         std::pair<QLineEdit*, QComboBox*> player = createPlayerOptions();
         players_.push_back(player);

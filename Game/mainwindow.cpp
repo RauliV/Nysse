@@ -105,44 +105,28 @@ void MainWindow::setPicture(QImage &img)
 }
 
 
-void MainWindow::on_startButton_clicked()
-{
-    qDebug() << "Start clicked";
-    //emit gameStarted();
-}
-
 void MainWindow::on_PortraitView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint)
 {
 
 }
 
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_SettingsButton_clicked()
 {
     settingsDialog sDialog;
     sDialog.setModal(true);
-    //QObject::connect(&sDialog, &sDialog::settingsSet, this, &MainWindow::createPlayers);
+    QObject::connect(&sDialog, &settingsDialog::settingsSet, this, &MainWindow::savePlayerInfo);
     sDialog.exec();
 }
 
-/*void MainWindow::centerAndResize() {
+void MainWindow::on_StartButton_clicked()
+{
+    //Tämä pitäisi saada toimimaan
+    //createPlayers(playerCount_, playerSpecs_);
+}
 
-   // get the dimension available on this screen
-   QSize availableSize = qApp->desktop()->availableGeometry().size();
-   int width = availableSize.width();
-   int height = availableSize.height();
-   qDebug() << "Available dimensions " << width << "x" << height;
-   width *= 0.9; // 90% of the screen size
-   height *= 0.9; // 90% of the screen size
-   qDebug() << "Computed dimensions " << width << "x" << height;
-   QSize newSize( width, height );
-   setGeometry(
-       QStyle::alignedRect(
-           Qt::LeftToRight,
-           Qt::AlignCenter,
-           newSize,
-           qApp->desktop()->availableGeometry()
-       )
-   );
-}*/
-
+void MainWindow::savePlayerInfo(int playerCount, std::vector<std::pair<std::string, std::string> > playerSpecs)
+{
+    playerCount_ = playerCount;
+    playerSpecs_ = playerSpecs;
+}

@@ -120,16 +120,23 @@
     <property name="title">
      <string/>
     </property>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>40</y>
-       <width>89</width>
-       <height>98</height>
+       <y>10</y>
+       <width>98</width>
+       <height>132</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="StartButton">
+        <property name="text">
+         <string>START GAME</string>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QPushButton" name="endTurn">
         <property name="text">
@@ -138,7 +145,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="SettingsButton">
         <property name="text">
          <string>SETTINGS</string>
         </property>
