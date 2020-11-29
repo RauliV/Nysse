@@ -6,19 +6,19 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
+    actors/player.cpp \
+    actors/helicopter.cpp \
+    actors/scooter.cpp \
+    actors/taxi.cpp \
+    actors/walk.cpp \
     city.cpp \
     creategame.cpp \
     game_engine.cpp \
-    helicopter.cpp \
     main.cc \
     mainwindow.cpp \
-    player.cpp \
     playerturndialog.cpp \
-    scooter.cpp \
     settingsdialog.cpp \
     statistics.cpp \
-    taxi.cpp \
-    walk.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -45,17 +45,17 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 HEADERS += \
+    actors/player.hh \
+    actors/helicopter.hh \
+    actors/scooter.hh \
+    actors/taxi.hh \
+    actors/walk.hh \
     city.hh \
     game_engine.h \
-    helicopter.hh \
     mainwindow.h \
-    player.hh \
     playerturndialog.hh \
-    scooter.hh \
     settingsdialog.hh \
     statistics.hh\
-    taxi.hh \
-    walk.hh
 
 FORMS += \
     playerturndialog.ui \

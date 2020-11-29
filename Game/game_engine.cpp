@@ -144,9 +144,7 @@ void teststuff()
 //pelaajamäärää ei olisi edes varsinaisesti tarvittu täällä
 //playerTurnDialogin riviä 18 jouduin hiukan väliaikaisesti sotkemaan, jotta kääntyi
 //Pelaajaolioon tein name_ ja colour_ muuttujat sekä getName metodin
-//Myös mainwindowia vähän rukkasin, niin, että riviltä 124 -> lähettää kokeeksi dataa.
 
-//ylimääräinen kello uissa
 
 
 

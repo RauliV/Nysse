@@ -68,7 +68,7 @@
       <x>530</x>
       <y>230</y>
       <width>125</width>
-      <height>161</height>
+      <height>121</height>
      </rect>
     </property>
     <property name="title">
@@ -81,16 +81,6 @@
        <y>60</y>
        <width>71</width>
        <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QTimeEdit" name="timeEdit">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>110</y>
-       <width>118</width>
-       <height>26</height>
       </rect>
      </property>
     </widget>
@@ -112,15 +102,15 @@
     <property name="geometry">
      <rect>
       <x>530</x>
-      <y>380</y>
+      <y>360</y>
       <width>125</width>
-      <height>151</height>
+      <height>171</height>
      </rect>
     </property>
     <property name="title">
      <string/>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>20</x>

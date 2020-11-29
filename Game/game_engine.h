@@ -3,7 +3,7 @@
 
 #include "mainwindow.h"
 #include "core/logic.hh"
-#include "player.hh"
+#include "actors/player.hh"
 #include "city.hh"
 #include "interfaces/icity.hh"
 #include <random>
