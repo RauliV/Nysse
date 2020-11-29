@@ -78,7 +78,10 @@ Interface::Location getRandomLocation (){
 
 }
 
-
+std::list<std::shared_ptr<Player>> getPlayers()
+{
+    return cityPtr->getPlayerList();
+}
 
 
 void startingPointsSetup()
@@ -150,7 +153,7 @@ void teststuff()
 
 
 
-void createPlayers(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs)
+void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
 {
     std::list <std::shared_ptr<Player>> playerList = {};
 
