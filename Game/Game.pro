@@ -9,13 +9,16 @@ SOURCES += \
     city.cpp \
     creategame.cpp \
     game_engine.cpp \
+    helicopter.cpp \
     main.cc \
     mainwindow.cpp \
     player.cpp \
     playerturndialog.cpp \
+    scooter.cpp \
     settingsdialog.cpp \
     statistics.cpp \
-    test_func_runs.cpp
+    taxi.cpp \
+    walk.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -44,12 +47,15 @@ else:unix: PRE_TARGETDEPS += \
 HEADERS += \
     city.hh \
     game_engine.h \
+    helicopter.hh \
     mainwindow.h \
     player.hh \
     playerturndialog.hh \
+    scooter.hh \
     settingsdialog.hh \
     statistics.hh\
-    test_func_runs.h
+    taxi.hh \
+    walk.hh
 
 FORMS += \
     playerturndialog.ui \

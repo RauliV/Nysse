@@ -160,6 +160,7 @@ void createPlayers(int playerCount, std::vector<std::pair<std::string, std::stri
         // pelaajaoliot listaan
         std::shared_ptr<Player> playerPointer = std::make_shared<Player> (player.first, player.second);
         playerList.push_back(playerPointer);
+        qDebug() << QString::fromStdString(player.first);
     }
 
 
