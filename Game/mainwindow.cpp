@@ -20,11 +20,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    //STAT LABELS
-
-    ui->cash_value->setText(QString("120"));
-    ui->drunk_value->setText(QString("1"));
-    ui->speed_value->setText(QString("50"));
 
 
 
@@ -51,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //PORTRAIT
 
-    portrait = new QGraphicsScene(this);
+    /*portrait = new QGraphicsScene(this);
     ui->PortraitView->setScene(portrait);
 
     portrait->setSceneRect(0,0,119,119);
@@ -62,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->MapScrollArea->show();
     ui->mapView->show();
     ui->PortraitView->show();
-    //(this)->show();
+    //(this)->show();*/
 
 }
 
@@ -105,6 +100,59 @@ void MainWindow::setPicture(QImage &img)
 
 }
 
+void MainWindow::createPlayerPortraits()
+{
+    //Adding space to mainwindow for portraits based on player count
+    this->setFixedWidth(670 + 150*playerCount_);
+    ui->horizontalLayout->setSizeConstraint(QLayout::SetFixedSize);
+
+    std::list<std::shared_ptr<Player>> playerList = getPlayers();
+    std::list<std::shared_ptr<Player>>::iterator it;
+    //going through all players to create individual portraits
+    for(it = playerList.begin(); it != playerList.end(); it++)
+    {
+        //Widget that will contain all player info
+        std::shared_ptr<Player> player = *it;
+        QWidget* playerLayoutWidget = new QWidget;
+        playerLayoutWidget->setMaximumSize(300, 300);
+        playerLayoutWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+
+        //labels
+        QLabel* nameLabel = new QLabel;
+        QLabel* cashLabel = new QLabel;
+        QLabel* bankLabel = new QLabel;
+        QLabel* drunknessLabel = new QLabel;
+
+        //Labels for player info
+        nameLabel->setText(QString::fromStdString(player->getName()));
+        cashLabel->setText("Cash: " + QString::number(player->getCash()));
+        bankLabel->setText("Bank: " + QString::number(player->getBank()));
+        drunknessLabel->setText("Drunkness: " + QString::number(player->getDrunkness()));
+
+        //Portrait for player image
+        portrait = new QGraphicsScene(this);
+        portrait->setSceneRect(0,0,150,150);
+        //player->getColour();
+        //portrait->setBackgroundBrush()
+        QPixmap pixmap_portrait(":/graphics/1prom2.png");
+        QGraphicsView* portraitView = new QGraphicsView;
+        portraitView->setSceneRect(0,0,150,150);
+        pixmap_portrait = pixmap_portrait.scaled(portraitView->size(), Qt::IgnoreAspectRatio);
+        portraitView->setScene(portrait);
+
+
+        //Vertical layout for labels and portrait
+        QVBoxLayout* vLayout = new QVBoxLayout;
+        vLayout->addWidget(nameLabel);
+        vLayout->addWidget(cashLabel);
+        vLayout->addWidget(bankLabel);
+        vLayout->addWidget(drunknessLabel);
+        vLayout->addWidget(portraitView);
+        playerLayoutWidget->setLayout(vLayout);
+        ui->horizontalLayout->addWidget(playerLayoutWidget);
+    }
+}
+
 
 void MainWindow::on_PortraitView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint)
 {
@@ -117,13 +165,16 @@ void MainWindow::on_SettingsButton_clicked()
     settingsDialog sDialog;
     sDialog.setModal(true);
     QObject::connect(&sDialog, &settingsDialog::settingsSet, this, &MainWindow::savePlayerInfo);
+    //QObject::connect(&sDialog, &settingsDialog::settingsSet, this, &MainWindow::createPlayerPortraits);
     sDialog.exec();
 }
 
 
 void MainWindow::on_StartButton_clicked()
 {
-   std::string nimi1 = "Jaakko";
+    createPlayers(playerSpecs_);
+    createPlayerPortraits();
+   /*std::string nimi1 = "Jaakko";
    std::string vari1 = "musta";
    std::string nimi2 = "Teppo";
    std::string vari2 = "vaaleanpunainen";
@@ -132,10 +183,10 @@ void MainWindow::on_StartButton_clicked()
    std::pair<std::string, std::string> pari2 = {nimi2,vari2};
 
    std::vector<std::pair<std::string, std::string>> vec = {pari1,pari2};
-   createPlayers(2,vec);
+   createPlayers(2,vec);*/
 
     //Tämä pitäisi saada toimimaan
-    //createPlayers(playerCount_, playerSpecs_);
+    ui->StartButton->setDisabled(true);
 }
 
 void MainWindow::savePlayerInfo(int playerCount, std::vector<std::pair<std::string, std::string> > playerSpecs)
