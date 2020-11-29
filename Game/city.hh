@@ -14,11 +14,6 @@ class City : public Interface::ICity
 public:
 
 
-
-
-
-
-
     void setBackground(QImage& basicbackground, QImage& bigbackground);
 
     void setClock(QTime clock);
@@ -47,12 +42,12 @@ public:
     //Omien metodien määrittely
 
 
-    void setPlayerList (std::list<std::shared_ptr<Interface::IActor>> playerList)
+    void setPlayerList (std::list<std::shared_ptr<Player>> playerList)
     {
         playerList_ = playerList;
     }
 
-    std::list<std::shared_ptr<Interface::IActor>> getPlayerList (){
+    std::list<std::shared_ptr<Player>> getPlayerList (){
         return playerList_;
     }
 
@@ -123,7 +118,7 @@ private:
    std::vector<std::shared_ptr<Interface::IStop>> stopsList_;
    std::list<std::shared_ptr<Interface::IActor>> actorsList_;
    std::list<std::shared_ptr<Interface::IActor>> movedActors_;
-   std::list<std::shared_ptr<Interface::IActor>> playerList_;
+   std::list<std::shared_ptr<Player>> playerList_;
    std::shared_ptr<QTime> gameClock_;
 
 };

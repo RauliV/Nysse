@@ -13,7 +13,6 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground){
 
 
     mainWindowPtr_->setPicture(basicbackground);
-    qDebug() << "picture";
 
 };
 

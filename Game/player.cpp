@@ -1,6 +1,9 @@
  #include "player.hh"
 
-Player::Player()
+Player::Player(std::string name, std::string colour):
+    name_(name),
+    colour_(colour)
+
 {
     cash_ = 20;
     bank_ = 100;
@@ -91,4 +94,14 @@ void Player::setIdle(bool state)
 bool Player::isIdle()
 {
     return idle_;
+}
+
+std::string Player::getColour()
+{
+    return colour_;
+}
+
+std::string Player::getName()
+{
+    return name_;
 }

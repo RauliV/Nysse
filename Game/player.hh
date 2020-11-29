@@ -2,11 +2,13 @@
 #define PLAYER_HH
 #include "interfaces/iactor.hh"
 #include "core/location.hh"
+#include <iostream>
 
 class Player : public  Interface::IActor
 {
 public:
-    Player();
+
+    Player(std::string name, std::string colour);
     void destroy() override;
     void move(Interface::Location loc) override;
     Interface::Location giveLocation() const override;
@@ -25,6 +27,10 @@ public:
     void setIdle(bool state);
     bool isIdle();
 
+    std::string getColour();
+
+    std::string getName();
+
 
 
 private:
@@ -33,6 +39,9 @@ private:
     int bank_;
     Interface::Location loc_;
     bool idle_ = true;
+    std::string name_;
+    std::string colour_;
+
 };
 
 #endif // PLAYER_HH

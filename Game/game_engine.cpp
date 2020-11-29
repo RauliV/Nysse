@@ -78,17 +78,8 @@ Interface::Location getRandomLocation (){
 
 }
 
-void createPlayers(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs)
-{
-    qDebug() << "Pelaajien lkm: " << playerCount;
-    for (auto const&  player : playerSpecs){
 
-        QString nimi = QString::fromStdString(player.first);
-        QString vari = QString::fromStdString(player.second);
-        qDebug() << "Pelaajan nimi: " << nimi << "Pelaajan väri: " << vari;
-    }
-    //tänne tulee pelaajien määrä, nimet ja värit mainwindowista
-}
+
 
 void startingPointsSetup()
 {
@@ -99,43 +90,92 @@ void startingPointsSetup()
 
     //vakioita. Voisi ehkä määritellä const XXXXX.
 
-    int distanceToTarget = 400;
+    int distanceToTarget = 80;
     int distanceTreshold = 10;
 
 
-    // tämä tieto settingsdialogista
-    int playerCount = 4;
+    // haetaan pelaajien aloituspisteitä, kunnes etäisyys maaliin
+    // riittävän samanlainen (treshold)
+    for (auto const&  player : cityPtr->getPlayerList())
+    {
+        Interface::Location startingPoint = getRandomLocation();
+        int distance = startingPoint.calcDistance(startingPoint,targetLocation); // Etäisyys targetLocationin ja arvotun pisteen välillä
 
-
-    std::list <std::shared_ptr<Interface::IActor>> playerList = {};
-
-
-    for (int it = 0; it < playerCount; it++){
-
-        // pelaajaoliot listaan
-        std::shared_ptr<Interface::IActor> playerPointer = std::make_shared<Player> ();
-        playerList.push_back(playerPointer);
-
-        // haetaan pelaajien aloituspisteitä, kunnes etäisyys maaliin
-        // riittävän samanlainen (treshold)
-        double distance = getRandomLocation().calcDistance(getRandomLocation(),
-                                                   targetLocation);
         while (distance < (distanceToTarget-distanceTreshold) or
-            (distance > (distanceToTarget+distanceTreshold))){
+            (distance > (distanceToTarget+distanceTreshold)))           //Kunnes tresholdin sisällä.
+        {
 
-            distance = getRandomLocation().calcDistance(getRandomLocation(),targetLocation);
+            Interface::Location startingPoint = getRandomLocation();
+            distance = startingPoint.calcDistance(startingPoint,targetLocation);
         }
 
 
-        qDebug() << "Player " << it << "start location is: ";
-        qDebug() << getRandomLocation().giveX() << getRandomLocation().giveX();
-        playerPointer->move(getRandomLocation());
+        //kun löytynyt, mene sinne
+        player->move(startingPoint);  //siirtyykö heti vai liikkuuko tickeittäin?
 
     }
 
+}
+
+
+void teststuff()
+{
+
+
+    //Testejä
+
+    auto list = cityPtr->getPlayerList();
+    int it = 1;
+    for (auto const& player : list){
+        Interface::Location loc = player->giveLocation();
+        QString qname = QString::fromStdString(player->getName());
+        QString qcolour = QString::fromStdString(player->getColour());
+        qDebug() << "Pelaaja " << it << ": " << qname;
+        qDebug() << "Väri on: " << qcolour;
+        qDebug() << "Paikassa: ";
+
+        loc.printBoth();
+    }
+}
+
+
+
+// Muutin vähän pelaajaoliota. Luodessa haluaa parametrreinä nimen ja värin
+//pelaajamäärää ei olisi edes varsinaisesti tarvittu täällä
+//playerTurnDialogin riviä 18 jouduin hiukan väliaikaisesti sotkemaan, jotta kääntyi
+//Pelaajaolioon tein name_ ja colour_ muuttujat sekä getName metodin
+//Myös mainwindowia vähän rukkasin, niin, että riviltä 124 -> lähettää kokeeksi dataa.
+
+//ylimääräinen kello uissa
+
+
+
+void createPlayers(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs)
+{
+    std::list <std::shared_ptr<Player>> playerList = {};
+
+
+    for (auto const&  player : playerSpecs)
+    {
+        // pelaajaoliot listaan
+        std::shared_ptr<Player> playerPointer = std::make_shared<Player> (player.first, player.second);
+        playerList.push_back(playerPointer);
+    }
+
+
     //pelaajalista city-olioon
     cityPtr->setPlayerList(playerList);
+
+
+    //aloituspistelotto
+    startingPointsSetup();
+
+    //testailuja
+
+    teststuff();
+
 }
+
 
 void updateActors(){
 
@@ -148,37 +188,13 @@ void updateActors(){
 
 }
 
-void startYourEngines(std::shared_ptr<Interface::ICity> icity){
 
 
-cityPtr = std::dynamic_pointer_cast<City>(icity);
-
-startingPointsSetup();  // luo pelaajaoliot ja arpoo aloituspisteet.
-                        // puuuttuu atm ja bar -oliot
-
-/*
-cityPtr->get_window()->setSize(500,500);
-cityPtr->get_window()->updateCoords(1,1);
-//jos pelaaja ei idle -> liikuta
-//muuten
-*/
-/*
- * Jos pelaajaActor on lähellä kohdetta
-std::vector<std::shared_ptr<Interface::IActor>> NbAct =
-cityPtr->getNearbyActors(wanted_destination(pelaaja_vuorossa))
-if ( std::find(actorsList_.begin(), actorsList_.end(), player) != actorsList_.end())
-
+void startYourEngines(std::shared_ptr<Interface::ICity> icity)
 {
-    arriveDestination();
-};
+    cityPtr = std::dynamic_pointer_cast<City>(icity);
 
-else move;
-
-
-*/
+    startingPointsSetup();
+}
 
 
-
-
-
-};

@@ -15,7 +15,7 @@ class PlayerTurnDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit PlayerTurnDialog(QWidget *parent = nullptr, Player* playerInTurn = new Player );
+    explicit PlayerTurnDialog(QWidget *parent = nullptr, Player* playerInTurn = new Player("Kalle", "musta") );
     ~PlayerTurnDialog();
 
 private slots:
