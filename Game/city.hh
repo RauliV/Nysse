@@ -42,14 +42,9 @@ public:
     //Omien metodien määrittely
 
 
-    void setPlayerList (std::list<std::shared_ptr<Player>> playerList)
-    {
-        playerList_ = playerList;
-    }
+    void setPlayerList (std::list<std::shared_ptr<Player>> playerList);
 
-    std::list<std::shared_ptr<Player>> getPlayerList (){
-        return playerList_;
-    }
+    std::list<std::shared_ptr<Player>> getPlayerList ();
 
 
 
