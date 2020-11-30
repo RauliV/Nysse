@@ -272,5 +272,11 @@ void startYourEngines(std::shared_ptr<Interface::ICity> icity)
  *
  *
  * tick -> siirry(QTime)
+ * 
+ * Moduuleita:  luokat+rajapinnat ; Kulkuneuvot (Iactor), paikat (IStop) -baari: aika, rahat, känni
+ * 
+ * 
+ * 
+ * 
 
 */
