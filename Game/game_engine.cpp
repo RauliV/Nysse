@@ -8,16 +8,23 @@ Interface::Location goalLocation;
 
 
 
+// Koska Locationin rakentaja ei automaattisesti aseta pikseli
 
 int xFromEast(int eastcoord)
 {
     return static_cast<int>((eastcoord - 3327034) * 0.333333);
 }
 
+
+
 int yFromNorth(int northcoord)
 {
     return static_cast<int>((northcoord - 6824642) * 0.333333);
 }
+
+
+
+
 
 void initScreen(std::shared_ptr<Interface::ICity> city)
 {
@@ -98,14 +105,13 @@ Interface::Location getRandomLocation (){
 void startingPointsSetup()
 {
 
+    const int DISTANCE_TO_TARGET = 350;
+    const int DISTANCE_TRESHOLD = 10;
+
+
     //Luodaan pelille random maali
     goalLocation = getRandomLocation();
 
-
-    //vakioita. Voisi ehkä määritellä const XXXXX.
-
-    int distanceToTarget = 350;
-    int distanceTreshold = 10;
 
 
     // haetaan pelaajien aloituspisteitä, kunnes etäisyys maaliin
@@ -116,8 +122,10 @@ void startingPointsSetup()
         //startingPoint.setXY(getRandomLocation().giveX(), getRandomLocation().giveY());
         double distance = Interface::Location::calcDistance(startingPoint,goalLocation); // Etäisyys targetLocationin ja arvotun pisteen välillä
 
-        while (distance < (distanceToTarget-distanceTreshold) or
-            (distance > (distanceToTarget+distanceTreshold)))           //Kunnes tresholdin sisällä.
+        //Kunnes tresholdin sisällä.
+        while (distance < (DISTANCE_TO_TARGET-DISTANCE_TRESHOLD) or
+            (distance > (DISTANCE_TO_TARGET+DISTANCE_TRESHOLD)))
+
         {
 
             Interface::Location startingPoint = getRandomLocation();
@@ -126,23 +134,23 @@ void startingPointsSetup()
 
 
         //kun löytynyt, mene sinne
-        player->move(startingPoint);  //siirtyykö heti vai liikkuuko tickeittäin?
+        player->move(startingPoint);
 
     }
 
 }
-
+// Laskee reitin linnuntietä paikasta A paikkaan B jaettun STEPSiin osaan.
 std::vector<std::pair<int, int>> calculatePlayerRoute (Interface::Location A,
                                                       Interface::Location B)
 {
-    int steps = 100;
+    const int STEPS = 100;
     std::vector<std::pair<int, int>> returnVector = {};
     int aX = A.giveX();
     int aY = A.giveY();
     double xMovement = B.giveX() - aX;
     double yMovement = B.giveY() - aY;
-    double xStep = xMovement / steps;
-    double yStep = yMovement / steps;
+    double xStep = xMovement / STEPS;
+    double yStep = yMovement / STEPS;
     for (int it = 1; it < 100; it ++){
         std::pair <int, int> coord = {aX + (it*xStep),
                                       aY + (it *yStep)};
@@ -188,6 +196,8 @@ void teststuff()
         }
     }
 
+
+
 }
 
 
@@ -211,12 +221,6 @@ void createPlayers(int playerCount, std::vector<std::pair<std::string, std::stri
     cityPtr->setPlayerList(playerList);
 
 
-    //aloituspistelotto
-    startingPointsSetup();
-
-    //testailuja
-
-    teststuff();
 
 }
 
@@ -247,7 +251,22 @@ void startYourEngines(std::shared_ptr<Interface::ICity> icity)
 {
     cityPtr = std::dynamic_pointer_cast<City>(icity);
 
+
+    //tämä siksi, ettei tarvitse aina testattaessa klikkailla.
+    int pC = 1;
+    std::pair<std::string, std::string> pP = {"Pekka", "musta"};
+    std::vector<std::pair<std::string, std::string>> pV {pP};
+    createPlayers(pC,pV);
+
+    //aloituspistelotto
+    startingPointsSetup();
+
+    //testailuja
+
+    teststuff();
     //startingPointsSetup();
+
+
     updateActors();
 }
 
@@ -272,5 +291,12 @@ void startYourEngines(std::shared_ptr<Interface::ICity> icity)
  *
  *
  * tick -> siirry(QTime)
+ *
+ * Moduuleita:  luokat+rajapinnat ; Kulkuneuvot (Iactor), paikat (IStop) -baari: aika, rahat, känni
+ *
+ * Vakiot
+ *
+ *
+ *
 
 */

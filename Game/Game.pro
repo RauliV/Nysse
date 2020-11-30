@@ -18,7 +18,9 @@ SOURCES += \
     mainwindow.cpp \
     playerturndialog.cpp \
     settingsdialog.cpp \
-    statistics.cpp \
+    statistics.cpp \ \
+    stops/atm.cpp \
+    stops/bar.cpp
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -55,7 +57,9 @@ HEADERS += \
     mainwindow.h \
     playerturndialog.hh \
     settingsdialog.hh \
-    statistics.hh\
+    statistics.hh\ \
+    stops/atm.hh \
+    stops/bar.hh
 
 FORMS += \
     playerturndialog.ui \
