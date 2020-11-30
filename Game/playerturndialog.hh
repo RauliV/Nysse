@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QtDebug>
 
-#include "player.hh"
+#include "actors/player.hh"
 
 namespace Ui {
 class PlayerTurnDialog;

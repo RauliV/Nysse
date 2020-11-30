@@ -187,6 +187,7 @@ void MainWindow::on_StartButton_clicked()
 
     //Tämä pitäisi saada toimimaan
     ui->StartButton->setDisabled(true);
+
 }
 
 void MainWindow::savePlayerInfo(int playerCount, std::vector<std::pair<std::string, std::string> > playerSpecs)

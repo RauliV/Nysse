@@ -21,7 +21,8 @@ void City::setClock(QTime clock){
 
     short int hours = clock.hour();
     short int minutes = clock.minute();
-    gameClock_->setHMS(hours,minutes,0);
+    *gameClock_=clock;
+    //gameClock_->setHMS(hours,minutes,0);
 
 };
 
@@ -55,9 +56,9 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
     actorsList_.remove(actor);
 }
 
-void City::actorDestroyed(std::shared_ptr<Interface::IActor> actor)
+void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
-    actor->destroy();
+    actor->remove();
 };
 
 

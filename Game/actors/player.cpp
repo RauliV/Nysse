@@ -10,7 +10,7 @@ Player::Player(std::string name, std::string colour):
     drunkness_ = 0;
 }
 
-void Player::destroy()
+void Player::remove()
 {
 
 }
@@ -25,7 +25,7 @@ Interface::Location Player::giveLocation() const
     return loc_;
 }
 
-bool Player::isDestroyed() const
+bool Player::isRemoved() const
 {
 
 }
