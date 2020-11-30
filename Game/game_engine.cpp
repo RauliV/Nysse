@@ -70,8 +70,8 @@ void movePlayer(std::shared_ptr<Player> player, int x, int y){
 
 Interface::Location getRandomLocation (){
 
-    int randomX = rand() % 501;
-    int randomY = rand() % 501;
+    int randomX = rand() % 100;
+    int randomY = rand() % 100;
     Interface::Location rndLocation(randomX, randomY);
 
     return rndLocation;
@@ -136,6 +136,9 @@ void teststuff()
 
         loc.printBoth();
     }
+
+    Interface::Location prs(90000,40000);
+    prs.printBoth();
 }
 
 
@@ -193,7 +196,30 @@ void startYourEngines(std::shared_ptr<Interface::ICity> icity)
 {
     cityPtr = std::dynamic_pointer_cast<City>(icity);
 
-    startingPointsSetup();
+    //startingPointsSetup();
+    //updateActors();
 }
 
 
+/*
+ *
+ * Klikattu kohdetta:
+ *
+ * jos pelaaja määränpäässä -> idle -> mitä tehdään. Baarissa ryypätään,
+ * ei olla idle = vuoroa ei tule, ennenkuin juomingit loppuy
+ * Laske pelaajan liikkumispisteet vector (Pelaaja (-> kulkuneuvo-> nopeus, nyt loc), wantedXY)
+ * jos ei nyssessä: Jos nyssessä vektori = bussivektori
+ *
+ * return (Qtime,location);
+ *
+ *
+ *
+ * Pelaaja: + missä kulkuneuvossa
+ *          + reitti määränpäähän
+ *
+ * Kulkuneuvot: + Nopeus
+ *
+ *
+ * tick -> siirry(QTime)
+
+*/

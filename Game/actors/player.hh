@@ -9,10 +9,10 @@ class Player : public  Interface::IActor
 public:
 
     Player(std::string name, std::string colour);
-    void destroy() override;
+    void remove() override;
     void move(Interface::Location loc) override;
     Interface::Location giveLocation() const override;
-    bool isDestroyed() const override;
+    bool isRemoved() const override;
     ~Player() override;
 
     bool spendCash(int amount);
