@@ -2,7 +2,10 @@
 #define PLAYER_HH
 #include "interfaces/iactor.hh"
 #include "core/location.hh"
+#include "interfaces/ivehicle.hh"
 #include <iostream>
+#include <memory>
+
 
 class Player : public  Interface::IActor
 {
@@ -27,11 +30,12 @@ public:
     void setIdle(bool state);
     bool isIdle();
 
-    std::string getColour();
 
+    std::string getColour();
     std::string getName();
 
-
+    void getInVechile(std::shared_ptr <Interface::IVehicle> vehicle);
+    std::shared_ptr <Interface::IVehicle> inWhichVehicle ();
 
 private:
     int cash_;
@@ -41,6 +45,8 @@ private:
     bool idle_ = true;
     std::string name_;
     std::string colour_;
+    std::shared_ptr <Interface::IVehicle> inVehicle_;
+
 
 };
 
