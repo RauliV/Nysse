@@ -3,7 +3,7 @@
 
 #include "mainwindow.h"
 #include "stops/bar.hh"
-#include "stops/bar.hh"
+#include "stops/atm.hh"
 #include "core/logic.hh"
 #include "actors/player.hh"
 #include "interfaces/icity.hh"
@@ -53,6 +53,14 @@ public:
 
     std::list<std::shared_ptr<Bar>> getBarList (){
         return barList_;
+    }
+
+    void setAtmList (std::list<std::shared_ptr<Atm>> aList){
+        atmList_ = aList;
+    }
+
+    std::list<std::shared_ptr<Atm>> getAtmList (){
+        return atmList_;
     }
 
 
@@ -144,6 +152,7 @@ private:
    std::list<std::shared_ptr<Interface::IActor>> movedActors_;
    std::list<std::shared_ptr<Player>> playerList_;
    std::list<std::shared_ptr<Bar>> barList_;
+   std::list<std::shared_ptr<Atm>> atmList_;
    std::shared_ptr<QTime> gameClock_;
    Interface::Location goalLocation_;
 

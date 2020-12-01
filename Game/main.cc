@@ -39,12 +39,59 @@ int main(int argc, char *argv[])
 
 }
 
-//targetlocation cityyn
-//miten välitän saman cityolion sekä game-engineen, että
-//setboardiin.
-//luodaan täällä
-//konstaillaan
-//Baarien ja atm luokat ja luonti
-//Player - in_vechile
-//Timerouteplayer
-//tick -> player not idle -> move
+/*
+*   1.12
+* Pelaaja: + missä kulkuneuvossa
+*
+* * Kulkuneuvot:  + Nopeus
+*               + Hinta:    Nysse pysäkinväli - ei voi jatkaa samalla nyssellä
+*                           Taksi kulkee niin kauan kuin rahaa
+*                           taksi kulkee mistä mihin? (vaatii n. 3 nostoa maaliin)
+                            Tieristä loppuu akku 10 egee.
+*               + ActorIcon
+*               + Tier Akku
+*
+* ATM pelaaja on jo nostanut;
+*
+*
+*
+*  * kulkuneuvojen lisäämiseen AddActor
+*
+*
+
+*
+*
+*   2.12
+*
+* * Unittests - karttakoko/koordinaatit
+*
+*
+*
+* get right icon
+*  * actoritem -> try - catch. Jos ei löydy ikonia -> nysse, stoppi tai matkustaja
+    * jos ei stoppilistassa nysse tai matkustaja
+    * pitäisikö tehdä pari {actor, type(icon)}
+
+*Timerouteplayer?
+
+*tick -> player not idle -> move
+ * Klikattu kohdetta:
+ *
+ * jos pelaaja määränpäässä -> idle -> mitä tehdään. Baarissa ryypätään,
+ * ei olla idle = vuoroa ei tule, ennenkuin juomingit loppuy
+ * Laske pelaajan liikkumispisteet vector (Pelaaja (-> kulkuneuvo-> nopeus, nyt loc), wantedXY)
+ * jos ei nyssessä: Jos nyssessä vektori = bussivektori
+ *
+ * return (Qtime,location);
+
+ * goalDestination -> punainen x?
+ * tick -> siirry(QTime)
+
+
+ * Säännöt/documentointi ym.
+ *
+ *
+ *
+ *
+
+*/

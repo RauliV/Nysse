@@ -1,5 +1,6 @@
 #include "game_engine.h"
 #include "setboard.hh"
+#include "unistd.h"
 
 std::shared_ptr<City> cityPtr;
 
@@ -8,6 +9,7 @@ void bar(std::shared_ptr<Player> player)
 {
 
     // mitä tapahtuu, kun pelaaja saapuu baariin
+    // aika, rahat, känni
 
 }
 
@@ -109,19 +111,17 @@ void teststuff()
         }
     }
 
-
-
+  /*  for (int it = 0; it < 10;it ++)
+    {
+        createActorItems();
+        sleep(1);
+    }*/
 }
-
-
-    // X -intervallin napsulla
-
 
 
 void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
 {
     cityPtr = std::dynamic_pointer_cast<City>(cPtr);
-
 
     //tämä siksi, ettei tarvitse aina testattaessa klikkailla.
     int pC = 1;
@@ -129,50 +129,14 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     std::vector<std::pair<std::string, std::string>> pV {pP};
     createPlayers(pV);
 
-    //aloituspistelotto
+    //Setboard funktioita
     startingPointsSetup();
     createAtmsBars();
-    for (int it = 0; it < 10;it ++)
-    {
-        createActorItems();
-        cityPtr->getGame()->advance();
-    }
+    createActorItems();
+
     //testailuja
 
     teststuff();
-    //startingPointsSetup();
 
+};
 
-
-}
-
-
-/*
- *
- * Klikattu kohdetta:
- *
- * jos pelaaja määränpäässä -> idle -> mitä tehdään. Baarissa ryypätään,
- * ei olla idle = vuoroa ei tule, ennenkuin juomingit loppuy
- * Laske pelaajan liikkumispisteet vector (Pelaaja (-> kulkuneuvo-> nopeus, nyt loc), wantedXY)
- * jos ei nyssessä: Jos nyssessä vektori = bussivektori
- *
- * return (Qtime,location);
- *
- *
- *
- * Pelaaja: + missä kulkuneuvossa
- *          + reitti määränpäähän
- *
- * Kulkuneuvot: + Nopeus
- *
- *
- * tick -> siirry(QTime)
- *
- * Moduuleita:  luokat+rajapinnat ; Kulkuneuvot (Iactor), paikat (IStop) -baari: aika, rahat, känni
- *
- * Vakiot
- *
- *
- *
-
-*/

@@ -8,14 +8,27 @@
 #include "city.hh"
 #include <random>
 
+const QString TAXI_ICON_FILE = ":/graphics/taxi_icon.png";
+const QString SCOOTER_ICON_FILE = ":/graphics/scooter_icon.png";
+const QString BUS_STOP_ICON_FILE = ":/graphics/nysse_icon.png";
+const QString WALK_ICON_FILE = ":/graphics/taxi_icon.png";
+
+const int BAR_COUNT =   10;
+const int TIME_SPENT_IN_BAR =   15000; //ms
+
+const int ATM_COUNT =   10;
+const int ATM_MAX_WITHDRAW = 100;
+const int ATM_CASH_AT_BEGINNING = 200; //ehkä per pelaaja. Kokonaismäärä
 
 const int DISTANCE_TO_TARGET =  350; //Target = maali
 const int DISTANCE_TRESHOLD =   10;
 const int STEPS =       100; //kuinka moneen osaan matka jaetaan
-const int BAR_COUNT =   10;
-const int ATM_COUNT =   10;
-const int MAP_WIDTH =   500;
-const int MAP_HEIGHT =  500;
+
+const int MAP_WIDTH =   400;    //actoreiden piirtoalueen koko
+const int MAP_HEIGHT =  400;
+
+//Vasen ja yläreuna pois, jotta stopit on keskusta-alueella eikä koskessa.
+const int MAP_NORTH_EAST_CUT = 100;
 
 
 void initScreen(std::shared_ptr<Interface::ICity> city);

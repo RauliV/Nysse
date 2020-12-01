@@ -43,7 +43,8 @@ void startingPointsSetup()
     for (auto const&  player : cityPtrSet->getPlayerList())
     {
         Interface::Location startingPoint = getRandomLocation();
-        //startingPoint.setXY(getRandomLocation().giveX(), getRandomLocation().giveY());
+        startingPoint.setXY(getRandomLocation().giveX(),
+        getRandomLocation().giveY());
         double distance = Interface::Location::calcDistance(startingPoint,cityPtrSet->getGoalLocation()); // Etäisyys targetLocationin ja arvotun pisteen välillä
 
         //Kunnes tresholdin sisällä.
@@ -63,8 +64,8 @@ void startingPointsSetup()
 
 Interface::Location getRandomLocation ()
 {
-    int randomX = rand() % MAP_WIDTH;
-    int randomY = rand() % MAP_HEIGHT;
+    int randomX = (rand() % MAP_WIDTH) + MAP_NORTH_EAST_CUT;
+    int randomY = rand() % MAP_HEIGHT  + MAP_NORTH_EAST_CUT;
     Interface::Location rndLocation;
     rndLocation.setXY(randomX,randomY);
 
@@ -93,14 +94,24 @@ void createAtmsBars()
         {
             barPtr -> setPilot(false);
         }
-
-
         bList.push_back(barPtr);
     }
+    //Kaupungin juottolat kaupunkiolioon
     cityPtrSet->setBarList(bList);
 
+    //Atms
 
+    std::list<std::shared_ptr<Atm>> aList = {};
 
+    for (int it = 0; it < ATM_COUNT; it++)
+    {
+        std::shared_ptr<Atm> atmPtr = std::make_shared<Atm> ();
+        atmPtr->setLocation(getRandomLocation());
+
+        aList.push_back(atmPtr);
+    }
+    //Kaupungin automaatit kaupunkiolioon
+    cityPtrSet->setAtmList(aList);
 }
 
 std::list <std::shared_ptr<Player>> getPlayers(){
