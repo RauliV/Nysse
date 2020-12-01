@@ -4,6 +4,7 @@
 #include "interfaces/iactor.hh"
 #include "actoritem.hh"
 #include "actors/player.hh"
+#include "graphics/simpleactoritem.hh"
 
 #include <QGraphicsView>
 #include <QMainWindow>
@@ -32,7 +33,7 @@ public:
     void setSize(int w, int h);
     void setTick(int t);
 
-    void addActor(int locX, int locY, int type = 0);
+    void addActor(int locX, int locY, int type = 0, QString iconPath = "");
     void updateCoords(int nX, int nY);
     void setPicture(QImage &img);
     void createPlayerPortraits();

@@ -77,9 +77,10 @@ void MainWindow::setTick(int t)
     tick_ = t;
 }
 
-void MainWindow::addActor(int locX, int locY, int type)
+void MainWindow::addActor(int locX, int locY, int type, QString iconPath)
 {
-    ActorItem* nActor = new ActorItem(locX, locY, type);
+    //ActorItem* nActor = new ActorItem(locX, locY, type, iconPath);
+    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
     actors_.push_back(nActor);
     map_scene->addItem(nActor);
     last_ = nActor;
