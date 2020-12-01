@@ -74,9 +74,13 @@ Interface::Location getRandomLocation ()
 
 void createAtmsBars()
 {
+    // Bars
     std::list<std::shared_ptr<Bar>> bList = {};
 
+
     short int pilot = rand() % BAR_COUNT;
+
+    //Arvotaan baarinumero, jossa pilotti
     for (int it = 0; it < BAR_COUNT; it++)
     {
         std::shared_ptr<Bar> barPtr = std::make_shared<Bar> ();
@@ -94,29 +98,36 @@ void createAtmsBars()
         bList.push_back(barPtr);
     }
     cityPtrSet->setBarList(bList);
- /*   setBarList
-    setAtmList
-*/
+
+
+
 }
 
 std::list <std::shared_ptr<Player>> getPlayers(){
     return cityPtrSet->getPlayerList();
 }
 
-// Luo pelaajaoliot "Game Start" signaalista. playerCountnturha. Sievennä
-// Tallettaa kaupungin pelaajaolioiden osoitteet kaupungin pelaajaluetteloon
+void createActorItems()
+{
+    for (auto const& actor : cityPtrSet->getActors()){
+        Interface::Location aLoc = actor->giveLocation();
+        cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),1);
+    }
+
+}
+
+
+// Luo pelaajaoliot "Game Start" signaalista.
+// Tallentaa kaupungin pelaajaolioiden osoitteet kaupungin pelaajaluetteloon
 void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
 {
     std::list <std::shared_ptr<Player>> playerList = {};
-
 
     for (auto const&  player : playerSpecs)
     {
         std::shared_ptr<Player> playerPointer = std::make_shared<Player> (player.first, player.second);
         playerList.push_back(playerPointer);
     }
-
-
 
     //pelaajalista city-olioon
     cityPtrSet->setPlayerList(playerList);

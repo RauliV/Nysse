@@ -115,27 +115,7 @@ void teststuff()
 
 
     // X -intervallin napsulla
-void updateActors()
-{
-    for (auto const& actor : cityPtr->getMovedActors()){
 
-
-/*        Interface::Location paikka = actor->giveLocation();
-        int x1 = paikka.giveEasternCoord();
-        int y1 = paikka.giveNorthernCoord();
-        int x = xFromEast(x1);
-        int y = yFromNorth(y1);
-        paikka.setXY(x,y);
-        //CourseSide::SimpleActorItem acto(x,y,1);
-        //cityPtr -> getWindow()-> addActor(x,y,9);
-     //                                   actor->giveLocation().giveY(),1);
-*/
-
-   // }
-
-
-}
-}
 
 
 void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
@@ -152,14 +132,18 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     //aloituspistelotto
     startingPointsSetup();
     createAtmsBars();
-
+    for (int it = 0; it < 10;it ++)
+    {
+        createActorItems();
+        cityPtr->getGame()->advance();
+    }
     //testailuja
 
     teststuff();
     //startingPointsSetup();
 
 
-    //updateActors();
+
 }
 
 

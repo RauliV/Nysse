@@ -7,7 +7,7 @@
 #include <QtDebug>
 
 
-
+void createActorItems();
 void startYourEngines(std::shared_ptr<Interface::ICity> city);
 void initScreen(std::shared_ptr<Interface::ICity> city);
 void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs);
