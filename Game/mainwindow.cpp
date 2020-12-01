@@ -79,7 +79,7 @@ void MainWindow::setTick(int t)
 
 void MainWindow::addActor(int locX, int locY, int type)
 {
-    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
+    ActorItem* nActor = new ActorItem(locX, locY, type);
     actors_.push_back(nActor);
     map_scene->addItem(nActor);
     last_ = nActor;
@@ -192,7 +192,7 @@ void MainWindow::on_StartButton_clicked()
 {
     createPlayers(playerSpecs_);
     createPlayerPortraits();
-   //addActor(250,250, 0);
+    addActor(200,200, 90);
    /*std::string nimi1 = "Jaakko";
    std::string vari1 = "musta";
    std::string nimi2 = "Teppo";
