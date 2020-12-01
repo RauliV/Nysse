@@ -74,13 +74,19 @@ Interface::Location getRandomLocation ()
 
 void createAtmsBars()
 {
-    std::shared_ptr <std::vector<Interface::IStop>> bList = {};
+    std::shared_ptr <std::vector<std::shared_ptr<Bar>>> bList = {};
 
+    short int pilot = rand() % BAR_COUNT;
     for (int it = 0; it < BAR_COUNT; it++)
     {
         std::shared_ptr<Bar> barPtr = std::make_shared<Bar> ();
         barPtr->setLocation(getRandomLocation());
+        if (it == pilot)
+        {
+            barPtr -> setPilot(true);
+        }
 
+        bList->push_back(barPtr);
     }
  /*   setBarList
     setAtmList

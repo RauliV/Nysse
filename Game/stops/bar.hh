@@ -35,9 +35,21 @@ public:
         return nullreturn;
     }
 
+    void setPilot(bool pilot)
+    {
+        pilot_ = pilot;
+    }
+
+    bool isPilotInBar ()
+    {
+        return pilot_;
+    }
+
 private:
     Interface::Location location_;
     QString name_;
+    bool pilot_;
+
 
 
 };

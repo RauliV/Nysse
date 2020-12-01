@@ -2,6 +2,8 @@
 #define CITY_HH
 
 #include "mainwindow.h"
+#include "stops/bar.hh"
+#include "stops/bar.hh"
 #include "core/logic.hh"
 #include "actors/player.hh"
 #include "interfaces/icity.hh"
@@ -41,6 +43,16 @@ public:
 
 
     //Omien metodien määrittely
+
+
+
+    void setBarList (std::list<std::shared_ptr<Bar>> bList){
+        barList_ = bList;
+    }
+
+    std::list<std::shared_ptr<Bar>> getBarList (){
+        return barList_;
+    }
 
 
     void setPlayerList (std::list<std::shared_ptr<Player>> playerList)
@@ -131,6 +143,7 @@ private:
    std::list<std::shared_ptr<Interface::IActor>> actorsList_;
    std::list<std::shared_ptr<Interface::IActor>> movedActors_;
    std::list<std::shared_ptr<Player>> playerList_;
+   std::list<std::shared_ptr<Bar>> barList_;
    std::shared_ptr<QTime> gameClock_;
    Interface::Location goalLocation_;
 
