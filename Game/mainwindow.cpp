@@ -80,11 +80,8 @@ void MainWindow::setTick(int t)
 void MainWindow::addActor(int locX, int locY, int type)
 {
     CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
-    QPainter* painter = new QPainter(this);
-    QStyleOptionGraphicsItem *option = new QStyleOptionGraphicsItem;
-    nActor->paint(painter, option, ui->mapView);
     actors_.push_back(nActor);
-    //map_scene->addItem(nActor);
+    map_scene->addItem(nActor);
     last_ = nActor;
 }
 
@@ -100,6 +97,7 @@ void MainWindow::setPicture(QImage &img)
     mapScene->setSceneRect(0,0,500,500);
     mapScene->setBackgroundBrush(img);
     ui->mapView->setScene(mapScene);
+    map_scene = mapScene;
 
 }
 
@@ -194,7 +192,7 @@ void MainWindow::on_StartButton_clicked()
 {
     createPlayers(playerSpecs_);
     createPlayerPortraits();
-    addActor(100,100,1);
+   //addActor(250,250, 0);
    /*std::string nimi1 = "Jaakko";
    std::string vari1 = "musta";
    std::string nimi2 = "Teppo";
@@ -206,7 +204,6 @@ void MainWindow::on_StartButton_clicked()
    std::vector<std::pair<std::string, std::string>> vec = {pari1,pari2};
    createPlayers(2,vec);*/
 
-    //Tämä pitäisi saada toimimaan
     ui->StartButton->setDisabled(true);
     ui->SettingsButton->setDisabled(true);
 
