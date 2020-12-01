@@ -102,6 +102,11 @@ void teststuff()
         for (auto const& itt : vec){
             qDebug() << itt.first << itt.second;
         }
+
+        for (auto const& it : cityPtr->getBarList()){
+            qDebug() << "Bar nr: " << it->isPilotInBar();
+
+        }
     }
 
 
@@ -146,6 +151,7 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
 
     //aloituspistelotto
     startingPointsSetup();
+    createAtmsBars();
 
     //testailuja
 
