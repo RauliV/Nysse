@@ -80,8 +80,11 @@ void MainWindow::setTick(int t)
 void MainWindow::addActor(int locX, int locY, int type)
 {
     CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
+    QPainter* painter = new QPainter(this);
+    QStyleOptionGraphicsItem *option = new QStyleOptionGraphicsItem;
+    nActor->paint(painter, option, ui->mapView);
     actors_.push_back(nActor);
-    map_scene->addItem(nActor);
+    //map_scene->addItem(nActor);
     last_ = nActor;
 }
 
@@ -132,10 +135,28 @@ void MainWindow::createPlayerPortraits()
         //Portrait for player image
         portrait = new QGraphicsScene(this);
         portrait->setSceneRect(0,0,150,150);
-        //player->getColour();
+        std::string color = player->getColour();
+        if(color == "Red")
+        {
+            portrait->setBackgroundBrush(Qt::red);
+        }
+        else if(color == "Blue")
+        {
+            portrait->setBackgroundBrush(Qt::blue);
+        }
+        else if(color == "Green")
+        {
+            portrait->setBackgroundBrush(Qt::green);
+        }
+        else if(color == "Yellow")
+        {
+            portrait->setBackgroundBrush(Qt::yellow);
+        }
+
         //portrait->setBackgroundBrush()
-        QPixmap pixmap_portrait(":/graphics/1prom2.png");
+        QPixmap pixmap_portrait(":/graphics/0prom_small.png");
         QGraphicsView* portraitView = new QGraphicsView;
+        portrait->setForegroundBrush(pixmap_portrait);
         portraitView->setSceneRect(0,0,150,150);
         pixmap_portrait = pixmap_portrait.scaled(portraitView->size(), Qt::IgnoreAspectRatio);
         portraitView->setScene(portrait);
@@ -165,7 +186,6 @@ void MainWindow::on_SettingsButton_clicked()
     settingsDialog sDialog;
     sDialog.setModal(true);
     QObject::connect(&sDialog, &settingsDialog::settingsSet, this, &MainWindow::savePlayerInfo);
-    //QObject::connect(&sDialog, &settingsDialog::settingsSet, this, &MainWindow::createPlayerPortraits);
     sDialog.exec();
 }
 
@@ -174,6 +194,7 @@ void MainWindow::on_StartButton_clicked()
 {
     createPlayers(playerSpecs_);
     createPlayerPortraits();
+    addActor(100,100,1);
    /*std::string nimi1 = "Jaakko";
    std::string vari1 = "musta";
    std::string nimi2 = "Teppo";
@@ -187,6 +208,7 @@ void MainWindow::on_StartButton_clicked()
 
     //Tämä pitäisi saada toimimaan
     ui->StartButton->setDisabled(true);
+    ui->SettingsButton->setDisabled(true);
 
 }
 
