@@ -2,7 +2,8 @@
 #define CITY_HH
 
 #include "mainwindow.h"
-#include "game_engine.h"
+#include "core/logic.hh"
+#include "actors/player.hh"
 #include "interfaces/icity.hh"
 #include <QTime>
 #include <memory>
@@ -111,6 +112,17 @@ public:
 
     }
 
+    void setGoalLocation (Interface::Location gLoc)
+    {
+        goalLocation_ = gLoc;
+    }
+
+    Interface::Location getGoalLocation ()
+    {
+        return goalLocation_;
+    }
+
+
 
 private:
    std::shared_ptr <MainWindow> mainWindowPtr_;
@@ -120,6 +132,7 @@ private:
    std::list<std::shared_ptr<Interface::IActor>> movedActors_;
    std::list<std::shared_ptr<Player>> playerList_;
    std::shared_ptr<QTime> gameClock_;
+   Interface::Location goalLocation_;
 
 };
 

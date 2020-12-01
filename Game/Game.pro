@@ -17,8 +17,9 @@ SOURCES += \
     main.cc \
     mainwindow.cpp \
     playerturndialog.cpp \
+    setboard.cpp \
     settingsdialog.cpp \
-    statistics.cpp \ \
+    statistics.cpp \
     stops/atm.cpp \
     stops/bar.cpp
 
@@ -56,6 +57,7 @@ HEADERS += \
     game_engine.h \
     mainwindow.h \
     playerturndialog.hh \
+    setboard.hh \
     settingsdialog.hh \
     statistics.hh\ \
     stops/atm.hh \
