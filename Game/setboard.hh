@@ -22,7 +22,9 @@ void initScreen(std::shared_ptr<Interface::ICity> city);
 Interface::Location getRandomLocation ();
 void startingPointsSetup();
 void createAtmsBars();
-void createPlayers(int playerCount, std::vector<std::pair<std::string,
+void createPlayers(std::vector<std::pair<std::string,
                    std::string>> playerSpecs);
+std::list <std::shared_ptr<Player>> getPlayers();
+
 
 #endif // SETBOARD_HH

@@ -1,6 +1,6 @@
 #include "settingsdialog.hh"
 #include "mainwindow.h"
-#include "game_engine.h"
+#include "setboard.hh"
 #include "ui_mainwindow.h"
 #include "QElapsedTimer"
 #include "QTime"

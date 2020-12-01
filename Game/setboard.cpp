@@ -93,10 +93,13 @@ void createAtmsBars()
 */
 }
 
+std::list <std::shared_ptr<Player>> getPlayers(){
+    return cityPtrSet->getPlayerList();
+}
 
 // Luo pelaajaoliot "Game Start" signaalista. playerCountnturha. Sievennä
 // Tallettaa kaupungin pelaajaolioiden osoitteet kaupungin pelaajaluetteloon
-void createPlayers(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs)
+void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
 {
     std::list <std::shared_ptr<Player>> playerList = {};
 
@@ -106,6 +109,7 @@ void createPlayers(int playerCount, std::vector<std::pair<std::string, std::stri
         std::shared_ptr<Player> playerPointer = std::make_shared<Player> (player.first, player.second);
         playerList.push_back(playerPointer);
     }
+
 
 
     //pelaajalista city-olioon

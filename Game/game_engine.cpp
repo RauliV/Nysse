@@ -142,7 +142,7 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     int pC = 1;
     std::pair<std::string, std::string> pP = {"Pekka", "musta"};
     std::vector<std::pair<std::string, std::string>> pV {pP};
-    createPlayers(pC,pV);
+    createPlayers(pV);
 
     //aloituspistelotto
     startingPointsSetup();
