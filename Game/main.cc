@@ -2,8 +2,8 @@
 #include "core/logic.hh"
 #include "creategame.hh"
 #include "city.hh"
+#include "setboard.hh"
 #include "game_engine.h"
-//#include "interfaces/icity.hh"
 /*#include "player.hh"
 #include "statistics.hh"
 #include "mainwindow.h"*/
@@ -21,15 +21,16 @@ int main(int argc, char *argv[])
 
 
 
+
     std::shared_ptr<Interface::ICity> Tampere = Interface::createGame();
 
-    std::shared_ptr<City> city = std::dynamic_pointer_cast<City>(Tampere);
+    std::shared_ptr<City> cPtr = std::dynamic_pointer_cast<City>(Tampere);
 
     std::shared_ptr<MainWindow> mainWindow = std::make_shared<MainWindow> ();
 
-    city->setWindow(mainWindow);
+    cPtr->setWindow(mainWindow);
     initScreen(Tampere);
-    city->getGame()->finalizeGameStart();
+    cPtr->getGame()->finalizeGameStart();
     startYourEngines(Tampere);
 
 
@@ -37,3 +38,13 @@ int main(int argc, char *argv[])
     return a.exec();
 
 }
+
+//targetlocation cityyn
+//miten välitän saman cityolion sekä game-engineen, että
+//setboardiin.
+//luodaan täällä
+//konstaillaan
+//Baarien ja atm luokat ja luonti
+//Player - in_vechile
+//Timerouteplayer
+//tick -> player not idle -> move

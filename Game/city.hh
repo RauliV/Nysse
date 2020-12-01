@@ -2,7 +2,10 @@
 #define CITY_HH
 
 #include "mainwindow.h"
-#include "game_engine.h"
+#include "stops/bar.hh"
+#include "stops/bar.hh"
+#include "core/logic.hh"
+#include "actors/player.hh"
 #include "interfaces/icity.hh"
 #include <QTime>
 #include <memory>
@@ -42,7 +45,22 @@ public:
     //Omien metodien määrittely
 
 
-    void setPlayerList (std::list<std::shared_ptr<Player>> playerList);
+
+
+    void setBarList (std::list<std::shared_ptr<Bar>> bList){
+        barList_ = bList;
+    }
+
+    std::list<std::shared_ptr<Bar>> getBarList (){
+        return barList_;
+    }
+
+
+    void setPlayerList (std::list<std::shared_ptr<Player>> playerList)
+    {
+        playerList_ = playerList;
+    }
+
 
     std::list<std::shared_ptr<Player>> getPlayerList ();
 
@@ -106,6 +124,17 @@ public:
 
     }
 
+    void setGoalLocation (Interface::Location gLoc)
+    {
+        goalLocation_ = gLoc;
+    }
+
+    Interface::Location getGoalLocation ()
+    {
+        return goalLocation_;
+    }
+
+
 
 private:
    std::shared_ptr <MainWindow> mainWindowPtr_;
@@ -114,7 +143,9 @@ private:
    std::list<std::shared_ptr<Interface::IActor>> actorsList_;
    std::list<std::shared_ptr<Interface::IActor>> movedActors_;
    std::list<std::shared_ptr<Player>> playerList_;
+   std::list<std::shared_ptr<Bar>> barList_;
    std::shared_ptr<QTime> gameClock_;
+   Interface::Location goalLocation_;
 
 };
 

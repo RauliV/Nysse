@@ -111,10 +111,6 @@ bool City::isGameOver() const
     return false;
 }
 
-void City::setPlayerList(std::list<std::shared_ptr<Player> > playerList)
-{
-    playerList_ = playerList;
-}
 
 std::list<std::shared_ptr<Player> > City::getPlayerList(){
     return playerList_;

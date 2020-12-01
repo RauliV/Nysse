@@ -1,50 +1,31 @@
 #include "game_engine.h"
-
-
-
+#include "setboard.hh"
 
 std::shared_ptr<City> cityPtr;
 
 
-void initScreen(std::shared_ptr<Interface::ICity> city)
+void bar(std::shared_ptr<Player> player)
 {
-    QString file_iso = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
-    QString file_pieni = ":/offlinedata/offlinedata/kartta_pieni_500x500.png";
-    QImage tausta_iso (file_iso);
-    QImage tausta_pieni (file_pieni);
-    city->setBackground(tausta_iso, tausta_pieni);
-
-
-    //city->get_window()->menu;
-
-    //city->get_window()->centralWidget()->DrawWindowBackground z;
-
-}
-
-
-
-void bar(std::shared_ptr<Player> player){
 
     // mitä tapahtuu, kun pelaaja saapuu baariin
 
-
 }
 
-void atm(std::shared_ptr<Player> player){
+
+void atm(std::shared_ptr<Player> player)
+{
 
     // mitä tapahtuu, kun pelaaja saapuu automaatille
 
-
 }
 
-void stop(std::shared_ptr<Player> player){
+
+void stop(std::shared_ptr<Player> player)
+{
 
     // mitä tapahtuu, kun pelaaja saapuu pysäkille
 
-
 }
-
-
 
 
 void arriveDestination(){ //välietappi
@@ -63,114 +44,105 @@ void arriveDestination(){ //välietappi
 void movePlayer(std::shared_ptr<Player> player, int x, int y){
     Interface::Location newLoc(x,y);
     player->move(newLoc);
-    cityPtr->actorMoved(player);
+    //cityPtr->actorMoved(player);
 }
 
 
 
-Interface::Location getRandomLocation (){
 
-    int randomX = rand() % 100;
-    int randomY = rand() % 100;
-    Interface::Location rndLocation(randomX, randomY);
 
-    return rndLocation;
 
-}
-
-std::list<std::shared_ptr<Player>> getPlayers()
+// Laskee reitin linnuntietä paikasta A paikkaan B jaettun STEPSiin osaan.
+std::vector<std::pair<int, int>> calculatePlayerRoute (Interface::Location A,
+                                                      Interface::Location B)
 {
-    return cityPtr->getPlayerList();
-}
-
-
-void startingPointsSetup()
-{
-
-    //Luodaan pelille random maali
-    Interface::Location targetLocation = getRandomLocation();
-
-
-    //vakioita. Voisi ehkä määritellä const XXXXX.
-
-    int distanceToTarget = 80;
-    int distanceTreshold = 10;
-
-
-    // haetaan pelaajien aloituspisteitä, kunnes etäisyys maaliin
-    // riittävän samanlainen (treshold)
-    for (auto const&  player : cityPtr->getPlayerList())
-    {
-        Interface::Location startingPoint = getRandomLocation();
-        int distance = startingPoint.calcDistance(startingPoint,targetLocation); // Etäisyys targetLocationin ja arvotun pisteen välillä
-
-        while (distance < (distanceToTarget-distanceTreshold) or
-            (distance > (distanceToTarget+distanceTreshold)))           //Kunnes tresholdin sisällä.
-        {
-
-            Interface::Location startingPoint = getRandomLocation();
-            distance = startingPoint.calcDistance(startingPoint,targetLocation);
-        }
-
-
-        //kun löytynyt, mene sinne
-        player->move(startingPoint);  //siirtyykö heti vai liikkuuko tickeittäin?
-
+    std::vector<std::pair<int, int>> returnVector = {};
+    int aX = A.giveX();
+    int aY = A.giveY();
+    double xMovement = B.giveX() - aX;
+    double yMovement = B.giveY() - aY;
+    double xStep = xMovement / STEPS;
+    double yStep = yMovement / STEPS;
+    for (int it = 1; it < 100; it ++){
+        std::pair <int, int> coord = {aX + (it*xStep),
+                                      aY + (it *yStep)};
+        returnVector.push_back(coord);
     }
 
-}
+    return returnVector;
 
+}
 
 void teststuff()
 {
 
 
     //Testejä
-
     auto list = cityPtr->getPlayerList();
     int it = 1;
     for (auto const& player : list){
         Interface::Location loc = player->giveLocation();
+        /*loc.setXY(xFromEast(player->giveLocation().giveEasternCoord()),
+                  yFromNorth(player->giveLocation().giveNorthernCoord()));
+        //Interface::Location y = loc.setXY(player->giveLocation().giveEasternCoord();
+
+*/
         QString qname = QString::fromStdString(player->getName());
         QString qcolour = QString::fromStdString(player->getColour());
         qDebug() << "Pelaaja " << it << ": " << qname;
         qDebug() << "Väri on: " << qcolour;
         qDebug() << "Paikassa: ";
+        qDebug() << "Maali: " << cityPtr->getGoalLocation().giveX() << cityPtr->getGoalLocation().giveY();
+        qDebug() << "Pelaaja: " << loc.giveX() << loc.giveY();
 
-        loc.printBoth();
+        it ++;
+        std::vector<std::pair<int, int>> vec = calculatePlayerRoute(player->giveLocation(),
+                                                                    cityPtr->getGoalLocation());
+        qDebug() << "jonne mennään seuraavien pisteiden kautta";
+        for (auto const& itt : vec){
+            qDebug() << itt.first << itt.second;
+        }
     }
 
-    Interface::Location prs(90000,40000);
-    prs.printBoth();
+
+
 }
 
 
-
-// Muutin vähän pelaajaoliota. Luodessa haluaa parametrreinä nimen ja värin
-//pelaajamäärää ei olisi edes varsinaisesti tarvittu täällä
-//playerTurnDialogin riviä 18 jouduin hiukan väliaikaisesti sotkemaan, jotta kääntyi
-//Pelaajaolioon tein name_ ja colour_ muuttujat sekä getName metodin
-
-
-
-
-void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
+    // X -intervallin napsulla
+void updateActors()
 {
-    std::list <std::shared_ptr<Player>> playerList = {};
+    for (auto const& actor : cityPtr->getMovedActors()){
 
 
-    for (auto const&  player : playerSpecs)
-    {
-        // pelaajaoliot listaan
-        std::shared_ptr<Player> playerPointer = std::make_shared<Player> (player.first, player.second);
-        playerList.push_back(playerPointer);
-        qDebug() << QString::fromStdString(player.first);
-    }
+/*        Interface::Location paikka = actor->giveLocation();
+        int x1 = paikka.giveEasternCoord();
+        int y1 = paikka.giveNorthernCoord();
+        int x = xFromEast(x1);
+        int y = yFromNorth(y1);
+        paikka.setXY(x,y);
+        //CourseSide::SimpleActorItem acto(x,y,1);
+        //cityPtr -> getWindow()-> addActor(x,y,9);
+     //                                   actor->giveLocation().giveY(),1);
+*/
+
+   // }
 
 
-    //pelaajalista city-olioon
-    cityPtr->setPlayerList(playerList);
+}
+}
 
+
+void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
+{
+    cityPtr = std::dynamic_pointer_cast<City>(cPtr);
+
+
+    //tämä siksi, ettei tarvitse aina testattaessa klikkailla.
+    int pC = 1;
+    std::pair<std::string, std::string> pP = {"Pekka", "musta"};
+    std::vector<std::pair<std::string, std::string>> pV {pP};
+    createPlayers(pV);
 
     //aloituspistelotto
     startingPointsSetup();
@@ -178,28 +150,9 @@ void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
     //testailuja
 
     teststuff();
-
-}
-
-
-void updateActors(){
-
-
-    for (auto const& actor : cityPtr->getActors()){
-        cityPtr->getWindow()->addActor(actor->giveLocation().giveX(),
-                                        actor->giveLocation().giveY(),1);
-    }
-
-
-}
-
-
-
-void startYourEngines(std::shared_ptr<Interface::ICity> icity)
-{
-    cityPtr = std::dynamic_pointer_cast<City>(icity);
-
     //startingPointsSetup();
+
+
     //updateActors();
 }
 
@@ -224,5 +177,12 @@ void startYourEngines(std::shared_ptr<Interface::ICity> icity)
  *
  *
  * tick -> siirry(QTime)
+ *
+ * Moduuleita:  luokat+rajapinnat ; Kulkuneuvot (Iactor), paikat (IStop) -baari: aika, rahat, känni
+ *
+ * Vakiot
+ *
+ *
+ *
 
 */
