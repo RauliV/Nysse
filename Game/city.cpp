@@ -109,6 +109,11 @@ bool City::isGameOver() const
     //if (target_location == player_location
 
     return false;
+}
+
+
+std::list<std::shared_ptr<Player> > City::getPlayerList(){
+    return playerList_;
 };
 
 

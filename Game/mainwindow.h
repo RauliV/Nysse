@@ -3,6 +3,7 @@
 
 #include "interfaces/iactor.hh"
 #include "graphics/simpleactoritem.hh"
+#include "actors/player.hh"
 
 #include <QGraphicsView>
 #include <QMainWindow>
@@ -34,6 +35,7 @@ public:
     void addActor(int locX, int locY, int type = 0);
     void updateCoords(int nX, int nY);
     void setPicture(QImage &img);
+    void createPlayerPortraits();
 
 signals:
     void gameStarted();

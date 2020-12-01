@@ -23,6 +23,7 @@ public:
 signals:
     void settingsSet(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs);
 
+
 private slots:
 
     void on_buttonBox_accepted();

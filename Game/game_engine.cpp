@@ -56,7 +56,6 @@ void movePlayer(std::shared_ptr<Player> player, int x, int y){
 std::vector<std::pair<int, int>> calculatePlayerRoute (Interface::Location A,
                                                       Interface::Location B)
 {
-
     std::vector<std::pair<int, int>> returnVector = {};
     int aX = A.giveX();
     int aY = A.giveY();
@@ -71,9 +70,6 @@ std::vector<std::pair<int, int>> calculatePlayerRoute (Interface::Location A,
     }
 
     return returnVector;
-
-
-
 
 }
 

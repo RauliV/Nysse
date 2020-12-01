@@ -10,5 +10,6 @@
 
 void startYourEngines(std::shared_ptr<Interface::ICity> city);
 void initScreen(std::shared_ptr<Interface::ICity> city);
-void createPlayers(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs);
+void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs);
+std::list<std::shared_ptr<Player>> getPlayers();
 #endif // GAME_ENGINE_H

@@ -46,6 +46,7 @@ public:
 
 
 
+
     void setBarList (std::list<std::shared_ptr<Bar>> bList){
         barList_ = bList;
     }
@@ -60,9 +61,8 @@ public:
         playerList_ = playerList;
     }
 
-    std::list<std::shared_ptr<Player>> getPlayerList (){
-        return playerList_;
-    }
+
+    std::list<std::shared_ptr<Player>> getPlayerList ();
 
 
 
