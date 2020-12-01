@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include "interfaces/iactor.hh"
-#include "graphics/simpleactoritem.hh"
+#include "actoritem.hh"
 #include "actors/player.hh"
 
 #include <QGraphicsView>
