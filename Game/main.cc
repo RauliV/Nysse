@@ -39,6 +39,16 @@ int main(int argc, char *argv[])
 
 }
 
+// kuuluisiko matkustajien mennää bussiin itsellään?
+//
+//nopeus = steps on tick.
+
+// windowista tick (pelaaja)
+// click -> lokaatio
+
+// miksi palluroita
+//movedactors = 0??
+
 /*
 *   Kulkuneuvoon astumisen ehdot
 *

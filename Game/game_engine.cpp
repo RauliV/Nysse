@@ -5,6 +5,28 @@
 std::shared_ptr<City> cityPtr;
 
 
+void theEnd()
+{
+
+}
+
+void onTheTick()
+{
+    if (cityPtr->isGameOver() == true)
+    {
+        theEnd();
+    }
+
+    /* if (player.get_location == player.wantedlocation)
+    {
+        arriveDestination (player);
+    }
+
+    */
+}
+
+
+
 void bar(std::shared_ptr<Player> player)
 {
 
@@ -42,8 +64,6 @@ void arriveDestination(){ //välietappi
     //kulkuneuvolocation = playerlocation
 
     // wantedlocation = "";
-    // jos ei baari -> player = idle
-
     // jos wanted_destination on baari -> bar(player)
     // jos wanted_destination on atm -> atm(player)
     // jos wanted_destination on stop -> stop(player)
@@ -81,69 +101,14 @@ cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),1);
 }
 */
 
-void updateActorsLocations()
-
-{   //päivitetäänkö myös nysset ja matkustajat?
-    //uusi lokaatio tulee, mutta ruudunpäivitys meillä?
-    //Muutenhan ei ole muuta liikkuvaa, kuin pelaaja. Ikoini ja nopeus muuttuu
-    //jos kulkuneuvossa
-
-
-    //päivitetään muut kuin pelaajat
-
-       //dynaamiset actorit listasta = nysset ja passet
- /*   for (auto const& actor : cityPtr->getMovedActors())
-    {
-        Interface::Location aLoc = actor->giveLocation();
-
-        if ( std::find(cityPtr->getStops().begin()->get(),
-                       cityPtr->getStops().end()->get(),
-                       actor) != cityPtr->getStops().end()->get())
-        {
-            ifile = BUS_STOP_ICON_FILE;
-        }
-
-        else if (std::find(cityPtr->getBarList().begin(), cityPtr->getBarList().end(),
-                           actor) != cityPtr->getBarList().end())
-        {
-            ifile = BAR_ICON_FILE;
-        }
-
-        else if (std::find(cityPtr->getAtmList().begin(), cityPtr->getAtmList().end(),
-                           actor) != cityPtr->getAtmList().end())
-        {
-            ifile = ATM_ICON_FILE;
-        }
-
-
-        cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), ifile, actor);
-
-*/
-
-
-        // ja pelaajat lopuksi - saako dynamiccastpointterilla iactoriksi
-     for (auto const& player : cityPtr->getPlayerList())
-     {
-         QString ifile = "";
-         if (player->inWhichVehicle()->getName() == "scooter")
-         {
-             ifile = SCOOTER_ICON_FILE;
-         }
-
-         //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), ifile, player);
-
-     }
-
-
-
-
-}
+void matkalla();
+void baarissa();
 
 // nysset ja matkustajat liikkuvat itse?
 void movePlayer(std::shared_ptr<Player> player, int x, int y){
     Interface::Location newLoc(x,y);
     player->move(newLoc);
-    //cityPtr->actorMoved(player);
+    cityPtr->actorMoved(player);
 }
 
 
@@ -225,7 +190,7 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     //Setboard funktioita
     startingPointsSetup();
     createAtmsBars();
-
+    updateActorsLocations();
 
     addStaticItems();
 

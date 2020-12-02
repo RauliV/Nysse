@@ -5,6 +5,7 @@
 #include "stops/atm.hh"
 #include "core/logic.hh"
 #include "actors/player.hh"
+#include "game_engine.h"
 #include "city.hh"
 #include <random>
 
@@ -42,6 +43,8 @@ void createPlayers(std::vector<std::pair<std::string,
                    std::string>> playerSpecs);
 std::list <std::shared_ptr<Player>> getPlayers();
 void addStaticItems();
+void updateActorsLocations();
+
 
 
 #endif // SETBOARD_HH

@@ -1,4 +1,5 @@
 #include "setboard.hh"
+#include "QDebug"
 
 
 std::shared_ptr<City> cityPtrSet;
@@ -45,7 +46,10 @@ void startingPointsSetup()
         Interface::Location startingPoint = getRandomLocation();
         startingPoint.setXY(getRandomLocation().giveX(),
         getRandomLocation().giveY());
-        double distance = Interface::Location::calcDistance(startingPoint,cityPtrSet->getGoalLocation()); // Etäisyys targetLocationin ja arvotun pisteen välillä
+
+        // Etäisyys targetLocationin ja arvotun pisteen välillä
+        double distance = Interface::Location::calcDistance(startingPoint,
+               cityPtrSet->getGoalLocation()); // Etäisyys targetLocationin ja arvotun pisteen välillä
 
         //Kunnes tresholdin sisällä.
         while (distance < (DISTANCE_TO_TARGET-DISTANCE_TRESHOLD) or
@@ -116,6 +120,59 @@ void createAtmsBars()
 
 std::list <std::shared_ptr<Player>> getPlayers(){
     return cityPtrSet->getPlayerList();
+}
+
+void updateActorsLocations()
+
+{   //päivitetäänkö myös nysset ja matkustajat?
+    //uusi lokaatio tulee, mutta ruudunpäivitys meillä?
+    //Muutenhan ei ole muuta liikkuvaa, kuin pelaaja. Ikoini ja nopeus muuttuu
+    //jos kulkuneuvossa
+
+
+    //päivitetään muut kuin pelaajat
+
+       //dynaamiset actorit listasta = nysset ja passet
+    qDebug() << cityPtrSet->getMovedActors().size();
+    for (auto const& actor : cityPtrSet->getActors())
+    {
+        Interface::Location aLoc = actor->giveLocation();
+        cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), 2, BUS_STOP_ICON_FILE, actor);
+
+    }
+     /*   else if (std::find(cityPtr->getBarList().begin(), cityPtr->getBarList().end(),
+                           actor) != cityPtr->getBarList().end())
+        {
+            ifile = BAR_ICON_FILE;
+        }
+
+        else if (std::find(cityPtr->getAtmList().begin(), cityPtr->getAtmList().end(),
+                           actor) != cityPtr->getAtmList().end())
+        {
+            ifile = ATM_ICON_FILE;
+        }
+
+
+
+*/
+
+
+        // ja pelaajat lopuksi - saako dynamiccastpointterilla iactoriksi
+ /*    for (auto const& player : cityPtr->getPlayerList())
+     {
+         QString ifile = "";
+         if (player->inWhichVehicle()->getName() == "scooter")
+         {
+             ifile = SCOOTER_ICON_FILE;
+         }
+
+         //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), ifile, player);
+
+     }*/
+
+
+
+
 }
 
 void addStaticItems()
