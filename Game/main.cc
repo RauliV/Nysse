@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 }
 
 /*
-*   1.12
+*   Kulkuneuvoon astumisen ehdot
 *
 * * Kulkuneuvot:  + Nopeus  2
 *               + Hinta:    Nysse pysäkinväli - ei voi jatkaa samalla nyssellä
@@ -48,7 +48,6 @@ int main(int argc, char *argv[])
 *                           taksi kulkee mistä mihin? (vaatii n. 3 nostoa maaliin)
                             Tieristä loppuu akku 10 egee.
 *               + ActorIcon
-*               + Tier Akku
 *
 * ATM pelaaja on jo nostanut;
 * Lukumäärät suhteutetaan pelaajamääriin?

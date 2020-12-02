@@ -3,6 +3,7 @@
 
 #include "interfaces/ivehicle.hh"
 #include "interfaces/ipassenger.hh"
+//#include "QString"
 #include "memory"
 
 
@@ -20,14 +21,18 @@ public:
 
     void remove();
 
-     std::string getName() const;
+    std::string getName() const;
 
-     std::vector<std::shared_ptr<Interface::IPassenger> > getPassengers();
+    std::vector<std::shared_ptr<Interface::IPassenger> > getPassengers() const;
 
-     void addPassenger(std::shared_ptr<Interface::IPassenger> passenger);
+    void addPassenger(std::shared_ptr<Interface::IPassenger> passenger);
 
-     void removePassenger(std::shared_ptr<Interface::IPassenger> passenger);
+    void removePassenger(std::shared_ptr<Interface::IPassenger> passenger);
 
+private:
+    Interface::Location location_;
+    std::string name_;
+    int battery_;
    };
 
 
