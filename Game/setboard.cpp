@@ -120,6 +120,7 @@ std::list <std::shared_ptr<Player>> getPlayers(){
 
 void addStaticItems()
 {
+
     for (auto const& stop : cityPtrSet->getStops())
     {
         Interface::Location aLoc = stop->getLocation();

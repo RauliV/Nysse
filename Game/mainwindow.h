@@ -32,9 +32,11 @@ public:
 
     void setSize(int w, int h);
     void setTick(int t);
+    void setTimer();
 
-    void addActor(int locX, int locY, int type = 0, QString iconPath = "");
+    void addActor(int locX, int locY, int type = 0, QString iconPath = "", std::shared_ptr<Interface::IActor> actor = nullptr);
     void updateCoords(int nX, int nY);
+    void updateActors();
     void setPicture(QImage &img);
     void createPlayerPortraits();
 
@@ -58,7 +60,7 @@ private:
     QGraphicsScene *map_scene;
     QScrollArea *map;
     QTimer *timer;
-    QVector<QGraphicsItem*> actors_;
+    QVector<ActorItem*> actors_;
     CourseSide::SimpleActorItem* last_;
 
     int width_ = 500; //pxls

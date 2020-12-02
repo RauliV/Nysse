@@ -25,15 +25,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //TIMER
 
-    timer = new QTimer(this);
-    timer->start(tick_);
-    connect(timer, &QTimer::timeout, map_scene, &QGraphicsScene::advance);
-    ui->travelTimeLcd->setPalette(Qt::red);
-    timer->setInterval(1000);
-    connect(timer, &QTimer::timeout, [&]() {
-    QString time1 = QTime::currentTime().toString();
-    ui->travelTimeLcd->display(time1);
-    });
 
 
     /* e_timer for elapsed timer if needed
@@ -43,21 +34,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QString elapsed = QString::fromStdString(elapsed_str);
     ui->travelTimeLcd->display(elapsed); */
 
-
-    //PORTRAIT
-
-    /*portrait = new QGraphicsScene(this);
-    ui->PortraitView->setScene(portrait);
-
-    portrait->setSceneRect(0,0,119,119);
-    QPixmap pixmap_portrait(":/graphics/1prom2.png");
-    pixmap_portrait = pixmap_portrait.scaled(ui->PortraitView->size(), Qt::IgnoreAspectRatio);
-
-    ui->PortraitView->setBackgroundBrush(pixmap_portrait);
-    ui->MapScrollArea->show();
-    ui->mapView->show();
-    ui->PortraitView->show();
-    //(this)->show();*/
 
 }
 
@@ -77,10 +53,24 @@ void MainWindow::setTick(int t)
     tick_ = t;
 }
 
-void MainWindow::addActor(int locX, int locY, int type, QString iconPath)
+void MainWindow::setTimer()
 {
-    //ActorItem* nActor = new ActorItem(locX, locY, type, iconPath);
-    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
+    timer = new QTimer(this);
+    timer->start(tick_);
+    connect(timer, &QTimer::timeout, map_scene, &QGraphicsScene::advance);
+    ui->travelTimeLcd->setPalette(Qt::red);
+    timer->setInterval(1000);
+    connect(timer, &QTimer::timeout, [&]() {
+    QString time1 = QTime::currentTime().toString();
+    ui->travelTimeLcd->display(time1);
+    });
+    connect(timer, &QTimer::timeout, this, &MainWindow::updateActors);
+}
+
+void MainWindow::addActor(int locX, int locY, int type, QString iconPath, std::shared_ptr<Interface::IActor> actor)
+{
+    ActorItem* nActor = new ActorItem(locX, locY, type, iconPath, actor);
+    //CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
     actors_.push_back(nActor);
     map_scene->addItem(nActor);
     last_ = nActor;
@@ -89,6 +79,14 @@ void MainWindow::addActor(int locX, int locY, int type, QString iconPath)
 void MainWindow::updateCoords(int nX, int nY)
 {
     last_->setCoord(nX, nY);
+}
+
+void MainWindow::updateActors()
+{
+    for( int i = 0; i < actors_.size();i++)
+    {
+        actors_.at(i)->updateCoords();
+    }
 }
 
 void MainWindow::setPicture(QImage &img)
@@ -184,16 +182,17 @@ void MainWindow::on_SettingsButton_clicked()
 {
     settingsDialog sDialog;
     sDialog.setModal(true);
-    QObject::connect(&sDialog, &settingsDialog::settingsSet, this, &MainWindow::savePlayerInfo);
+    connect(&sDialog, &settingsDialog::settingsSet, this, &MainWindow::savePlayerInfo);
     sDialog.exec();
 }
 
 
 void MainWindow::on_StartButton_clicked()
 {
+    setTimer();
     createPlayers(playerSpecs_);
     createPlayerPortraits();
-    addActor(200,200, 90);
+    //addActor(200,200, 90);
    /*std::string nimi1 = "Jaakko";
    std::string vari1 = "musta";
    std::string nimi2 = "Teppo";
