@@ -1,7 +1,5 @@
 #ifndef SETBOARD_HH
 #define SETBOARD_HH
-
-#include "playerturndialog.hh"
 #include "stops/bar.hh"
 #include "stops/atm.hh"
 #include "core/logic.hh"

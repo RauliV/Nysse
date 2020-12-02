@@ -8,6 +8,7 @@ Player::Player(std::string name, std::string colour):
     cash_ = 20;
     bank_ = 100;
     drunkness_ = 0;
+    currentSteps_ = 0;
 }
 
 void Player::remove()
@@ -125,4 +126,32 @@ void Player::setChosenLocation (Interface::Location loc)
 Interface::Location Player::getChosenLocation ()
 {
     return chosenLocation_;
+}
+
+void Player::setRouteVector (std::shared_ptr<std::vector<Interface::Location>> vec)
+{
+    routeVector_ = vec;
+}
+
+std::shared_ptr<std::vector<Interface::Location>> Player::getRouteVector ()
+{
+    return routeVector_;
+}
+
+void Player::increaseSteps (int inc)
+{
+    currentSteps_ = currentSteps_ + inc;
+}
+
+int Player::getCurrentSteps ()
+{
+    return currentSteps_;
+}
+
+
+void Player::resetRoute ()
+{
+    currentSteps_ = 0;
+    routeVector_ = {};
+
 }

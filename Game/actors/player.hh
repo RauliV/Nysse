@@ -41,6 +41,18 @@ public:
     void setChosenLocation (Interface::Location loc);
 
 
+    void setRouteVector (std::shared_ptr<std::vector<Interface::Location>> vec);
+
+    std::shared_ptr<std::vector<Interface::Location>> getRouteVector ();
+
+    void increaseSteps (int inc);
+
+    int getCurrentSteps ();
+
+    void resetRoute ();
+
+
+
 private:
     int cash_;
     int drunkness_;
@@ -51,6 +63,9 @@ private:
     std::string colour_;
     std::shared_ptr <Interface::IVehicle> inVehicle_;
     Interface::Location chosenLocation_;
+    int currentSteps_;
+    std::shared_ptr<std::vector<Interface::Location>> routeVector_;
+
 
 };
 

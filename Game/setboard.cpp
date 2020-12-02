@@ -220,7 +220,7 @@ void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
 
     //pelaajalista city-olioon
     cityPtrSet->setPlayerList(playerList);
-
+    teststuff();
 }
 
 

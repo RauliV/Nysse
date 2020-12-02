@@ -5,7 +5,7 @@
 #include "city.hh"
 
 #include <QtDebug>
-
+void teststuff();
 void onTheTick(std::shared_ptr<Player> player);
 void createActorItems();
 void startYourEngines(std::shared_ptr<Interface::ICity> city);

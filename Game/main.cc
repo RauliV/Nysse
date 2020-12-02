@@ -42,6 +42,8 @@ int main(int argc, char *argv[])
 
 
 /*
+ *Montako kulkuneuvoa
+ *
  *
  * muutokset: mainwindow.cpp 87: kutsuu updateactorslocations
  * playerturndialog.hh 47 : getPlayerInTurn
@@ -55,7 +57,6 @@ int main(int argc, char *argv[])
 // miksi palluroita
 //movedactors = 0??
 
-/*
 *   Kulkuneuvoon astumisen ehdot
 *
 * * Kulkuneuvot:  + Nopeus  2
