@@ -105,3 +105,14 @@ std::string Player::getName()
 {
     return name_;
 }
+
+void Player::getInVechile(std::shared_ptr <Interface::IVehicle> vehicle)
+{
+    inVehicle_ = vehicle;
+}
+
+std::shared_ptr<Interface::IVehicle> Player::inWhichVehicle ()
+{
+    return inVehicle_;
+}
+

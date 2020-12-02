@@ -40,18 +40,17 @@ int main(int argc, char *argv[])
 }
 
 /*
-*   1.12
-* Pelaaja: + missä kulkuneuvossa
+*   Kulkuneuvoon astumisen ehdot
 *
-* * Kulkuneuvot:  + Nopeus
+* * Kulkuneuvot:  + Nopeus  2
 *               + Hinta:    Nysse pysäkinväli - ei voi jatkaa samalla nyssellä
 *                           Taksi kulkee niin kauan kuin rahaa
 *                           taksi kulkee mistä mihin? (vaatii n. 3 nostoa maaliin)
                             Tieristä loppuu akku 10 egee.
 *               + ActorIcon
-*               + Tier Akku
 *
 * ATM pelaaja on jo nostanut;
+* Lukumäärät suhteutetaan pelaajamääriin?
 *
 *
 *
@@ -64,7 +63,7 @@ int main(int argc, char *argv[])
 *   2.12
 *
 * * Unittests - karttakoko/koordinaatit
-*
+*Siivoa koko kaupunki
 *
 *
 * get right icon
