@@ -92,7 +92,7 @@ std::vector<std::shared_ptr<Interface::IActor>> City::getNearbyActors(Interface:
     std::vector<std::shared_ptr<Interface::IActor>> nearby_actors = {};
 
     for (auto const& actor : actorsList_){
-        if (loc.calcDistance(actor->giveLocation(),loc) < 2) {
+        if (loc.calcDistance(actor->giveLocation(),loc) < 200) {
             nearby_actors.push_back(actor);
         }
     }

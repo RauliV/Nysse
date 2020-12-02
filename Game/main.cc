@@ -49,6 +49,8 @@ int main(int argc, char *argv[])
                             Tieristä loppuu akku 10 egee.
 *               + ActorIcon
 *
+* promillerajat kulkuneuvoihin
+*
 * ATM pelaaja on jo nostanut;
 * Lukumäärät suhteutetaan pelaajamääriin?
 *

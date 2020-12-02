@@ -18,6 +18,8 @@ void atm(std::shared_ptr<Player> player)
 {
 
     // mitä tapahtuu, kun pelaaja saapuu automaatille
+    // jos ei vielä nostettu täältä, jos saldoa?
+
 
 }
 
@@ -29,10 +31,18 @@ void stop(std::shared_ptr<Player> player)
 
 }
 
+void stepInVehicle(std::shared_ptr<Player> player)
+{
+    //Bussi -> jos ei jo ollut ja jos rahaa eikä liikaa kännissä - astu sisään
+    //Scooter -> jos akkua ja rahaa eikä liikaa kännissä
+    //Taksi -> jos rahaa eikä liikaa kännissä
+}
 
 void arriveDestination(){ //välietappi
+    //kulkuneuvolocation = playerlocation
 
-
+    // wantedlocation = "";
+    // jos ei baari -> player = idle
 
     // jos wanted_destination on baari -> bar(player)
     // jos wanted_destination on atm -> atm(player)
@@ -43,15 +53,107 @@ void arriveDestination(){ //välietappi
 
 }
 
+//voi klikata vain, jos player idle = ei kulkuneuvossa, baarissa tai matkalla
+void clicked(std::shared_ptr<Player> player, Interface::Location loc)
+{
+    std::vector<std::shared_ptr<Interface::IActor>> actorsNear =
+            cityPtr->getNearbyActors(loc);
+
+    if (actorsNear.size()==0)
+    {
+        qDebug() << "There's no one nearby";
+    }
+    else if (actorsNear.size()>1)
+    {
+        qDebug () << "Choose your poison";
+    }
+    else
+    {
+       // wantedlocation = loc;
+    }
+
+
+}
+
+/*for (auto const& actor : cityPtrSet->getActors()){
+Interface::Location aLoc = actor->giveLocation();
+cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),1);
+}
+*/
+
+void updateActorsLocations()
+
+{   //päivitetäänkö myös nysset ja matkustajat?
+    //uusi lokaatio tulee, mutta ruudunpäivitys meillä?
+    //Muutenhan ei ole muuta liikkuvaa, kuin pelaaja. Ikoini ja nopeus muuttuu
+    //jos kulkuneuvossa
+
+
+    //päivitetään muut kuin pelaajat
+
+        //staattiset createen, eli stop, atm, bar
+    for (auto const& stop : cityPtr->getStops())
+    {
+        Interface::Location aLoc = stop->getLocation();
+        //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
+         //                              ifile, actor);
+
+    }
+
+
+        // atm
+
+
+        // bar
+
+
+       //dynaamiset actorit listasta = nysset ja passet
+ /*   for (auto const& actor : cityPtr->getMovedActors())
+    {
+        QString ifile = "";
+        Interface::Location aLoc = actor->giveLocation();
+
+        if ( std::find(cityPtr->getStops().begin()->get(),
+                       cityPtr->getStops().end()->get(),
+                       actor) != cityPtr->getStops().end()->get())
+        {
+            ifile = BUS_STOP_ICON_FILE;
+        }
+
+        else if (std::find(cityPtr->getBarList().begin(), cityPtr->getBarList().end(),
+                           actor) != cityPtr->getBarList().end())
+        {
+            ifile = BAR_ICON_FILE;
+        }
+
+        else if (std::find(cityPtr->getAtmList().begin(), cityPtr->getAtmList().end(),
+                           actor) != cityPtr->getAtmList().end())
+        {
+            ifile = ATM_ICON_FILE;
+        }
+
+
+        cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), ifile, actor);
+
+*/
+
+
+        // ja pelaajat lopuksi - saako dynamiccastpointterilla iactoriksi
+     for (auto const& player : cityPtr->getPlayerList())
+     {
+     }
+
+
+
+
+}
+
+// nysset ja matkustajat liikkuvat itse?
 void movePlayer(std::shared_ptr<Player> player, int x, int y){
     Interface::Location newLoc(x,y);
     player->move(newLoc);
     //cityPtr->actorMoved(player);
 }
-
-
-
-
 
 
 // Laskee reitin linnuntietä paikasta A paikkaan B jaettun STEPSiin osaan.

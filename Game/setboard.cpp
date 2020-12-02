@@ -136,7 +136,9 @@ void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
 
     for (auto const&  player : playerSpecs)
     {
-        std::shared_ptr<Player> playerPointer = std::make_shared<Player> (player.first, player.second);
+        std::shared_ptr<Player> playerPointer =
+                std::make_shared<Player> (player.first, player.second);
+
         playerList.push_back(playerPointer);
     }
 

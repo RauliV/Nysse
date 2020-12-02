@@ -12,6 +12,9 @@ const QString TAXI_ICON_FILE = ":/graphics/taxi_icon.png";
 const QString SCOOTER_ICON_FILE = ":/graphics/scooter_icon.png";
 const QString BUS_STOP_ICON_FILE = ":/graphics/nysse_icon.png";
 const QString WALK_ICON_FILE = ":/graphics/taxi_icon.png";
+const QString BAR_ICON_FILE = ":graphics/bar_icon.png";
+const QString ATM_ICON_FILE = ":graphics/atm_icon.png";
+
 
 const int BAR_COUNT =   10;
 const int TIME_SPENT_IN_BAR =   15000; //ms
