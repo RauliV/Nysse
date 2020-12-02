@@ -91,26 +91,9 @@ void updateActorsLocations()
 
     //päivitetään muut kuin pelaajat
 
-        //staattiset createen, eli stop, atm, bar
-    for (auto const& stop : cityPtr->getStops())
-    {
-        Interface::Location aLoc = stop->getLocation();
-        //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
-         //                              ifile, actor);
-
-    }
-
-
-        // atm
-
-
-        // bar
-
-
        //dynaamiset actorit listasta = nysset ja passet
  /*   for (auto const& actor : cityPtr->getMovedActors())
     {
-        QString ifile = "";
         Interface::Location aLoc = actor->giveLocation();
 
         if ( std::find(cityPtr->getStops().begin()->get(),
@@ -141,6 +124,14 @@ void updateActorsLocations()
         // ja pelaajat lopuksi - saako dynamiccastpointterilla iactoriksi
      for (auto const& player : cityPtr->getPlayerList())
      {
+         QString ifile = "";
+         if (player->inWhichVehicle()->getName() == "scooter")
+         {
+             ifile = SCOOTER_ICON_FILE;
+         }
+
+         //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), ifile, player);
+
      }
 
 
@@ -234,7 +225,9 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     //Setboard funktioita
     startingPointsSetup();
     createAtmsBars();
-    createActorItems();
+
+
+    addStaticItems();
 
     //testailuja
 

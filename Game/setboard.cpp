@@ -118,11 +118,29 @@ std::list <std::shared_ptr<Player>> getPlayers(){
     return cityPtrSet->getPlayerList();
 }
 
-void createActorItems()
+void addStaticItems()
 {
-    for (auto const& actor : cityPtrSet->getActors()){
-        Interface::Location aLoc = actor->giveLocation();
-        cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),1);
+    for (auto const& stop : cityPtrSet->getStops())
+    {
+        Interface::Location aLoc = stop->getLocation();
+        //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
+         //                     BAR_ICON_FILE, actor);
+
+    }
+    for (auto const& atm : cityPtrSet->getStops())
+    {
+        Interface::Location aLoc = atm->getLocation();
+        //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
+         //                     ATM_ICON_FILE, actor);
+
+    }
+
+    for (auto const& bar : cityPtrSet->getStops())
+    {
+        Interface::Location aLoc = bar->getLocation();
+        //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
+         //                      BAR_ICON_FILE, actor);
+
     }
 
 }

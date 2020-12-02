@@ -41,6 +41,7 @@ void createAtmsBars();
 void createPlayers(std::vector<std::pair<std::string,
                    std::string>> playerSpecs);
 std::list <std::shared_ptr<Player>> getPlayers();
+void addStaticItems();
 
 
 #endif // SETBOARD_HH
