@@ -7,14 +7,14 @@
 class ActorItem : public CourseSide::SimpleActorItem
 {
 public:
-    ActorItem(int x, int y, int type, QString iconPath, Interface::IActor* actor);
+    ActorItem(int x, int y, int type, QString iconPath, std::shared_ptr<Interface::IActor> actor);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     void updateCoords();
 
 
 private:
 QString iconPath_;
-Interface::IActor* actor_;
+std::shared_ptr<Interface::IActor> actor_;
 
 };
 

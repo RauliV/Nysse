@@ -1,6 +1,6 @@
 #include "actoritem.hh"
 
-ActorItem::ActorItem(int x, int y, int type, QString iconPath, Interface::IActor* actor)
+ActorItem::ActorItem(int x, int y, int type, QString iconPath, std::shared_ptr<Interface::IActor> actor)
     :CourseSide::SimpleActorItem{x,y,type}
 { 
     iconPath_ = iconPath;

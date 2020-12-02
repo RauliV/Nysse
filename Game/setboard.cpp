@@ -122,7 +122,7 @@ void createActorItems()
 {
     for (auto const& actor : cityPtrSet->getActors()){
         Interface::Location aLoc = actor->giveLocation();
-        cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),1);
+        cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),1,BUS_STOP_ICON_FILE ,actor);
     }
 
 }

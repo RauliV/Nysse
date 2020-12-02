@@ -67,7 +67,7 @@ void MainWindow::setTimer()
     connect(timer, &QTimer::timeout, this, &MainWindow::updateActors);
 }
 
-void MainWindow::addActor(int locX, int locY, int type, QString iconPath, Interface::IActor* actor)
+void MainWindow::addActor(int locX, int locY, int type, QString iconPath, std::shared_ptr<Interface::IActor> actor)
 {
     ActorItem* nActor = new ActorItem(locX, locY, type, iconPath, actor);
     //CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);

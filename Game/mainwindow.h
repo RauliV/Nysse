@@ -34,7 +34,7 @@ public:
     void setTick(int t);
     void setTimer();
 
-    void addActor(int locX, int locY, int type = 0, QString iconPath = "", Interface::IActor* actor = nullptr);
+    void addActor(int locX, int locY, int type = 0, QString iconPath = "", std::shared_ptr<Interface::IActor> actor = nullptr);
     void updateCoords(int nX, int nY);
     void updateActors();
     void setPicture(QImage &img);
