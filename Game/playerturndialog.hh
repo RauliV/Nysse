@@ -44,11 +44,12 @@ private slots:
 
     void on_DirectionCheckBox_4_toggled(bool checked);
 
+
 private:
+    Player* playerInTurn_;
     Ui::PlayerTurnDialog *ui;
     QString vehicle_;
     QString direction_;
-    Player* playerInTurn_;
     Interface::Location destination_;
 };
 

@@ -39,6 +39,12 @@ int main(int argc, char *argv[])
 
 }
 
+
+
+/*
+ *
+ * muutokset: mainwindow.cpp 87: kutsuu updateactorslocations
+ * playerturndialog.hh 47 : getPlayerInTurn
 // kuuluisiko matkustajien mennää bussiin itsellään?
 //
 //nopeus = steps on tick.

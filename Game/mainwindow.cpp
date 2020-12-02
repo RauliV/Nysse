@@ -65,6 +65,7 @@ void MainWindow::setTimer()
     ui->travelTimeLcd->display(time1);
     });
     connect(timer, &QTimer::timeout, this, &MainWindow::updateActors);
+
 }
 
 void MainWindow::addActor(int locX, int locY, int type, QString iconPath, std::shared_ptr<Interface::IActor> actor)
@@ -83,6 +84,7 @@ void MainWindow::updateCoords(int nX, int nY)
 
 void MainWindow::updateActors()
 {
+    updateActorsLocations();
     for( int i = 0; i < actors_.size();i++)
     {
         actors_.at(i)->updateCoords();

@@ -10,19 +10,19 @@ void theEnd()
 
 }
 
-void onTheTick()
+void onTheTick(std::shared_ptr<Player>  player)
 {
     if (cityPtr->isGameOver() == true)
     {
         theEnd();
     }
 
-    /* if (player.get_location == player.wantedlocation)
+    if (player->giveLocation() == player->getChosenLocation())
     {
-        arriveDestination (player);
+        //arriveDestination (player);
     }
 
-    */
+
 }
 
 
@@ -55,12 +55,16 @@ void stop(std::shared_ptr<Player> player)
 
 void stepInVehicle(std::shared_ptr<Player> player)
 {
+    //poista actori käytön jälkeen?
+
     //Bussi -> jos ei jo ollut ja jos rahaa eikä liikaa kännissä - astu sisään
     //Scooter -> jos akkua ja rahaa eikä liikaa kännissä
     //Taksi -> jos rahaa eikä liikaa kännissä
 }
 
-void arriveDestination(){ //välietappi
+void arriveDestination()
+
+{
     //kulkuneuvolocation = playerlocation
 
     // wantedlocation = "";
@@ -85,11 +89,11 @@ void clicked(std::shared_ptr<Player> player, Interface::Location loc)
     }
     else if (actorsNear.size()>1)
     {
-        qDebug () << "Choose your poison";
+        qDebug () << "Choose your poison Dialog";
     }
     else
     {
-       // wantedlocation = loc;
+       player->setChosenLocation(loc);
     }
 
 
@@ -190,7 +194,15 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     //Setboard funktioita
     startingPointsSetup();
     createAtmsBars();
-    updateActorsLocations();
+    //updateActorsLocations();
+
+    for (auto const& item : cityPtr->getActors())
+    {
+        Interface::Location aLoc = item->giveLocation();
+        cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), 2
+                               ,SCOOTER_ICON_FILE, item);
+
+    }
 
     addStaticItems();
 

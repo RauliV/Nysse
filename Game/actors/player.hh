@@ -37,6 +37,10 @@ public:
     void getInVechile(std::shared_ptr <Interface::IVehicle> vehicle);
     std::shared_ptr <Interface::IVehicle> inWhichVehicle ();
 
+    Interface::Location getChosenLocation();
+    void setChosenLocation (Interface::Location loc);
+
+
 private:
     int cash_;
     int drunkness_;
@@ -46,7 +50,7 @@ private:
     std::string name_;
     std::string colour_;
     std::shared_ptr <Interface::IVehicle> inVehicle_;
-
+    Interface::Location chosenLocation_;
 
 };
 

@@ -116,3 +116,13 @@ std::shared_ptr<Interface::IVehicle> Player::inWhichVehicle ()
     return inVehicle_;
 }
 
+void Player::setChosenLocation (Interface::Location loc)
+{
+
+    chosenLocation_ = loc;
+}
+
+Interface::Location Player::getChosenLocation ()
+{
+    return chosenLocation_;
+}

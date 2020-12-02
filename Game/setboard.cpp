@@ -1,4 +1,5 @@
 #include "setboard.hh"
+//#include "playerturndialog.hh"
 #include "QDebug"
 
 
@@ -133,13 +134,13 @@ void updateActorsLocations()
     //päivitetään muut kuin pelaajat
 
        //dynaamiset actorit listasta = nysset ja passet
-    qDebug() << cityPtrSet->getMovedActors().size();
-    for (auto const& actor : cityPtrSet->getActors())
+
+/*    for (auto const& actor : cityPtrSet->getActors())
     {
         Interface::Location aLoc = actor->giveLocation();
         cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), 2, BUS_STOP_ICON_FILE, actor);
 
-    }
+    }*/
      /*   else if (std::find(cityPtr->getBarList().begin(), cityPtr->getBarList().end(),
                            actor) != cityPtr->getBarList().end())
         {
@@ -170,8 +171,7 @@ void updateActorsLocations()
 
      }*/
 
-
-
+    onTheTick(cityPtrSet->getPlayerList().front());
 
 }
 
@@ -181,8 +181,8 @@ void addStaticItems()
     for (auto const& stop : cityPtrSet->getStops())
     {
         Interface::Location aLoc = stop->getLocation();
-        //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
-         //                     BAR_ICON_FILE, actor);
+      //  cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
+       //                       BAR_ICON_FILE, stop);
 
     }
     for (auto const& atm : cityPtrSet->getStops())

@@ -1,6 +1,7 @@
 #ifndef SETBOARD_HH
 #define SETBOARD_HH
 
+#include "playerturndialog.hh"
 #include "stops/bar.hh"
 #include "stops/atm.hh"
 #include "core/logic.hh"
@@ -10,7 +11,7 @@
 #include <random>
 
 const QString TAXI_ICON_FILE = ":/graphics/taxi_icon.png";
-const QString SCOOTER_ICON_FILE = ":/graphics/scooter_icon.png";
+const QString SCOOTER_ICON_FILE = ":/graphics/scooter_icon2.png";
 const QString BUS_STOP_ICON_FILE = ":/graphics/nysse_icon.png";
 const QString WALK_ICON_FILE = ":/graphics/taxi_icon.png";
 const QString BAR_ICON_FILE = ":graphics/bar_icon.png";
