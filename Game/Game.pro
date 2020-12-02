@@ -6,6 +6,7 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
+    actoritem.cpp \
     actors/player.cpp \
     actors/helicopter.cpp \
     actors/scooter.cpp \
@@ -48,6 +49,7 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 HEADERS += \
+    actoritem.hh \
     actors/player.hh \
     actors/helicopter.hh \
     actors/scooter.hh \

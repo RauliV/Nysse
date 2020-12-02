@@ -1,9 +1,10 @@
 #include "actoritem.hh"
 
-ActorItem::ActorItem(int x, int y, int type, QString iconPath)
+ActorItem::ActorItem(int x, int y, int type, QString iconPath, Interface::IActor* actor)
     :CourseSide::SimpleActorItem{x,y,type}
 { 
     iconPath_ = iconPath;
+    actor_ = actor;
 }
 
 void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -24,6 +25,15 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
     painter->setBrush(brush);
     painter->drawEllipse(bounds);
+}
+
+void ActorItem::updateCoords()
+{
+    if(actor_ != nullptr)
+    {
+        Interface::Location loc = actor_->giveLocation();
+        setCoord(loc.giveX(),loc.giveY());
+    }
 }
 
 
