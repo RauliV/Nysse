@@ -69,3 +69,14 @@ void Taxi::remove()
  {
      return maxPromilleLevel_;
  }
+
+ std::shared_ptr<QImage> Taxi::getIcon()
+ {
+     QImage tIcon (iconFile);
+     std::shared_ptr<QImage> tIconPtr= std::make_shared<QImage> (tIcon);
+
+     return tIconPtr;
+ }
+
+
+

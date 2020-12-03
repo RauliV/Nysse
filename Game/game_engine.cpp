@@ -227,20 +227,30 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     startingPointsSetup();
     createAtmsBars();
     addStaticItems();
-    clearPassengers();
+    //clearPassengers();
+
 
     for (auto const& item : cityPtr->getActors())
     {
-        Interface::Location aLoc = item->giveLocation();
-        cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), 2
-                               ,BUS_STOP_ICON_PTR, item);
+        if (std::dynamic_pointer_cast<Taxi>(item) != 0){
+            qDebug() << "taksi";
+
+        }
+
+        else if (std::dynamic_pointer_cast<CourseSide::Nysse>(item) != 0){
+            qDebug() << "Nysse";
+
+        }
+
+        else if (std::dynamic_pointer_cast<CourseSide::Passenger>(item) != 0){
+
+            qDebug() << "passe";
+        }
+
+
 
     }
 
-
-    //testailuja
-
-    //teststuff();
 
 };
 

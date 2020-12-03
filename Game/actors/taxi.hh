@@ -4,7 +4,8 @@
 
 #include "interfaces/ivehicle.hh"
 #include "interfaces/ipassenger.hh"
-//#include "QString"
+#include "QImage"
+#include "QString"
 #include "memory"
 
 class Taxi
@@ -36,12 +37,16 @@ public:
 
     int getMaxPromilleLevel();
 
+    std::shared_ptr<QImage> getIcon();
+
 private:
     Interface::Location location_;
     std::string name_;
     int speed_;
     double costPerTick_;
     int maxPromilleLevel_;
+    QString iconFile = ":/graphics/taxi_icon.png";
+
 
 };
 
