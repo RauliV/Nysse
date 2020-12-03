@@ -9,6 +9,7 @@ Player::Player(std::string name, std::string colour):
     bank_ = 100;
     drunkness_ = 0;
     currentSteps_ = 0;
+    routeVector_ = {};
 }
 
 void Player::remove()
@@ -153,5 +154,7 @@ void Player::resetRoute ()
 {
     currentSteps_ = 0;
     routeVector_ = {};
+    Interface::Location nLoc(0,0);
+    chosenLocation_ = nLoc;
 
 }

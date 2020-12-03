@@ -30,7 +30,7 @@ void onTheTick(std::shared_ptr<Player>  player)
 std::shared_ptr<std::vector<Interface::Location>> calculatePlayerRoute (Interface::Location A,
                                                       Interface::Location B)
 {
-    std::shared_ptr<std::vector<Interface::Location>> returnVector = {};
+    std::vector<Interface::Location> returnVector;
     int aX = A.giveX();
     int aY = A.giveY();
     double xMovement = B.giveX() - aX;
@@ -42,12 +42,14 @@ std::shared_ptr<std::vector<Interface::Location>> calculatePlayerRoute (Interfac
 
         std::pair <int, int> coord = {aX + (it*xStep),
                                       aY + (it *yStep)};
-        Interface::Location loc (coord.first, coord.second);
+        Interface::Location loci;
+        loci.setXY(coord.first, coord.second);
 
-        returnVector->push_back(loc);
+        returnVector.push_back(loci);
     }
-
-    return returnVector;
+    std::shared_ptr<std::vector<Interface::Location>> returnVectorPtr;
+    returnVectorPtr = std::make_shared<std::vector<Interface::Location>> (returnVector);
+    return returnVectorPtr;
 
 }
 
@@ -91,13 +93,11 @@ void stepInVehicle(std::shared_ptr<Player> player, std::shared_ptr<Interface::IV
     //Taksi -> jos rahaa eikä liikaa kännissä
 }
 
-void arriveDestination(std::shared_ptr<Player> player,int x,int y)
+void arriveDestination(std::shared_ptr<Player> player, Interface::Location dest)
 
-{   Interface::Location loc(0,0);
+{
     player->setIdle(true);
-    player->setChosenLocation(loc);
-    player->setRouteVector({});
-
+    player->resetRoute();
 
     //kulkuneuvolocation = playerlocation
 
@@ -126,9 +126,9 @@ void onTheClick(std::shared_ptr<Player> player, Interface::Location loc)
         qDebug () << "Choose your poison Dialog";
     }
     else
-    {
+    {   Interface::Location aaa = player->giveLocation();
        player->setChosenLocation(loc);
-       player->setRouteVector(calculatePlayerRoute(player->giveLocation(), loc));
+       player->setRouteVector(calculatePlayerRoute(aaa, loc));
     }
 
 
@@ -156,25 +156,26 @@ void movePlayer(std::shared_ptr<Player> player){
 
     else if (player->inWhichVehicle()->getName() == "taxi")
     {
-        player->increaseSteps(3);
+        player->increaseSteps(4);
     }
 
-    auto ppl = cityPtr->getPlayerList().front();
-
-    ppl->setChosenLocation(cityPtr->getBarList().front()->getLocation());
     int cSteps = player->getCurrentSteps();
-    Interface::Location A = ppl->giveLocation();
-    Interface::Location B = ppl->getChosenLocation();
-    A.setNorthEast(NorthFromY(A.giveY()), EastFromX(A.giveX()));
-    B.setNorthEast(NorthFromY(B.giveY()), EastFromX(B.giveX()));
 
+    if (player->getRouteVector() != nullptr)
+    {
+        Interface::Location newLoc = player->getRouteVector()->at(cSteps);
+        //newLoc.setNorthEast(NorthFromY(newLoc.giveY()), EastFromX(newLoc.giveX()));
+        player->move(newLoc);
+        cityPtr->actorMoved(player);
+        if (cSteps == 100){
+            arriveDestination(player, player->getChosenLocation());
 
-    auto rVec = calculatePlayerRoute(A,B );
-    Interface::Location newLoc = rVec->at(cSteps);
-    newLoc.setNorthEast(NorthFromY(newLoc.giveY()), EastFromX(newLoc.giveX()));
-    ppl->setRouteVector(rVec);
-    player->move(newLoc);
-    cityPtr->actorMoved(player);
+        }
+    } else
+    {
+        qDebug() << "Ei reittiä pelaajalla";
+    }
+
 }
 
 
@@ -211,7 +212,7 @@ void teststuff()
 
     auto ppl = cityPtr->getPlayerList().front();
     onTheClick(ppl, cityPtr->getBarList().front()->getLocation());
-    while (ppl->getCurrentSteps() < 90 )
+    while (ppl->getCurrentSteps() < STEPS - 5 )
     {
         movePlayer(ppl);
         qDebug() << ppl->getCurrentSteps()<< ppl->giveLocation().giveX() << ppl->giveLocation().giveY();
@@ -220,7 +221,7 @@ void teststuff()
     //ppl->getInVechile(veh);
     ppl->resetRoute();
 
-    while (ppl->getCurrentSteps() < 90 )
+    while (ppl->getCurrentSteps() < STEPS - 5 )
     {
         movePlayer(ppl);
         qDebug() << ppl->getCurrentSteps()<< ppl->giveLocation().giveX() << ppl->giveLocation().giveY();
