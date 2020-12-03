@@ -9,6 +9,9 @@
 #include <random>
 
 const QString TAXI_ICON_FILE = ":/graphics/taxi_icon.png";
+QImage TAXI_ICON(TAXI_ICON_FILE);
+std::shared_ptr<QImage> TAXI_ICON_PTR = std::make_shared<QImage> (TAXI_ICON);
+
 const QString SCOOTER_ICON_FILE = ":/graphics/scooter_icon2.png";
 const QString BUS_STOP_ICON_FILE = ":/graphics/nysse_icon.png";
 const QString WALK_ICON_FILE = ":/graphics/taxi_icon.png";
