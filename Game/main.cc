@@ -41,25 +41,23 @@ int main(int argc, char *argv[])
 
 
 
-/*
+/*UI
+ *Kulkuneuvoon astuminen (ehdot: akku, rahat, känni)
+ * jos menee pysäkille -> nysseen, chosenlocation on next stop
+ *
+
+ * Spendcash unittest - matkustaessa kulutetaan, niin olisi syytä olla
+ * menemättä negat, ettei tule tolpalla tappelua
+ *
  *Montako kulkuneuvoa
- *
- *
- * muutokset: mainwindow.cpp 87: kutsuu updateactorslocations
- * playerturndialog.hh 47 : getPlayerInTurn
-// kuuluisiko matkustajien mennää bussiin itsellään?
-//
+
 //nopeus = steps on tick.
 
-// windowista tick (pelaaja)
-// click -> lokaatio
-
-// miksi palluroita
-//movedactors = 0??
-
-*   Kulkuneuvoon astumisen ehdot
 *
-* * Kulkuneuvot:  + Nopeus  2
+*
+* * Kulkuneuvot:  + Nopeus, hinta/distance, icon, akku
+*
+*               taksi könttä
 *               + Hinta:    Nysse pysäkinväli - ei voi jatkaa samalla nyssellä
 *                           Taksi kulkee niin kauan kuin rahaa
 *                           taksi kulkee mistä mihin? (vaatii n. 3 nostoa maaliin)

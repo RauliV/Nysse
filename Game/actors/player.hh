@@ -1,5 +1,7 @@
 #ifndef PLAYER_HH
 #define PLAYER_HH
+#include "scooter.hh"
+#include "taxi.hh"
 #include "interfaces/iactor.hh"
 #include "core/location.hh"
 #include "interfaces/ivehicle.hh"
@@ -18,7 +20,7 @@ public:
     bool isRemoved() const;
     ~Player() override;
 
-    bool spendCash(int amount);
+    bool spendCash(double amount);
     bool withdrawCash(int amount);
     int getCash();
     int getBank();
@@ -30,7 +32,6 @@ public:
     void setIdle(bool state);
     bool isIdle();
 
-
     std::string getColour();
     std::string getName();
 
@@ -40,16 +41,14 @@ public:
     Interface::Location getChosenLocation();
     void setChosenLocation (Interface::Location loc);
 
-
     void setRouteVector (std::shared_ptr<std::vector<Interface::Location>> vec);
-
     std::shared_ptr<std::vector<Interface::Location>> getRouteVector ();
+    void resetRoute ();
 
-    void increaseSteps (int inc);
-
+    void takeStep();
     int getCurrentSteps ();
 
-    void resetRoute ();
+
 
 
 

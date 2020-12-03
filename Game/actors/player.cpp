@@ -37,7 +37,7 @@ Player::~Player()
 
 }
 
-bool Player::spendCash(int amount)
+bool Player::spendCash(double amount)
 {
     if(amount < cash_){
         cash_ -= amount;
@@ -139,9 +139,28 @@ std::shared_ptr<std::vector<Interface::Location>> Player::getRouteVector ()
     return routeVector_;
 }
 
-void Player::increaseSteps (int inc)
+void Player::takeStep ()
 {
-    currentSteps_ = currentSteps_ + inc;
+    //kävellen
+    if (inVehicle_ == nullptr){
+        currentSteps_  ++;
+    }
+    else
+    {
+        if (inVehicle_->getName() == "scooter")
+        {
+            std::shared_ptr<Scooter> vehc = std::dynamic_pointer_cast<Scooter> (inVehicle_);
+            currentSteps_ = currentSteps_ + vehc->getSpeed();
+            this->spendCash(vehc->getCostPerTick());
+        }
+
+        else if (inVehicle_->getName() == "taxi")
+        {
+            std::shared_ptr<Taxi> vehc = std::dynamic_pointer_cast<Taxi> (inVehicle_);
+            currentSteps_ = currentSteps_ + vehc->getSpeed();
+            this->spendCash(vehc->getCostPerTick());
+        }
+    }
 }
 
 int Player::getCurrentSteps ()

@@ -98,7 +98,7 @@ void arriveDestination(std::shared_ptr<Player> player, Interface::Location dest)
 {
     player->setIdle(true);
     player->resetRoute();
-
+    //kutsu playerturnia?
     //kulkuneuvolocation = playerlocation
 
     // wantedlocation = "";
@@ -134,30 +134,13 @@ void onTheClick(std::shared_ptr<Player> player, Interface::Location loc)
 
 }
 
-/*for (auto const& actor : cityPtrSet->getActors()){
-Interface::Location aLoc = actor->giveLocation();
-cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),1);
-}
-*/
 
-void matkalla();
-void baarissa();
+//calculateTotalCosts
 
-// nysset ja matkustajat liikkuvat itse?
+//Liikuta pelaajaa reitillä
 void movePlayer(std::shared_ptr<Player> player){
-    if (player->inWhichVehicle()==nullptr){
-        player->increaseSteps(1);
-    }
 
-    else if (player->inWhichVehicle()->getName() == "scooter")
-    {
-        player->increaseSteps(2);
-    }
-
-    else if (player->inWhichVehicle()->getName() == "taxi")
-    {
-        player->increaseSteps(4);
-    }
+    player->takeStep(); //päivittää askeleet ja kustannukset
 
     int cSteps = player->getCurrentSteps();
 
@@ -167,9 +150,9 @@ void movePlayer(std::shared_ptr<Player> player){
         //newLoc.setNorthEast(NorthFromY(newLoc.giveY()), EastFromX(newLoc.giveX()));
         player->move(newLoc);
         cityPtr->actorMoved(player);
-        if (cSteps == 100){
+        if (cSteps == STEPS)
+        {
             arriveDestination(player, player->getChosenLocation());
-
         }
     } else
     {
@@ -241,18 +224,9 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     //Setboard funktioita
     startingPointsSetup();
     createAtmsBars();
-    clearPassengers();
-    //updateActorsLocations();
-
-    for (auto const& item : cityPtr->getActors())
-    {
-        Interface::Location aLoc = item->giveLocation();
-        cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), 2
-                               ,SCOOTER_ICON_FILE, item);
-
-    }
-
     addStaticItems();
+    clearPassengers();
+
 
     //testailuja
 

@@ -2,8 +2,9 @@
 
 Taxi::Taxi()
 {
-
-    battery_ = 100;
+    speed_ = 2;
+    costPerTick_ = 0.4;
+    int maxPromilleLevel_ = 2;
 }
 
 Taxi::~Taxi()
@@ -51,4 +52,20 @@ void Taxi::remove()
  void Taxi::removePassenger(std::shared_ptr<Interface::IPassenger> passenger)
  {
 
+ }
+
+
+ int Taxi::getSpeed()
+ {
+     return speed_;
+ }
+
+ double Taxi::getCostPerTick()
+ {
+     return costPerTick_;
+ }
+
+ int Taxi::getMaxPromilleLevel()
+ {
+     return maxPromilleLevel_;
  }

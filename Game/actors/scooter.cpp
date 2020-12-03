@@ -3,6 +3,10 @@
 Scooter::Scooter()
 {
     battery_ = 100;
+    speed_ = 2;
+    costPerTick_ = 0.4;
+    int maxPromilleLevel_ = 2;
+
 }
 
 Scooter::~Scooter()
@@ -50,4 +54,19 @@ void Scooter::remove()
  void Scooter::removePassenger(std::shared_ptr<Interface::IPassenger> passenger)
  {
 
+ }
+
+ int Scooter::getSpeed()
+ {
+     return speed_;
+ }
+
+ double Scooter::getCostPerTick()
+ {
+     return costPerTick_;
+ }
+
+ int Scooter::getMaxPromilleLevel()
+ {
+     return maxPromilleLevel_;
  }

@@ -100,6 +100,15 @@ Interface::Location getRandomLocation ()
     return rndLocation;
 }
 
+void createVehicles()
+{
+    //Taksit
+
+
+    //Scootterit
+
+}
+
 
 void createAtmsBars()
 {
