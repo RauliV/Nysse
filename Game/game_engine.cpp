@@ -247,7 +247,7 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     {
         Interface::Location aLoc = item->giveLocation();
         cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), 2
-                               ,SCOOTER_ICON_FILE, item);
+                               ,BUS_STOP_ICON_PTR, item);
 
     }
 

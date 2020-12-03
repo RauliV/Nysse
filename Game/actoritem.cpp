@@ -1,30 +1,30 @@
 #include "actoritem.hh"
 
-ActorItem::ActorItem(int x, int y, int type, QString iconPath, std::shared_ptr<Interface::IActor> actor)
+ActorItem::ActorItem(int x, int y, int type, const std::shared_ptr<QImage> icon, std::shared_ptr<Interface::IActor> actor)
     :CourseSide::SimpleActorItem{x,y,type}
 { 
-    iconPath_ = iconPath;
+    icon_ = icon;
     actor_ = actor;
 }
 
 void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QRectF bounds = boundingRect();
-    QColor color;
     QBrush brush;
 
-    if(iconPath_.isEmpty())
+    if(icon_== nullptr)
     {
         brush = Qt::black;
+        painter->setBrush(brush);
+        painter->drawEllipse(bounds);
     }
     else
     {
-        QPixmap icon(iconPath_);
-        brush = icon;
+        painter->drawImage(bounds, *icon_);
     }
 
-    painter->setBrush(brush);
-    painter->drawEllipse(bounds);
+
+
 }
 
 void ActorItem::updateCoords()
