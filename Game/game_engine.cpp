@@ -241,6 +241,7 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     //Setboard funktioita
     startingPointsSetup();
     createAtmsBars();
+    clearPassengers();
     //updateActorsLocations();
 
     for (auto const& item : cityPtr->getActors())

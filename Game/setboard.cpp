@@ -45,6 +45,18 @@ void initScreen(std::shared_ptr<Interface::ICity> city)
 }
 
 
+void clearPassengers()
+{
+    for (auto const& stop : cityPtrSet->getStops())
+    {
+        for (auto const& passenger : stop->getPassengers())
+        {
+            cityPtrSet->removeActor(passenger);
+        }
+    }
+}
+
+
 void startingPointsSetup()
 {
     //Luodaan pelille random maali
