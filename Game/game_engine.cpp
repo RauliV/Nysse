@@ -126,7 +126,9 @@ void onTheClick(std::shared_ptr<Player> player, Interface::Location loc)
         qDebug () << "Choose your poison Dialog";
     }
     else
-    {   Interface::Location aaa = player->giveLocation();
+    {
+   //    if (onkosullarahee)
+       Interface::Location aaa = player->giveLocation();
        player->setChosenLocation(loc);
        player->setRouteVector(calculatePlayerRoute(aaa, loc));
     }
