@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
+    ui->StartButton->setDisabled(true);
 
 
 
@@ -213,6 +214,7 @@ void MainWindow::on_StartButton_clicked()
 
 void MainWindow::savePlayerInfo(int playerCount, std::vector<std::pair<std::string, std::string> > playerSpecs)
 {
+    ui->StartButton->setEnabled(true);
     playerCount_ = playerCount;
     playerSpecs_ = playerSpecs;
 }
