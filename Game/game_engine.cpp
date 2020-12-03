@@ -145,8 +145,11 @@ void baarissa();
 
 // nysset ja matkustajat liikkuvat itse?
 void movePlayer(std::shared_ptr<Player> player){
+    if (player->inWhichVehicle()==nullptr){
+        player->increaseSteps(1);
+    }
 
-    if (player->inWhichVehicle()->getName() == "scooter")
+    else if (player->inWhichVehicle()->getName() == "scooter")
     {
         player->increaseSteps(2);
     }
@@ -155,12 +158,21 @@ void movePlayer(std::shared_ptr<Player> player){
     {
         player->increaseSteps(3);
     }
-    else
-    {
-        player->increaseSteps(1);
-    }
 
-    Interface::Location newLoc = player->getRouteVector()->at(player->getCurrentSteps());
+    auto ppl = cityPtr->getPlayerList().front();
+
+    ppl->setChosenLocation(cityPtr->getBarList().front()->getLocation());
+    int cSteps = player->getCurrentSteps();
+    Interface::Location A = ppl->giveLocation();
+    Interface::Location B = ppl->getChosenLocation();
+    A.setNorthEast(NorthFromY(A.giveY()), EastFromX(A.giveX()));
+    B.setNorthEast(NorthFromY(B.giveY()), EastFromX(B.giveX()));
+
+
+    auto rVec = calculatePlayerRoute(A,B );
+    Interface::Location newLoc = rVec->at(cSteps);
+    newLoc.setNorthEast(NorthFromY(newLoc.giveY()), EastFromX(newLoc.giveX()));
+    ppl->setRouteVector(rVec);
     player->move(newLoc);
     cityPtr->actorMoved(player);
 }
@@ -198,7 +210,7 @@ void teststuff()
             std::dynamic_pointer_cast<Interface::IVehicle>(taksi);*/
 
     auto ppl = cityPtr->getPlayerList().front();
-    ppl->setChosenLocation(cityPtr->getBarList().front()->getLocation());
+    onTheClick(ppl, cityPtr->getBarList().front()->getLocation());
     while (ppl->getCurrentSteps() < 90 )
     {
         movePlayer(ppl);

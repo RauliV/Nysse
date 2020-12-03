@@ -43,6 +43,11 @@ void createPlayers(std::vector<std::pair<std::string,
 std::list <std::shared_ptr<Player>> getPlayers();
 void addStaticItems();
 void updateActorsLocations();
+int xFromEast(int eastcoord);
+int yFromNorth(int northcoord);
+int EastFromX(int x);
+int NorthFromY(int y);
+
 
 
 

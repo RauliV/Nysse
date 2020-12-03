@@ -22,6 +22,17 @@ int yFromNorth(int northcoord)
 }
 
 
+
+int EastFromX(int x)
+{
+    return static_cast<int>(x/0.333333 + 3327034);
+}
+
+int NorthFromY(int y)
+{
+    return static_cast<int>(y/0.333333 + 6824642);
+}
+
 void initScreen(std::shared_ptr<Interface::ICity> city)
 {
     QString file_iso = ":/offlinedata/offlinedata/kartta_iso_1095x592.png";
