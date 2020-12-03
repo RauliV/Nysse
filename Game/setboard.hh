@@ -65,6 +65,7 @@ int xFromEast(int eastcoord);
 int yFromNorth(int northcoord);
 int EastFromX(int x);
 int NorthFromY(int y);
+void clearPassengers();
 
 
 
