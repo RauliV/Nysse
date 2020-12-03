@@ -229,6 +229,14 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     addStaticItems();
     clearPassengers();
 
+    for (auto const& item : cityPtr->getActors())
+    {
+        Interface::Location aLoc = item->giveLocation();
+        cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), 2
+                               ,BUS_STOP_ICON_PTR, item);
+
+    }
+
 
     //testailuja
 

@@ -66,12 +66,13 @@ void MainWindow::setTimer()
     ui->travelTimeLcd->display(time1);
     });
     connect(timer, &QTimer::timeout, this, &MainWindow::updateActors);
+    //connect(timer, %QTimer::timeout, ,);
 
 }
 
-void MainWindow::addActor(int locX, int locY, int type, QString iconPath, std::shared_ptr<Interface::IActor> actor)
+void MainWindow::addActor(int locX, int locY, int type, const std::shared_ptr<QImage> icon, std::shared_ptr<Interface::IActor> actor)
 {
-    ActorItem* nActor = new ActorItem(locX, locY, type, iconPath, actor);
+    ActorItem* nActor = new ActorItem(locX, locY, type, icon, actor);
     //CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
     actors_.push_back(nActor);
     map_scene->addItem(nActor);
