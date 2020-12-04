@@ -1,5 +1,9 @@
 #include <QtTest>
 #include <QCoreApplication>
+#include "setboard.hh"
+#include "interfaces/istop.hh"
+#include "city.hh"
+#include "actors/player.hh"
 
 // add necessary includes here
 
@@ -40,6 +44,14 @@ void cValues::cleanupTestCase()
 
 void cValues::test_case1()
 {
+        auto loc = getRandomLocation();
+
+        //QVERIFY(paiva.giveDay() <= 0);
+        if ((loc.giveX() > 500) or (loc.giveX() > 500 ))
+        {
+            QFAIL("koordinaatit menee yli laidan");
+        }
+
 
 }
 
