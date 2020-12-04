@@ -156,10 +156,13 @@ void MainWindow::createPlayerPortraits()
         }
 
         //portrait->setBackgroundBrush()
-        QPixmap pixmap_portrait(":/graphics/0prom_small.png");
+
+        //KOITIN PIENEMMÄLLÄ KUVALLA JA FRAMELLA, MAHTUUKO PAREMMIN
+
+        QPixmap pixmap_portrait(":/graphics/0prom_small2.png");
         QGraphicsView* portraitView = new QGraphicsView;
         portrait->setForegroundBrush(pixmap_portrait);
-        portraitView->setSceneRect(0,0,150,150);
+        portraitView->setSceneRect(0,0,120,120);
         pixmap_portrait = pixmap_portrait.scaled(portraitView->size(), Qt::IgnoreAspectRatio);
         portraitView->setScene(portrait);
 

@@ -6,4 +6,6 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES +=  tst_getrandomcoordinates.cpp
+SOURCES +=  tst_cvalues.cpp
+
+INCLUDEPATH += \
