@@ -8,7 +8,7 @@
 #include "QString"
 #include "memory"
 
-class Taxi
+class Taxi : public Interface::IVehicle
 {
 public:
     Taxi();

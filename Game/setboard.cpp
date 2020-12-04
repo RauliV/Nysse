@@ -100,12 +100,19 @@ Interface::Location getRandomLocation ()
     return rndLocation;
 }
 
-void createVehicles()
+void createTaxisScooters()
 {
-    //Taksit
 
 
-    //Scootterit
+    for (int it = 0; it < 6; it++)
+    {
+        std::shared_ptr<Taxi> taxiPtr = std::make_shared<Taxi> ();
+        std::shared_ptr<Scooter> scooterPtr = std::make_shared<Scooter> ();
+        cityPtrSet->addActor(scooterPtr);
+        //cityPtrSet->addActor(taxiPtr);
+    }
+
+
 
 }
 
@@ -151,68 +158,23 @@ void createAtmsBars()
     cityPtrSet->setAtmList(aList);
 }
 
-std::list <std::shared_ptr<Player>> getPlayers(){
+std::list <std::shared_ptr<Player>> getPlayers()
+{
     return cityPtrSet->getPlayerList();
 }
 
-void updateActorsLocations()
-
-{   //päivitetäänkö myös nysset ja matkustajat?
-    //uusi lokaatio tulee, mutta ruudunpäivitys meillä?
-    //Muutenhan ei ole muuta liikkuvaa, kuin pelaaja. Ikoini ja nopeus muuttuu
-    //jos kulkuneuvossa
-
-
-    //päivitetään muut kuin pelaajat
-
-       //dynaamiset actorit listasta = nysset ja passet
-
-/*    for (auto const& actor : cityPtrSet->getActors())
-    {
-        Interface::Location aLoc = actor->giveLocation();
-        cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), 2, BUS_STOP_ICON_FILE, actor);
-
-    }*/
-     /*   else if (std::find(cityPtr->getBarList().begin(), cityPtr->getBarList().end(),
-                           actor) != cityPtr->getBarList().end())
-        {
-            ifile = BAR_ICON_FILE;
-        }
-
-        else if (std::find(cityPtr->getAtmList().begin(), cityPtr->getAtmList().end(),
-                           actor) != cityPtr->getAtmList().end())
-        {
-            ifile = ATM_ICON_FILE;
-        }
-
-
-
-*/
-
-
-        // ja pelaajat lopuksi - saako dynamiccastpointterilla iactoriksi
- /*    for (auto const& player : cityPtr->getPlayerList())
-     {
-         QString ifile = "";
-         if (player->inWhichVehicle()->getName() == "scooter")
-         {
-             ifile = SCOOTER_ICON_FILE;
-         }
-
-         //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(), ifile, player);
-
-     }*/
-
-    onTheTick(cityPtrSet->getPlayerList().front());
-
-}
 
 void addStaticItems()
 {
 
+    //Vaatii ui:n puolelta addstaticactorin
+
+    // Maalista punainen X ?
+
     for (auto const& stop : cityPtrSet->getStops())
     {
         Interface::Location aLoc = stop->getLocation();
+
       //  cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
        //                       BAR_ICON_FILE, stop);
 
@@ -233,6 +195,41 @@ void addStaticItems()
 
     }
 
+}
+
+std::string getSubClass (std::shared_ptr<Interface::IActor> iActor )
+{
+        if (std::dynamic_pointer_cast<Taxi>(iActor) != 0)
+        {
+            return "taxi" ;
+        }
+        else if (std::dynamic_pointer_cast<CourseSide::Nysse>(iActor) != 0)
+        {
+            return "nysse";
+        }
+
+        else if (std::dynamic_pointer_cast<CourseSide::Passenger>(iActor) != 0)
+        {
+            return "passenger";
+        }
+        return "";
+}
+
+void addActorItems ()
+{
+    for (auto const& actor : cityPtrSet->getActors())
+    {
+        int aX = actor->giveLocation().giveX();
+        int aY = actor->giveLocation().giveY();
+
+        // olettamuksella, että ikonia ei välitetä funktioon parametrina
+        // koska sen osoitin on actorin (taksi ja scooter) sisällä.
+        // Jos ei ole taksi tai scooter, on nysse, koska matkustajat on
+        // räjäytetty
+
+
+        //cityPtrSet->getWindow()->addActor(aX, aY, 0, actor);
+    }
 }
 
 

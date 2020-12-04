@@ -1,4 +1,4 @@
-#include "game_engine.h"
+#include "gameengine.h"
 #include "setboard.hh"
 #include "actors/taxi.hh"
 
@@ -216,40 +216,49 @@ void teststuff()
 }
 
 
+
 void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
 {
     cityPtr = std::dynamic_pointer_cast<City>(cPtr);
 
-    //tämä siksi, ettei tarvitse aina testattaessa klikkailla.
-
 
     //Setboard funktioita
-    startingPointsSetup();
     createAtmsBars();
+    createTaxisScooters();
     addStaticItems();
-    //clearPassengers();
+    addActorItems();
+    clearPassengers();
+    startingPointsSetup();
 
 
-    for (auto const& item : cityPtr->getActors())
+    
+    for (auto const& actor : cityPtr->getActors())
+        
+
+
     {
-        if (std::dynamic_pointer_cast<Taxi>(item) != 0){
-            qDebug() << "taksi";
 
-        }
-
-        else if (std::dynamic_pointer_cast<CourseSide::Nysse>(item) != 0){
-            qDebug() << "Nysse";
-
-        }
-
-        else if (std::dynamic_pointer_cast<CourseSide::Passenger>(item) != 0){
-
-            qDebug() << "passe";
-        }
-
-
+        cityPtr->getWindow()->addActor(actor->giveLocation().giveX(),
+                                       actor->giveLocation().giveY(),
+                                       2,
+                                       SCOOTER_ICON_PTR);
+       /* std::string sClass = getSubClass(actor);
+        
+        if (sClass == "taxi")
+        {
+            auto icon = std::dynamic_pointer_cast<Taxi>(actor)->getIcon();
+            cityPtr->getWindow()->addActor(actor->giveLocation().giveX(),
+                                           actor->giveLocation().giveY(),
+                                           2,
+                                           icon);*/
+                    
 
     }
+    
+
+
+
+    
 
 
 };

@@ -3,7 +3,7 @@
 #include "creategame.hh"
 #include "city.hh"
 #include "setboard.hh"
-#include "game_engine.h"
+#include "gameengine.h"
 /*#include "player.hh"
 #include "statistics.hh"
 #include "mainwindow.h"*/
@@ -44,7 +44,11 @@ int main(int argc, char *argv[])
 /*UI
  *Kulkuneuvoon astuminen (ehdot: akku, rahat, känni)
  * jos menee pysäkille -> nysseen, chosenlocation on next stop
- *
+
+ * tilanneraportti ja aikataulu
+ * Addactors
+ * calculateTotalTravelCosts
+
 
  * Spendcash unittest - matkustaessa kulutetaan, niin olisi syytä olla
  * menemättä negat, ettei tule tolpalla tappelua
@@ -64,31 +68,14 @@ int main(int argc, char *argv[])
                             Tieristä loppuu akku 10 egee.
 *               + ActorIcon
 *
-* promillerajat kulkuneuvoihin
 *
-* ATM pelaaja on jo nostanut;
+* ATM pelaaja on jo nostanut -> button inactive - onko lopullisesti ?;
 * Lukumäärät suhteutetaan pelaajamääriin?
 *
-*
-*
-*  * kulkuneuvojen lisäämiseen AddActor
-*
-*
-
-*
-*
-*   2.12
 *
 * * Unittests - karttakoko/koordinaatit
 *Siivoa koko kaupunki
 *
-*
-* get right icon
-*  * actoritem -> try - catch. Jos ei löydy ikonia -> nysse, stoppi tai matkustaja
-    * jos ei stoppilistassa nysse tai matkustaja
-    * pitäisikö tehdä pari {actor, type(icon)}
-
-*Timerouteplayer?
 
 *tick -> player not idle -> move
  * Klikattu kohdetta:
@@ -98,12 +85,7 @@ int main(int argc, char *argv[])
  * Laske pelaajan liikkumispisteet vector (Pelaaja (-> kulkuneuvo-> nopeus, nyt loc), wantedXY)
  * jos ei nyssessä: Jos nyssessä vektori = bussivektori
  *
- * return (Qtime,location);
-
  * goalDestination -> punainen x?
- * tick -> siirry(QTime)
-
-
  * Säännöt/documentointi ym.
  *
  *

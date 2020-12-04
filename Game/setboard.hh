@@ -4,7 +4,7 @@
 #include "stops/atm.hh"
 #include "core/logic.hh"
 #include "actors/player.hh"
-#include "game_engine.h"
+#include "gameengine.h"
 #include "city.hh"
 #include <random>
 
@@ -59,7 +59,10 @@ void startingPointsSetup();
 void createAtmsBars();
 void createPlayers(std::vector<std::pair<std::string,
                    std::string>> playerSpecs);
+void createTaxisScooters();
+
 std::list <std::shared_ptr<Player>> getPlayers();
+void addActorItems ();
 void addStaticItems();
 void updateActorsLocations();
 int xFromEast(int eastcoord);

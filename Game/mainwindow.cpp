@@ -86,7 +86,8 @@ void MainWindow::updateCoords(int nX, int nY)
 
 void MainWindow::updateActors()
 {
-    updateActorsLocations();
+    onTheTick(getPlayers().front());   //Tämä ehkä pitäisi saada järkevämpään paikkaan.
+
     for( int i = 0; i < actors_.size();i++)
     {
         actors_.at(i)->updateCoords();

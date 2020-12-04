@@ -14,7 +14,7 @@ SOURCES += \
     actors/walk.cpp \
     city.cpp \
     creategame.cpp \
-    game_engine.cpp \
+    gameengine.cpp \
     main.cc \
     mainwindow.cpp \
     playerturndialog.cpp \
@@ -56,7 +56,7 @@ HEADERS += \
     actors/taxi.hh \
     actors/walk.hh \
     city.hh \
-    game_engine.h \
+    gameengine.h \
     mainwindow.h \
     playerturndialog.hh \
     setboard.hh \
