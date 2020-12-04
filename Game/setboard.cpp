@@ -108,14 +108,13 @@ void createTaxisScooters()
     {
         std::shared_ptr<Taxi> taxiPtr = std::make_shared<Taxi> ();
         std::shared_ptr<Scooter> scooterPtr = std::make_shared<Scooter> ();
+        //Lokaatiot ja listat
+
+
         cityPtrSet->addActor(scooterPtr);
         //cityPtrSet->addActor(taxiPtr);
     }
-
-
-
 }
-
 
 void createAtmsBars()
 {
@@ -179,7 +178,7 @@ void addStaticItems()
        //                       BAR_ICON_FILE, stop);
 
     }
-    for (auto const& atm : cityPtrSet->getStops())
+    for (auto const& atm : cityPtrSet->getAtmList())
     {
         Interface::Location aLoc = atm->getLocation();
         //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
@@ -187,7 +186,7 @@ void addStaticItems()
 
     }
 
-    for (auto const& bar : cityPtrSet->getStops())
+    for (auto const& bar : cityPtrSet->getBarList())
     {
         Interface::Location aLoc = bar->getLocation();
         //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
@@ -208,6 +207,10 @@ std::string getSubClass (std::shared_ptr<Interface::IActor> iActor )
             return "nysse";
         }
 
+        else if (std::dynamic_pointer_cast<Scooter>(iActor) != 0)
+        {
+            return "scooter";
+        }
         else if (std::dynamic_pointer_cast<CourseSide::Passenger>(iActor) != 0)
         {
             return "passenger";
@@ -249,7 +252,6 @@ void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
 
     //pelaajalista city-olioon
     cityPtrSet->setPlayerList(playerList);
-    teststuff();
 }
 
 

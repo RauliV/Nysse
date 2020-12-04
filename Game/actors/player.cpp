@@ -1,4 +1,5 @@
  #include "player.hh"
+#include "setboard.hh"
 
 Player::Player(std::string name, std::string colour):
     name_(name),
@@ -136,18 +137,26 @@ void Player::setRouteVector (std::shared_ptr<std::vector<Interface::Location>> v
 
 std::shared_ptr<std::vector<Interface::Location>> Player::getRouteVector ()
 {
+    //Jos nyssessä vektori = bussivektori
     return routeVector_;
 }
 
 void Player::takeStep ()
 {
     //kävellen
-    if (inVehicle_ == nullptr){
+    if (inVehicle_ == nullptr)
+    {
         currentSteps_  ++;
     }
     else
     {
-        if (inVehicle_->getName() == "scooter")
+        if (getSubClass(inVehicle_) == "nysse")
+        {
+            std::shared_ptr<Scooter> vehc = std::dynamic_pointer_cast<Scooter> (inVehicle_);
+            currentSteps_ = currentSteps_ + 4;
+        }
+
+        else if (inVehicle_->getName() == "scooter")
         {
             std::shared_ptr<Scooter> vehc = std::dynamic_pointer_cast<Scooter> (inVehicle_);
             currentSteps_ = currentSteps_ + vehc->getSpeed();

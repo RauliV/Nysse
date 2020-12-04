@@ -1,6 +1,7 @@
 #include "gameengine.h"
 #include "setboard.hh"
 #include "actors/taxi.hh"
+#include <boost/any.hpp>
 
 std::shared_ptr<City> cityPtr;
 
@@ -29,8 +30,7 @@ void onTheTick(std::shared_ptr<Player>  player)
 // Laskee reitin linnuntietä paikasta A paikkaan B jaettun STEPSiin osaan.
 std::shared_ptr<std::vector<Interface::Location>> calculatePlayerRoute (Interface::Location A,
                                                       Interface::Location B)
-{
-    std::vector<Interface::Location> returnVector;
+{   std::vector<Interface::Location> returnVector;
     int aX = A.giveX();
     int aY = A.giveY();
     double xMovement = B.giveX() - aX;
@@ -82,9 +82,64 @@ void stop(std::shared_ptr<Player> player)
 
 //tämä voisi varmaan mennä ui:n puolelle, lähelle playerturndialogia
 
-void stepInVehicle(std::shared_ptr<Player> player, std::shared_ptr<Interface::IVehicle> vechile)
+void stepInVehicle(std::shared_ptr<Player> player,
+                   std::shared_ptr<Interface::IVehicle> vehicle)
 {
-    player->getInVechile(vechile);
+    // astuu nysseen
+
+    if (getSubClass(vehicle) == "nysse")
+     {
+        std::shared_ptr<CourseSide::Nysse> nysse =
+                std::dynamic_pointer_cast<CourseSide::Nysse> (vehicle);
+
+        std::shared_ptr<CourseSide::Stop> nStop = nysse->getStop().lock();
+        std::shared_ptr<CourseSide::Stop> nFinalStop = nysse->getFinalStop().lock();
+        std::shared_ptr<CourseSide::Stop> nNextStop;
+
+
+        if (player->getDrunkness() > 3)
+         {
+             //emit cantMoveDrunk;
+
+         }
+         else if (player->getCash() < BUSS_FARE)
+         {
+             //emit cantMoveCash;
+         }
+
+         else if (nStop == nFinalStop)
+         {
+            //emit cantMoveFinalStop
+         }
+         else
+         {  //Etsitään seuraava pysäkki
+            for (int it = 0; it < cityPtr->getStops().size(); it++)
+            {
+                if (cityPtr->getStops().at(it) == nStop)
+                {
+                    nNextStop = std::dynamic_pointer_cast<CourseSide::Stop>
+                            (cityPtr->getStops().at(it+1));
+                }
+             }
+             Interface::Location nextLoc = nNextStop->getLocation();
+             player->spendCash(BUSS_FARE);
+             player->resetRoute();
+             player->getInVechile(vehicle); //pelaajan ikonin muutos
+             std::shared_ptr<CourseSide::Nysse> nysse =
+                     std::dynamic_pointer_cast<CourseSide::Nysse> (vehicle);
+             player->setChosenLocation(nextLoc);
+             player->setIdle(false);
+
+         }
+
+     }
+     else
+    {
+
+        player->getInVechile(vehicle);
+        player->setIdle(false);
+    }
+
 
     //poista actori käytön jälkeen?
 
@@ -98,6 +153,9 @@ void arriveDestination(std::shared_ptr<Player> player, Interface::Location dest)
 {
     player->setIdle(true);
     player->resetRoute();
+    //set playericon
+
+
     //kutsu playerturnia?
     //kulkuneuvolocation = playerlocation
 
@@ -127,7 +185,7 @@ void onTheClick(std::shared_ptr<Player> player, Interface::Location loc)
     }
     else
     {
-   //    if (onkosullarahee)
+   //    if (onkosullarahee) Jos nyssessä vektori = bussivektori
        Interface::Location aaa = player->giveLocation();
        player->setChosenLocation(loc);
        player->setRouteVector(calculatePlayerRoute(aaa, loc));
@@ -167,18 +225,22 @@ void movePlayer(std::shared_ptr<Player> player){
 
 void teststuff()
 {
-
-
+    std::string nimi = "pekka";
+    std::string vari = "musta";
+    std::shared_ptr<Player> player = std::make_shared<Player> (nimi, vari);
     //Testejä
+
+    // Playerdata
+/*
     auto list = cityPtr->getPlayerList();
     int it = 1;
     for (auto const& player : list){
         Interface::Location loc = player->giveLocation();
-        /*loc.setXY(xFromEast(player->giveLocation().giveEasternCoord()),
+        loc.setXY(xFromEast(player->giveLocation().giveEasternCoord()),
                   yFromNorth(player->giveLocation().giveNorthernCoord()));
         //Interface::Location y = loc.setXY(player->giveLocation().giveEasternCoord();
 
-*/
+
         QString qname = QString::fromStdString(player->getName());
         QString qcolour = QString::fromStdString(player->getColour());
         qDebug() << "Pelaaja " << it << ": " << qname;
@@ -189,13 +251,10 @@ void teststuff()
 
         it ++;
     }
+*/
 
-
-    std::shared_ptr<Taxi> taksi = std::make_shared<Taxi> ();
-   /* std::shared_ptr<Interface::IVehicle> veh =
-            std::dynamic_pointer_cast<Interface::IVehicle>(taksi);*/
-
-    auto ppl = cityPtr->getPlayerList().front();
+    // Steps
+    /*auto ppl = cityPtr->getPlayerList().front();
     onTheClick(ppl, cityPtr->getBarList().front()->getLocation());
     while (ppl->getCurrentSteps() < STEPS - 5 )
     {
@@ -211,12 +270,22 @@ void teststuff()
         movePlayer(ppl);
         qDebug() << ppl->getCurrentSteps()<< ppl->giveLocation().giveX() << ppl->giveLocation().giveY();
     }
+*/
+
+     //Step in vehicle
+
+
+    std::shared_ptr<Taxi> taxi = std::make_shared<Taxi> ();
+    stepInVehicle(player, taxi);
+
+
+
+
+
+
 
 
 }
-
-
-
 void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
 {
     cityPtr = std::dynamic_pointer_cast<City>(cPtr);
@@ -229,37 +298,7 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     addActorItems();
     clearPassengers();
     startingPointsSetup();
+    teststuff();
 
-
-    
-    for (auto const& actor : cityPtr->getActors())
-        
-
-
-    {
-
-        cityPtr->getWindow()->addActor(actor->giveLocation().giveX(),
-                                       actor->giveLocation().giveY(),
-                                       2,
-                                       SCOOTER_ICON_PTR);
-       /* std::string sClass = getSubClass(actor);
-        
-        if (sClass == "taxi")
-        {
-            auto icon = std::dynamic_pointer_cast<Taxi>(actor)->getIcon();
-            cityPtr->getWindow()->addActor(actor->giveLocation().giveX(),
-                                           actor->giveLocation().giveY(),
-                                           2,
-                                           icon);*/
-                    
-
-    }
-    
-
-
-
-    
-
-
-};
+}
 

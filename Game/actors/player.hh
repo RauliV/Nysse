@@ -2,6 +2,7 @@
 #define PLAYER_HH
 #include "scooter.hh"
 #include "taxi.hh"
+//#include "setboard.hh"
 #include "interfaces/iactor.hh"
 #include "core/location.hh"
 #include "interfaces/ivehicle.hh"

@@ -39,43 +39,39 @@ int main(int argc, char *argv[])
 
 }
 
+//loadscreen
+//loppuscreen
 
 
 /*UI
  *Kulkuneuvoon astuminen (ehdot: akku, rahat, känni)
+ * Astu kulkuneuvoon(pelaaja, kulkuneuvo)
+ * Jos kulkuneuvo nysse - setPlayerRoute = nysseroute
  * jos menee pysäkille -> nysseen, chosenlocation on next stop
 
  * tilanneraportti ja aikataulu
- * Addactors
  * calculateTotalTravelCosts
+ * akkuhuomio scooter: ehkä vaan funktio is_travel_possible tms.
+ * *Siivoa koko kaupunki
+ * Baari - ajan kuluminen
+ * Säännöt/documentointi ym.
 
-
- * Spendcash unittest - matkustaessa kulutetaan, niin olisi syytä olla
- * menemättä negat, ettei tule tolpalla tappelua
+ * UnitTests:   SpendCash - matkustaessa kulutetaan, niin olisi syytä olla
+ *                          menemättä negat, ettei tule tolpalla tappelua
  *
- *Montako kulkuneuvoa
+ *              Karttakoko + koordinaatit
+ * *
 
-//nopeus = steps on tick.
+drunkness - drunkeness -> buzz?
 
-*
-*
-* * Kulkuneuvot:  + Nopeus, hinta/distance, icon, akku
-*
-*               taksi könttä
-*               + Hinta:    Nysse pysäkinväli - ei voi jatkaa samalla nyssellä
-*                           Taksi kulkee niin kauan kuin rahaa
-*                           taksi kulkee mistä mihin? (vaatii n. 3 nostoa maaliin)
-                            Tieristä loppuu akku 10 egee.
-*               + ActorIcon
-*
+Ihmettelyä:
+ * liikkuuko bussit pysäkinvälit linnuntietä?
+ *Montako kulkuneuvoa. nyt 6? vakio määrästä? suhteutettuna pelaajiin?
+
+Nysse pysäkinväli - ei voi jatkaa samalla nyssellä? -> chosenLocation = nextstop
+
 *
 * ATM pelaaja on jo nostanut -> button inactive - onko lopullisesti ?;
-* Lukumäärät suhteutetaan pelaajamääriin?
-*
-*
-* * Unittests - karttakoko/koordinaatit
-*Siivoa koko kaupunki
-*
 
 *tick -> player not idle -> move
  * Klikattu kohdetta:
@@ -83,10 +79,10 @@ int main(int argc, char *argv[])
  * jos pelaaja määränpäässä -> idle -> mitä tehdään. Baarissa ryypätään,
  * ei olla idle = vuoroa ei tule, ennenkuin juomingit loppuy
  * Laske pelaajan liikkumispisteet vector (Pelaaja (-> kulkuneuvo-> nopeus, nyt loc), wantedXY)
- * jos ei nyssessä: Jos nyssessä vektori = bussivektori
+ * jos ei nyssessä:
  *
  * goalDestination -> punainen x?
- * Säännöt/documentointi ym.
+
  *
  *
  *

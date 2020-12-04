@@ -3,7 +3,7 @@
 #include "stops/bar.hh"
 #include "stops/atm.hh"
 #include "core/logic.hh"
-#include "actors/player.hh"
+//#include "actors/player.hh"
 #include "gameengine.h"
 #include "city.hh"
 #include <random>
@@ -34,6 +34,10 @@ const QString ATM_ICON_FILE = ":graphics/atm_icon.png";
 const QImage ATM_ICON(ATM_ICON_FILE);
 const std::shared_ptr<QImage> ATM_ICON_PTR = std::make_shared<QImage> (ATM_ICON);
 
+// Vehicledata
+const short int SCOOTER_COUNT = 5;
+const short int TAXI_COUNT = 5;
+const short int BUSS_FARE = 5;
 
 const int BAR_COUNT =   10;
 const int TIME_SPENT_IN_BAR =   15000; //ms
@@ -42,8 +46,9 @@ const int ATM_COUNT =   10;
 const int ATM_MAX_WITHDRAW = 100;
 const int ATM_CASH_AT_BEGINNING = 200; //ehkä per pelaaja. Kokonaismäärä
 
+// Karttadata
 const int DISTANCE_TO_TARGET =  350; //Target = maali
-const int DISTANCE_TRESHOLD =   10;
+const int DISTANCE_TRESHOLD =   10;  // kuinka lähellä lähtöetäisyyksien tulee olla
 const int STEPS =       100; //kuinka moneen osaan matka jaetaan
 
 const int MAP_WIDTH =   400;    //actoreiden piirtoalueen koko
@@ -60,7 +65,7 @@ void createAtmsBars();
 void createPlayers(std::vector<std::pair<std::string,
                    std::string>> playerSpecs);
 void createTaxisScooters();
-
+std::string getSubClass (std::shared_ptr<Interface::IActor> iActor );
 std::list <std::shared_ptr<Player>> getPlayers();
 void addActorItems ();
 void addStaticItems();

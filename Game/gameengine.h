@@ -2,6 +2,7 @@
 #define GAME_ENGINE_H
 
 #include "mainwindow.h"
+#include "actors/player.hh"
 #include "city.hh"
 
 #include <QtDebug>
