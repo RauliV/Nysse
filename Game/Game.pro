@@ -20,6 +20,7 @@ SOURCES += \
     playerturndialog.cpp \
     setboard.cpp \
     settingsdialog.cpp \
+    staticitem.cpp \
     statistics.cpp \
     stops/atm.cpp \
     stops/bar.cpp
@@ -61,6 +62,7 @@ HEADERS += \
     playerturndialog.hh \
     setboard.hh \
     settingsdialog.hh \
+    staticitem.hh \
     statistics.hh\ \
     stops/atm.hh \
     stops/bar.hh

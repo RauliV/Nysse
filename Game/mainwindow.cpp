@@ -74,12 +74,22 @@ void MainWindow::setTimer()
 
 void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interface::IActor> actor)
 {
-    std::shared_ptr<QImage> img = getImage(actor);
+    std::shared_ptr<QImage> img = getImage(actor, nullptr);
     ActorItem* nActor = new ActorItem(locX, locY, type, img, actor);
-    //CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
     actors_.push_back(nActor);
     map_scene->addItem(nActor);
     last_ = nActor;
+}
+
+void MainWindow::addStaticItem(int locX, int locY, std::shared_ptr<Interface::IStop> place)
+{
+
+    /*
+    std::shared_ptr<QImage> img = getImage(nullptr,place);
+    StaticItem* nPlace = new StaticItem(locX, locY, 0, img, place); //Tästä tulee undefined reference
+    places_.push_back(nPlace);
+    map_scene->addItem(nPlace);
+    last_ = nPlace;*/
 }
 
 void MainWindow::updateCoords(int nX, int nY)
@@ -227,7 +237,7 @@ void MainWindow::savePlayerInfo(int playerCount, std::vector<std::pair<std::stri
     playerSpecs_ = playerSpecs;
 }
 
-std::shared_ptr<QImage> MainWindow::getImage(std::shared_ptr<Interface::IActor> actor)
+std::shared_ptr<QImage> MainWindow::getImage(std::shared_ptr<Interface::IActor> actor, std::shared_ptr<Interface::IStop> place)
 {
     if (std::dynamic_pointer_cast<Taxi>(actor) != 0){
         return taxiImg_;
@@ -247,6 +257,12 @@ std::shared_ptr<QImage> MainWindow::getImage(std::shared_ptr<Interface::IActor> 
     else if (std::dynamic_pointer_cast<CourseSide::Passenger>(actor) != 0){
         return nullptr;
     }
+    else if (std::dynamic_pointer_cast<Atm>(place) != 0){
+        return atmImg_;
+    }
+    else if (std::dynamic_pointer_cast<Bar>(place) != 0){
+        return barImg_;
+    }
 
     else return nullptr;
 }
@@ -258,5 +274,7 @@ void MainWindow::loadImages()
     taxiImg_= std::make_shared<QImage> (QImage(":/graphics/taxi_icon.png"));
     scooterImg_= std::make_shared<QImage> (QImage(":/graphics/scooter_icon.png"));
     walkImg_= std::make_shared<QImage> (QImage(":/graphics/walk_or_passenger_icon.png"));
+    barImg_= std::make_shared<QImage> (QImage(":/graphics/bar_icon.png"));
+    atmImg_ = std::make_shared<QImage> (QImage(":/graphics/bus_stop_icon.png"));
 
 }

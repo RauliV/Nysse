@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include "interfaces/iactor.hh"
+#include "interfaces/istop.hh"
 #include "actoritem.hh"
+#include "staticitem.hh"
 #include "actors/player.hh"
 #include "graphics/simpleactoritem.hh"
 
@@ -15,7 +17,6 @@
 #include <QVector>
 #include <map>
 
-//#include"game_engine.h"
 namespace Ui {
 
 class MainWindow;
@@ -35,6 +36,7 @@ public:
     void setTimer();
 
     void addActor(int locX, int locY, int type = 0, std::shared_ptr<Interface::IActor> actor = nullptr);
+    void addStaticItem(int locX, int locY, std::shared_ptr<Interface::IStop> place = nullptr);
     void updateCoords(int nX, int nY);
     void updateActors();
     void setPicture(QImage &img);
@@ -55,7 +57,7 @@ private slots:
 
     void savePlayerInfo(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs);
 
-    std::shared_ptr<QImage> getImage(std::shared_ptr<Interface::IActor> actor);
+    std::shared_ptr<QImage> getImage(std::shared_ptr<Interface::IActor> actor = nullptr, std::shared_ptr<Interface::IStop> place = nullptr);
 
 
 
@@ -66,6 +68,7 @@ private:
     QScrollArea *map;
     QTimer *timer;
     QVector<ActorItem*> actors_;
+    QVector<StaticItem*> places_;
     CourseSide::SimpleActorItem* last_;
 
     int width_ = 500; //pxls
@@ -75,10 +78,17 @@ private:
     int playerCount_;
     std::vector<std::pair<std::string, std::string>> playerSpecs_;
 
+    //actor images
     std::shared_ptr<QImage> nysseImg_;
     std::shared_ptr<QImage> taxiImg_;
     std::shared_ptr<QImage> walkImg_;
     std::shared_ptr<QImage> scooterImg_;
+    //place images
+    std::shared_ptr<QImage> barImg_;
+    std::shared_ptr<QImage> atmImg_;
+    std::shared_ptr<QImage> stopImg_;
+
+
 
 };
 

@@ -22,10 +22,7 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         }
         else
         {
-            QString path = ":/graphics/nysse_icon.png";
-            QImage img (path);
-            //painter->drawImage(bounds, *icon_);
-            painter->drawImage(bounds, img);
+            painter->drawImage(bounds, *icon_);
         }
     }
 }
