@@ -231,7 +231,7 @@ void addActorItems ()
         // räjäytetty
 
 
-        //cityPtrSet->getWindow()->addActor(aX, aY, 0, actor);
+        cityPtrSet->getWindow()->addActor(aX, aY, 0, actor);
     }
 }
 

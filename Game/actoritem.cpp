@@ -9,22 +9,25 @@ ActorItem::ActorItem(int x, int y, int type, const std::shared_ptr<QImage> icon,
 
 void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QRectF bounds = boundingRect();
-    QBrush brush;
-
-    if(icon_== nullptr)
+    //Ei piirretä matkustajia
+    if (std::dynamic_pointer_cast<CourseSide::Passenger>(actor_) == 0)
     {
-        brush = Qt::black;
-        painter->setBrush(brush);
-        painter->drawEllipse(bounds);
+        QRectF bounds = boundingRect();
+        QBrush brush;
+        if(icon_== nullptr)
+        {
+            brush = Qt::black;
+            painter->setBrush(brush);
+            painter->drawEllipse(bounds);
+        }
+        else
+        {
+            QString path = ":/graphics/nysse_icon.png";
+            QImage img (path);
+            //painter->drawImage(bounds, *icon_);
+            painter->drawImage(bounds, img);
+        }
     }
-    else
-    {
-        painter->drawImage(bounds, *icon_);
-    }
-
-
-
 }
 
 void ActorItem::updateCoords()

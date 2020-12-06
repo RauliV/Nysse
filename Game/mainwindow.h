@@ -34,11 +34,12 @@ public:
     void setTick(int t);
     void setTimer();
 
-    void addActor(int locX, int locY, int type = 0, const std::shared_ptr<QImage> icon = nullptr, std::shared_ptr<Interface::IActor> actor = nullptr);
+    void addActor(int locX, int locY, int type = 0, std::shared_ptr<Interface::IActor> actor = nullptr);
     void updateCoords(int nX, int nY);
     void updateActors();
     void setPicture(QImage &img);
     void createPlayerPortraits();
+    void loadImages();
 
 signals:
     void gameStarted();
@@ -53,6 +54,10 @@ private slots:
     void on_StartButton_clicked();
 
     void savePlayerInfo(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs);
+
+    std::shared_ptr<QImage> getImage(std::shared_ptr<Interface::IActor> actor);
+
+
 
 private:
     Ui::MainWindow *ui;
@@ -69,6 +74,12 @@ private:
 
     int playerCount_;
     std::vector<std::pair<std::string, std::string>> playerSpecs_;
+
+    std::shared_ptr<QImage> nysseImg_;
+    std::shared_ptr<QImage> taxiImg_;
+    std::shared_ptr<QImage> walkImg_;
+    std::shared_ptr<QImage> scooterImg_;
+
 };
 
  //namespace

@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->StartButton->setDisabled(true);
 
+    loadImages();
+
 
 
 
@@ -70,9 +72,10 @@ void MainWindow::setTimer()
 
 }
 
-void MainWindow::addActor(int locX, int locY, int type, const std::shared_ptr<QImage> icon, std::shared_ptr<Interface::IActor> actor)
+void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interface::IActor> actor)
 {
-    ActorItem* nActor = new ActorItem(locX, locY, type, icon, actor);
+    std::shared_ptr<QImage> img = getImage(actor);
+    ActorItem* nActor = new ActorItem(locX, locY, type, img, actor);
     //CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
     actors_.push_back(nActor);
     map_scene->addItem(nActor);
@@ -222,4 +225,38 @@ void MainWindow::savePlayerInfo(int playerCount, std::vector<std::pair<std::stri
     ui->StartButton->setEnabled(true);
     playerCount_ = playerCount;
     playerSpecs_ = playerSpecs;
+}
+
+std::shared_ptr<QImage> MainWindow::getImage(std::shared_ptr<Interface::IActor> actor)
+{
+    if (std::dynamic_pointer_cast<Taxi>(actor) != 0){
+        return taxiImg_;
+    }
+
+    else if (std::dynamic_pointer_cast<Scooter>(actor) != 0){
+        return scooterImg_;
+    }
+
+    else if (std::dynamic_pointer_cast<CourseSide::Nysse>(actor) != 0){
+        return nysseImg_;
+    }
+    else if (std::dynamic_pointer_cast<Player>(actor) != 0){
+        return walkImg_;
+    }
+
+    else if (std::dynamic_pointer_cast<CourseSide::Passenger>(actor) != 0){
+        return nullptr;
+    }
+
+    else return nullptr;
+}
+
+void MainWindow::loadImages()
+{
+
+    nysseImg_ = std::make_shared<QImage> (QImage(":/graphics/nysse_icon.png"));
+    taxiImg_= std::make_shared<QImage> (QImage(":/graphics/taxi_icon.png"));
+    scooterImg_= std::make_shared<QImage> (QImage(":/graphics/scooter_icon.png"));
+    walkImg_= std::make_shared<QImage> (QImage(":/graphics/walk_or_passenger_icon.png"));
+
 }

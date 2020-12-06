@@ -3,6 +3,7 @@
 #include "graphics/simpleactoritem.hh"
 #include "actors/player.hh"
 #include "interfaces/iactor.hh"
+#include "actors/passenger.hh"
 
 
 class ActorItem : public CourseSide::SimpleActorItem
