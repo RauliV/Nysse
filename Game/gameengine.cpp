@@ -295,10 +295,10 @@ void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
     createAtmsBars();
     createTaxisScooters();
     addStaticItems();
-    addActorItems();
+    //addActorItems();
     clearPassengers();
     startingPointsSetup();
-    teststuff();
+    //teststuff();
 
 }
 
