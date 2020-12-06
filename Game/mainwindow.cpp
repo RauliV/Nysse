@@ -84,12 +84,12 @@ void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interfac
 void MainWindow::addStaticItem(int locX, int locY, std::shared_ptr<Interface::IStop> place)
 {
 
-    /*
+
     std::shared_ptr<QImage> img = getImage(nullptr,place);
-    StaticItem* nPlace = new StaticItem(locX, locY, 0, img, place); //Tästä tulee undefined reference
+    StaticItem* nPlace = new StaticItem(locX, locY, 2, img, place); //Tästä tulee undefined reference
     places_.push_back(nPlace);
     map_scene->addItem(nPlace);
-    last_ = nPlace;*/
+    last_ = nPlace;
 }
 
 void MainWindow::updateCoords(int nX, int nY)

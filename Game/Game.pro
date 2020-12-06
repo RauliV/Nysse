@@ -63,7 +63,7 @@ HEADERS += \
     setboard.hh \
     settingsdialog.hh \
     staticitem.hh \
-    statistics.hh\ \
+    statistics.hh\
     stops/atm.hh \
     stops/bar.hh
 

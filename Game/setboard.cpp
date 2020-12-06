@@ -108,11 +108,11 @@ void createTaxisScooters()
     {
         std::shared_ptr<Taxi> taxiPtr = std::make_shared<Taxi> ();
         std::shared_ptr<Scooter> scooterPtr = std::make_shared<Scooter> ();
-        //Lokaatiot ja listat
-
+        taxiPtr->move(getRandomLocation());
+        scooterPtr->move(getRandomLocation());
 
         cityPtrSet->addActor(scooterPtr);
-        //cityPtrSet->addActor(taxiPtr);
+        cityPtrSet->addActor(taxiPtr);
     }
 }
 
@@ -138,6 +138,7 @@ void createAtmsBars()
             barPtr -> setPilot(false);
         }
         bList.push_back(barPtr);
+        cityPtrSet->addStop(barPtr);
     }
     //Kaupungin juottolat kaupunkiolioon
     cityPtrSet->setBarList(bList);
@@ -152,6 +153,8 @@ void createAtmsBars()
         atmPtr->setLocation(getRandomLocation());
 
         aList.push_back(atmPtr);
+        cityPtrSet->addStop(atmPtr);
+
     }
     //Kaupungin automaatit kaupunkiolioon
     cityPtrSet->setAtmList(aList);
@@ -174,17 +177,15 @@ void addStaticItems()
     {
         Interface::Location aLoc = stop->getLocation();
 
-      //  cityPtrSet->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
-       //                       BAR_ICON_FILE, stop);
+        cityPtrSet->getWindow()->addStaticItem(aLoc.giveX(), aLoc.giveY(), stop);
 
     }
-    for (auto const& atm : cityPtrSet->getAtmList())
+   /* for (auto const& atm : cityPtrSet->getAtmList())
     {
         Interface::Location aLoc = atm->getLocation();
-        //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
-         //                     ATM_ICON_FILE, actor);
+        cityPtrSet->getWindow()->addStaticItem(aLoc.giveX(), aLoc.giveY(), atm);
 
-    }
+    }*/
 
     for (auto const& bar : cityPtrSet->getBarList())
     {
@@ -248,8 +249,10 @@ void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
                 std::make_shared<Player> (player.first, player.second);
 
         playerList.push_back(playerPointer);
+        cityPtrSet->addActor(playerPointer);
     }
 
+    addActorItems();
     //pelaajalista city-olioon
     cityPtrSet->setPlayerList(playerList);
 }

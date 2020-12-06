@@ -1,4 +1,3 @@
-//#include "test_func_runs.h"
 #include "core/logic.hh"
 #include "creategame.hh"
 #include "city.hh"
@@ -38,18 +37,16 @@ int main(int argc, char *argv[])
 
 }
 
-//loadscreen
-//loppuscreen
 
 
-/*UI
- *Kulkuneuvoon astuminen (ehdot: akku, rahat, känni)
- * Astu kulkuneuvoon(pelaaja, kulkuneuvo)
- * Jos kulkuneuvo nysse - setPlayerRoute = nysseroute
- * jos menee pysäkille -> nysseen, chosenlocation on next stop
-
+/*
+ 
  * tilanneraportti ja aikataulu
+ * static itemsit
+ * playerit
  * calculateTotalTravelCosts
+ * astu scootteriin ja taksiin.
+ * Nysseä pitää odottaa?
  * akkuhuomio scooter: ehkä vaan funktio is_travel_possible tms.
  * *Siivoa koko kaupunki
  * Baari - ajan kuluminen
@@ -58,13 +55,13 @@ int main(int argc, char *argv[])
  * UnitTests:   SpendCash - matkustaessa kulutetaan, niin olisi syytä olla
  *                          menemättä negat, ettei tule tolpalla tappelua
  *
- *              Karttakoko + koordinaatit
  * *
 
 drunkness - drunkeness -> buzz?
 
 Ihmettelyä:
  * liikkuuko bussit pysäkinvälit linnuntietä?
+ * vakiomäärittelyt omiin tiedostoihinsa
  *Montako kulkuneuvoa. nyt 6? vakio määrästä? suhteutettuna pelaajiin?
 
 Nysse pysäkinväli - ei voi jatkaa samalla nyssellä? -> chosenLocation = nextstop
@@ -82,7 +79,9 @@ Nysse pysäkinväli - ei voi jatkaa samalla nyssellä? -> chosenLocation = nexts
  *
  * goalDestination -> punainen x?
 
- *
+ *loadscreen
+ *loppuscreen
+
  *
  *
  *
