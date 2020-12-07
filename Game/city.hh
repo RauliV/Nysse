@@ -40,109 +40,34 @@ public:
     bool isGameOver() const;
 
 
+    void setBarList (std::list<std::shared_ptr<Bar>> bList);
+    std::list<std::shared_ptr<Bar>> getBarList () const;
 
+    void setAtmList (std::list<std::shared_ptr<Atm>> aList);
+    std::list<std::shared_ptr<Atm>> getAtmList () const;
 
-    //Omien metodien määrittely
+    void setPlayerList (std::list<std::shared_ptr<Player>> playerList);
+    std::list<std::shared_ptr<Player>> getPlayerList () const;
 
+    std::list<std::shared_ptr<Interface::IActor>> getMovedActors() const;
 
+    void setStops (std::shared_ptr<Interface::IStop> stopPtr);
+    std::vector<std::shared_ptr<Interface::IStop>> getStops() const;
 
+    void setGame (std::shared_ptr<CourseSide::Logic> gamePtr);
+    std::shared_ptr<CourseSide::Logic> getGame () const;
 
-    void setBarList (std::list<std::shared_ptr<Bar>> bList){
-        barList_ = bList;
-    }
+    void setGameClock(std::shared_ptr<QTime> gameClock);
+    std::shared_ptr<QTime> getGameClock() const;
 
-    std::list<std::shared_ptr<Bar>> getBarList (){
-        return barList_;
-    }
+    void setWindow (std::shared_ptr<MainWindow> mainWindowPtr);
+    std::shared_ptr<MainWindow> getWindow () const;
 
-    void setAtmList (std::list<std::shared_ptr<Atm>> aList){
-        atmList_ = aList;
-    }
+    std::list<std::shared_ptr<Interface::IActor>> getActors() const;
 
-    std::list<std::shared_ptr<Atm>> getAtmList (){
-        return atmList_;
-    }
+    void setGoalLocation (Interface::Location gLoc);
 
-
-    void setPlayerList (std::list<std::shared_ptr<Player>> playerList)
-    {
-        playerList_ = playerList;
-    }
-
-
-    std::list<std::shared_ptr<Player>> getPlayerList ();
-
-
-
-    std::list<std::shared_ptr<Interface::IActor>> getMovedActors(){
-        return movedActors_;
-    }
-
-
-
-    void setStops (std::shared_ptr<Interface::IStop> stopPtr)
-    {
-        stopsList_.push_back(stopPtr);
-    };
-
-    std::vector<std::shared_ptr<Interface::IStop>> getStops(){
-
-        return stopsList_;
-    };
-
-
-
-    void setGame (std::shared_ptr<CourseSide::Logic> gamePtr)
-    {
-        gamePtr_ = gamePtr;
-    }
-
-    std::shared_ptr<CourseSide::Logic> getGame ()
-    {
-        return gamePtr_;
-    }
-
-
-
-    void setGameClock(std::shared_ptr<QTime> gameClock)
-    {
-        gameClock_ = gameClock;
-    }
-
-    std::shared_ptr<QTime> getGameClock()
-    {
-        return gameClock_;
-    }
-
-
-
-    void setWindow (std::shared_ptr<MainWindow> mainWindowPtr)
-    {
-        mainWindowPtr_ = mainWindowPtr;
-    }
-
-    std::shared_ptr<MainWindow> getWindow ()
-    {
-        return mainWindowPtr_;
-    }
-
-
-    std::list<std::shared_ptr<Interface::IActor>> getActors(){
-        return actorsList_;
-
-    }
-
-    void setGoalLocation (Interface::Location gLoc)
-    {
-        goalLocation_ = gLoc;
-    }
-
-    Interface::Location getGoalLocation ()
-    {
-        return goalLocation_;
-    }
-
-
+    Interface::Location getGoalLocation () const;
 
 private:
    std::shared_ptr <MainWindow> mainWindowPtr_;

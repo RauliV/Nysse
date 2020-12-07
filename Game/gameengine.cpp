@@ -261,31 +261,6 @@ QString startJourney(std::shared_ptr<Player> player,
 }
 
 
-
-void arriveDestination(std::shared_ptr<Player> player, Interface::Location dest)
-
-{
-    player->setIdle(true);
-    player->resetRoute();
-    //set playericon
-
-    //kutsu playerturnia?
-    //kulkuneuvolocation = playerlocation
-
-    // wantedlocation = "";
-    // jos wanted_destination on baari -> bar(player)
-    // jos wanted_destination on atm -> atm(player)
-    // jos wanted_destination on stop -> stop(player)
-
-    //movedActors remove(player)
-
-}
-
-
-
-
-
-
 //Liikuta pelaajaa reitillä
 void movePlayer(std::shared_ptr<Player> player){
 
@@ -296,13 +271,16 @@ void movePlayer(std::shared_ptr<Player> player){
     if (player->getRouteVector() != nullptr)
     {
         Interface::Location newLoc = player->getRouteVector()->at(cSteps);
-        //newLoc.setNorthEast(NorthFromY(newLoc.giveY()), EastFromX(newLoc.giveX()));
         player->move(newLoc);
         cityPtr->actorMoved(player);
-        if (cSteps == STEPS)
+
+
+        /* tätä kai ei tarvita, koska tick -runko testaa onko kohteessa
+         *
+         * if (cSteps == STEPS)
         {
             arriveDestination(player, player->getChosenLocation());
-        }
+        }*/
     } else
     {
         qDebug() << "Ei reittiä pelaajalla";
@@ -318,11 +296,15 @@ void onTheTick(std::shared_ptr<Player>  player)
         theEnd();
     }
 
+    //Jos pelaaja saapuu kohteeseen
     if (player->giveLocation() == player->getChosenLocation())
     {
-        //arriveDestination (player);
+        player->setIdle(true);
     }
-    movePlayer(player);
+    else
+    {
+        movePlayer(player);
+    }
 
 
 }
@@ -388,9 +370,6 @@ void teststuff()
 void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
 {
     cityPtr = std::dynamic_pointer_cast<City>(cPtr);
-
-
-    //Setboard funktioita
 
 
 }

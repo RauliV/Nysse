@@ -8,11 +8,15 @@
 **********          Sami Mansikkala            Rauli Virtanen         **********
 ****             sami.mansikkala@tuni.fi    rauli.virtanen@tuni.fi          ****
 *                                                                              *
+*                ON:                        ON:                                *
+*                                                                              *
 ********************************************************************************
+*
 *
 * PELIN TAVOITE
 *
 * Pelin tavoitteena on saavuttaa kartalta arvottu maalilokaatio ensimmäisenä
+*
 *
 *
 * PELIN ALOITUS
@@ -28,12 +32,14 @@
 * liiku itsellään.
 *
 *
+*
 * PELAAJIEN OMINAISUUDET
 * Iactor -virtuualiluokassa esiteltyjen lisäksi, josta pelaajaluokka on periytetty
 *
 * Rahat
 * Humala -> pelaajan kuvake portraitissa vaihtuu humalan mukaan. Max lvl 5,
 * jolloin tulee noutaja
+*
 *
 *
 * KÄYTETTÄVÄT KULKUNEUVOT
@@ -111,9 +117,6 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     Q_INIT_RESOURCE(offlinedata);
-
-
-
 
 
     std::shared_ptr<Interface::ICity> Tampere = Interface::createGame();
