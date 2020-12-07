@@ -186,3 +186,18 @@ void Player::resetRoute ()
     chosenLocation_ = nLoc;
 
 }
+
+void Player::exitBar()
+{
+    isInBar_ = false;
+}
+
+void Player::enterBar()
+{
+    isInBar_ = true;
+}
+
+bool Player::isInBar()
+{
+    return isInBar_;
+}

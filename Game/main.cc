@@ -139,9 +139,7 @@ int main(int argc, char *argv[])
 
 /*  NOTES/TODO/ETC:
  
- * calculateCosts, BatteryUsage // kulu- ja nopeussysteemit mietittävä uudelleen.
 
- * Siivoa koko kaupunki
  * Baari - ajan kuluminen /vuoro
  *
  * Säännöt/documentointi ym.

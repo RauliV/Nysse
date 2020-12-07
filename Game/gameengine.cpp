@@ -12,14 +12,12 @@ void theEnd()
 
 }
 
-
-
 // Laskee reitin linnuntietä paikasta A paikkaan B jaettun STEPSiin osaan.
 std::shared_ptr<std::vector<Interface::Location>> calculatePlayerRoute (Interface::Location A,
                                                       Interface::Location B)
 {   std::vector<Interface::Location> returnVector;
     double distance = Interface::Location::calcDistance(A, B);
-    int steps = distance/STEPS; //Montako ihmisaskelta matka on
+    int steps = distance/STEP_LENGTH; //Montako ihmisaskelta matka on
 
     int aX = A.giveX();
     int aY = A.giveY();
@@ -94,6 +92,7 @@ QString enterBar(std::shared_ptr<Player> player,
 
         //Odotetaan baarissa tickejä/siirretään vain vuoro?
         // tässä lopetetaan vuoro
+        player->enterBar();
         player->setIdle(false); //Ota pois seuraavan vuoron jälkeen.
         player->resetRoute();
         return "Hyvvee kaliaa";
@@ -317,77 +316,26 @@ void onTheTick(std::shared_ptr<Player>  player)
         theEnd();
     }
 
-    //Jos pelaaja saapuu kohteeseen
-    if (player->giveLocation() == player->getChosenLocation())
+    //jos pelaaja baarissa - vuoro menee siinä.
+    if (player -> isInBar())
     {
+        player->exitBar();
         player->setIdle(true);
     }
     else
     {
-        movePlayer(player);
+        //Jos pelaaja saapuu kohteeseen
+        if (player->giveLocation() == player->getChosenLocation())
+        {
+            player->setIdle(true);  //tästä seuraavaan vuoroon
+        }
+        else
+        {
+            movePlayer(player);
+        }
     }
-
-
 }
 
-
-void teststuff()
-{
-    std::string nimi = "pekka";
-    std::string vari = "musta";
-    std::shared_ptr<Player> player = std::make_shared<Player> (nimi, vari);
-    //Testejä
-
-    // Playerdata
-/*
-    auto list = cityPtr->getPlayerList();
-    int it = 1;
-    for (auto const& player : list){
-        Interface::Location loc = player->giveLocation();
-        loc.setXY(xFromEast(player->giveLocation().giveEasternCoord()),
-                  yFromNorth(player->giveLocation().giveNorthernCoord()));
-        //Interface::Location y = loc.setXY(player->giveLocation().giveEasternCoord();
-
-
-        QString qname = QString::fromStdString(player->getName());
-        QString qcolour = QString::fromStdString(player->getColour());
-        qDebug() << "Pelaaja " << it << ": " << qname;
-        qDebug() << "Väri on: " << qcolour;
-        qDebug() << "Paikassa: ";
-        qDebug() << "Maali: " << cityPtr->getGoalLocation().giveX() << cityPtr->getGoalLocation().giveY();
-        qDebug() << "Pelaaja: " << loc.giveX() << loc.giveY();
-
-        it ++;
-    }
-*/
-
-    // Steps
-    /*auto ppl = cityPtr->getPlayerList().front();
-    onTheClick(ppl, cityPtr->getBarList().front()->getLocation());
-    while (ppl->getCurrentSteps() < STEPS - 5 )
-    {
-        movePlayer(ppl);
-        qDebug() << ppl->getCurrentSteps()<< ppl->giveLocation().giveX() << ppl->giveLocation().giveY();
-    }
-
-    //ppl->getInVechile(veh);
-    ppl->resetRoute();
-
-    while (ppl->getCurrentSteps() < STEPS - 5 )
-    {
-        movePlayer(ppl);
-        qDebug() << ppl->getCurrentSteps()<< ppl->giveLocation().giveX() << ppl->giveLocation().giveY();
-    }
-*/
-
-     //Step in vehicle
-
-
-
-
-
-
-}
 void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
 {
     cityPtr = std::dynamic_pointer_cast<City>(cPtr);
