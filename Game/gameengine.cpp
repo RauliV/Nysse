@@ -18,13 +18,17 @@ void theEnd()
 std::shared_ptr<std::vector<Interface::Location>> calculatePlayerRoute (Interface::Location A,
                                                       Interface::Location B)
 {   std::vector<Interface::Location> returnVector;
+    double distance = Interface::Location::calcDistance(A, B);
+    int steps = distance/STEPS; //Montako ihmisaskelta matka on
+
     int aX = A.giveX();
     int aY = A.giveY();
     double xMovement = B.giveX() - aX;
     double yMovement = B.giveY() - aY;
-    double xStep = xMovement / STEPS;
-    double yStep = yMovement / STEPS;
-    for (int it = 1; it < STEPS; it ++){
+    double xStep = xMovement / steps;  //Askelen pituus näytöllä koordinaateittain
+    double yStep = yMovement / steps;
+
+    for (int it = 1; it < steps; it ++){
 
 
         std::pair <int, int> coord = {aX + (it*xStep),
@@ -42,13 +46,28 @@ std::shared_ptr<std::vector<Interface::Location>> calculatePlayerRoute (Interfac
 
 double calculateCost(std::shared_ptr<Player> player,
                      std::shared_ptr<Interface::IVehicle> vehicle,
-                     Interface::Location targeLocation)
+                     Interface::Location targetLocation)
 {
 
-    //Korjattava kustannusten ja nopeuden määrittäminen kulkuneuvoon
-    // Nykyisillä specseillä menee koskeen.
+    int cost = 0;
+    auto routeVector = calculatePlayerRoute(vehicle->giveLocation(),
+                                            targetLocation);
+    if (getSubClass(vehicle) == "scooter")
+    {
+        std::shared_ptr<Scooter> vehicleObject =
+                std::dynamic_pointer_cast<Scooter> (vehicle);
+        cost = routeVector->size() * vehicleObject->getCostPerTick();
 
-    return 5;
+    }
+    else if (getSubClass(vehicle) == "taxi")
+    {
+        std::shared_ptr<Taxi> vehicleObject =
+                std::dynamic_pointer_cast<Taxi> (vehicle);
+        cost = routeVector->size() * vehicleObject->getCostPerTick();
+    }
+
+    return cost;
+
 }
 
 
@@ -175,11 +194,13 @@ QString enterStop(std::shared_ptr<Player> player,
 
 
 
-
 int calculateBatteryUsage(std::shared_ptr<Scooter> scooter,
                           Interface::Location targetLocation)
 {
-    return 5; //laskettava uudelleen
+    auto routeVector = calculatePlayerRoute(scooter->giveLocation(),
+                                            targetLocation);
+    int batteryUsage = routeVector->size() * scooter->getBatteryPerTick();
+    return batteryUsage; //laskettava uudelleen
 }
 
 

@@ -5,7 +5,8 @@ Scooter::Scooter()
     battery_ = 100;
     speed_ = 2;
     costPerTick_ = 0.4;
-    int maxPromilleLevel_ = 2;
+    batteryPerTick_ = 2;
+    maxPromilleLevel_ = 2;
 
 }
 
@@ -56,21 +57,26 @@ void Scooter::remove()
 
  }
 
- int Scooter::getSpeed()
+ int Scooter::getSpeed() const
  {
      return speed_;
  }
 
- double Scooter::getCostPerTick()
+ double Scooter::getBatteryPerTick() const
+ {
+     return  batteryPerTick_;
+ }
+
+ double Scooter::getCostPerTick() const
  {
      return costPerTick_;
  }
 
- int Scooter::getMaxPromilleLevel()
+ int Scooter::getMaxPromilleLevel() const
  {
      return maxPromilleLevel_;
  }
- int Scooter::getBatteryStatus()
+ int Scooter::getBatteryStatus() const
  {
      return battery_;
  }
