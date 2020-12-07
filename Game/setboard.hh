@@ -64,6 +64,8 @@ void startingPointsSetup();
 void createAtmsBars();
 void createPlayers(std::vector<std::pair<std::string,
                    std::string>> playerSpecs);
+void setBoard(std::vector<std::pair<std::string,
+              std::string>> playerSpecs);
 void createTaxisScooters();
 std::string getSubClass (std::shared_ptr<Interface::IActor> iActor );
 std::list <std::shared_ptr<Player>> getPlayers();

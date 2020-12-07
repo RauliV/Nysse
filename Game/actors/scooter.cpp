@@ -70,3 +70,7 @@ void Scooter::remove()
  {
      return maxPromilleLevel_;
  }
+ int Scooter::getBatteryStatus()
+ {
+     return battery_;
+ }

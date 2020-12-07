@@ -226,11 +226,6 @@ void addActorItems ()
         int aX = actor->giveLocation().giveX();
         int aY = actor->giveLocation().giveY();
 
-        // olettamuksella, että ikonia ei välitetä funktioon parametrina
-        // koska sen osoitin on actorin (taksi ja scooter) sisällä.
-        // Jos ei ole taksi tai scooter, on nysse, koska matkustajat on
-        // räjäytetty
-
 
         cityPtrSet->getWindow()->addActor(aX, aY, 0, actor);
     }
@@ -252,10 +247,22 @@ void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
         cityPtrSet->addActor(playerPointer);
     }
 
-    addActorItems();
     //pelaajalista city-olioon
     cityPtrSet->setPlayerList(playerList);
 }
 
+void setBoard (std::vector<std::pair<std::string, std::string>> playerSpecs)
+{
+    createPlayers(playerSpecs);
+    createAtmsBars();
+    createTaxisScooters();
+    startingPointsSetup();
+    clearPassengers();
+    addActorItems();
+    addStaticItems();
 
+
+
+    //teststuff();
+}
 

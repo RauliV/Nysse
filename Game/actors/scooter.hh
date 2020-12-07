@@ -35,6 +35,9 @@ public:
 
     int getMaxPromilleLevel();
 
+    int getBatteryStatus();
+
+
 
 
 private:
