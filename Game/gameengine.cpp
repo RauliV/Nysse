@@ -53,6 +53,8 @@ double calculateCost(std::shared_ptr<Player> player,
 
 
 
+//Pelaaja baariin
+
 QString enterBar(std::shared_ptr<Player> player,
               std::shared_ptr<Bar> bar)
 {
@@ -171,20 +173,7 @@ QString enterStop(std::shared_ptr<Player> player,
 
 
 
-/* Pelaaja haluaa astua kulkuneuvoon
- * 
- * Scooter: 
- * Testattavat ehdot: Rahat, humala, akku
- * 
- * Taxi:
- * Testattavat ehdot: Rahat, humala
- * 
- * Lasketaan etukäteen syntyvät kustannukset?
- * 
- * Em. raja-arvot löytyy kyseisestä kulkuneuvo-oliosta
- *
- * 
- * */
+
 
 
 int calculateBatteryUsage(std::shared_ptr<Scooter> scooter,
@@ -280,7 +269,6 @@ void arriveDestination(std::shared_ptr<Player> player, Interface::Location dest)
     player->resetRoute();
     //set playericon
 
-
     //kutsu playerturnia?
     //kulkuneuvolocation = playerlocation
 
@@ -291,23 +279,7 @@ void arriveDestination(std::shared_ptr<Player> player, Interface::Location dest)
 
     //movedActors remove(player)
 
-
 }
-/* Jos on vuorossa ja idle
- * valitse stop interaktio tai klikkaa minne haluat matkustaa
- *
- * jos klikkaa karttaa -> Valitse kulkuneuvo -> 
- * startJourney : tarkistaa onko matka mahdollinen
-
-// tämä ehkä uihin
-// onko actoria
-// valitse mitä tehdään:
-// astu scooteriin, astu taksiin, odota bussia, poistu
-// nosta rahee, astu baariin, 
-
-// Jos kulkuneuvo -> step in vehicle - ensin kulkuneuvoon,
-// sitten matkakohteen klikkaus
-// jos atm, bar - tehdään toimet ja sama valinta ikkuna palaa
 
 
 
@@ -315,7 +287,6 @@ void arriveDestination(std::shared_ptr<Player> player, Interface::Location dest)
 
 
 //Liikuta pelaajaa reitillä
-*/
 void movePlayer(std::shared_ptr<Player> player){
 
     player->takeStep(); //päivittää askeleet ja kustannukset

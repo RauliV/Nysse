@@ -7,21 +7,17 @@ std::shared_ptr<City> cityPtrSet;
 
 
 // Koska Locationin rakentaja ei automaattisesti aseta pikselikoortinaatteja
-// karttakoordinaattien perusteella. Siksi röyhkeästi kopioitu Locationin
-// private metodit.
+// karttakoordinaattien perusteella, konversioapuohjelmat tässä.
+
 int xFromEast(int eastcoord)
 {
     return static_cast<int>((eastcoord - 3327034) * 0.333333);
 }
 
-
-
 int yFromNorth(int northcoord)
 {
     return static_cast<int>((northcoord - 6824642) * 0.333333);
 }
-
-
 
 int EastFromX(int x)
 {
@@ -261,8 +257,5 @@ void setBoard (std::vector<std::pair<std::string, std::string>> playerSpecs)
     addActorItems();
     addStaticItems();
 
-
-
-    //teststuff();
 }
 
