@@ -1,7 +1,6 @@
 #include "gameengine.h"
 #include "setboard.hh"
 #include "actors/taxi.hh"
-#include <boost/any.hpp>
 
 std::shared_ptr<City> cityPtr;
 
