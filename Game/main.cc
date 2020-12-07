@@ -1,5 +1,7 @@
 /* PALAUTUS MAANANTAINA 7.12 ON RAAKILEPALAUTUS. HALUAMME TOTEUTTAA
  * KUNNIANHIMOISEN PROJEKTIMME LOPPUUN, VAIKKA AIKATAULU YLITTYY
+ *
+ * TÄMÄ EI OLE VALMIS PELI. SAIMME SANKTIOTONTA LISÄAIKAA 7.12 ASTI
 
 ********************************************************************************
 **********    Tampereen Tähti - pikkujouluinen kaupunkiseikkailu   *************
@@ -8,7 +10,7 @@
 **********          Sami Mansikkala            Rauli Virtanen         **********
 ****             sami.mansikkala@tuni.fi    rauli.virtanen@tuni.fi          ****
 *                                                                              *
-*                ON:                        ON:                                *
+*                ON:                             ON: 290592                    *
 *                                                                              *
 ********************************************************************************
 *
@@ -25,7 +27,7 @@
 * Ohjelma arpoo pelaajien aloituspisteen joka on riittävän suurella tarkkuudella
 * yhtä kaukana maalista jokaisella pelaajalla
 *
-* Peli arpoo (muiden kuin nyssepysäkkien) pysähtymihtymispisteiden sijainnit
+* Peli arpoo (muiden kuin nyssepysäkkien) pysähtymispisteiden sijainnit
 * - yhteen baareista arvotaan helikopteripilotti
 *
 * Peli arpoo (muiden kuin nyssejen) kulkuneuvojen sijainnit kartalla. Eivät
@@ -140,24 +142,10 @@ int main(int argc, char *argv[])
 /*  NOTES/TODO/ETC:
  
 
- * Baari - ajan kuluminen /vuoro
- *
+
  * Säännöt/documentointi ym.
-
- * UnitTests:   SpendCash - matkustaessa kulutetaan, niin olisi syytä olla
- *                          menemättä negat, ettei tule tolpalla tappelua
- *
- * *
-
  * drunkness - drunkeness -> buzz?
-
- * vakiomäärittelyt omiin tiedostoihinsa
- * Montako kulkuneuvoa. nyt 6? vakio määrästä? suhteutettuna pelaajiin?
-
-
-
  * goalDestination -> punainen x?
-
- *loadscreen
- *loppuscreen
+ * loadscreen
+ * loppuscreen
 */

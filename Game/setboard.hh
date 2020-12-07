@@ -9,8 +9,7 @@
 
 
 // Vehicledata
-const short int SCOOTER_COUNT = 5;
-const short int TAXI_COUNT = 5;
+const short int VEHICLE_COUNT = 5;
 const short int BUSS_FARE = 5;
 
 const int BAR_COUNT =   10;

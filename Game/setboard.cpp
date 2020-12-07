@@ -100,7 +100,7 @@ void createTaxisScooters()
 {
 
 
-    for (int it = 0; it < 6; it++)
+    for (int it = 0; it < VEHICLE_COUNT; it++)
     {
         std::shared_ptr<Taxi> taxiPtr = std::make_shared<Taxi> ();
         std::shared_ptr<Scooter> scooterPtr = std::make_shared<Scooter> ();

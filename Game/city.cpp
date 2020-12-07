@@ -11,7 +11,7 @@
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground){
 
-
+    auto noWarning = bigbackground;
     mainWindowPtr_->setPicture(basicbackground);
 
 };
@@ -19,10 +19,12 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground){
 
 void City::setClock(QTime clock){
 
-    short int hours = clock.hour();
-    short int minutes = clock.minute();
     *gameClock_=clock;
-    //gameClock_->setHMS(hours,minutes,0);
+
+    /*short int hours = clock.hour();
+    short int minutes = clock.minute();
+
+    gameClock_->setHMS(hours,minutes,0);*/
 
 };
 
@@ -106,8 +108,11 @@ std::vector<std::shared_ptr<Interface::IActor>> City::getNearbyActors(Interface:
 
 bool City::isGameOver() const
 {
-
-    //if (target_location == player_location
+    for (auto const& player : playerList_)
+        if (player->giveLocation() == goalLocation_)
+        {
+            return true;
+        }
 
     return false;
 }
