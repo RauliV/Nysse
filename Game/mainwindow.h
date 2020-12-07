@@ -16,6 +16,7 @@
 #include <memory>
 #include <QVector>
 #include <map>
+#include <QDebug>
 
 namespace Ui {
 
@@ -35,12 +36,17 @@ public:
     void setTick(int t);
     void setTimer();
 
+    //Function to add buses and players to the map
     void addActor(int locX, int locY, int type = 0, std::shared_ptr<Interface::IActor> actor = nullptr);
+    //Function to add bars, atms and stops to the map
     void addStaticItem(int locX, int locY, std::shared_ptr<Interface::IStop> place = nullptr);
     void updateCoords(int nX, int nY);
+    //Function to update item positions on the map
     void updateActors();
+    //Sets the background map
     void setPicture(QImage &img);
     void createPlayerPortraits();
+    //Loads icons for items and assigns pointers to them
     void loadImages();
 
 signals:
@@ -49,18 +55,16 @@ signals:
 
 private slots:
 
-    void on_PortraitView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
-
+    //Opens settings dialog
     void on_SettingsButton_clicked();
-
+    //Starts gameclock and the game
     void on_StartButton_clicked();
-
+    //gets information from settings dialog
     void savePlayerInfo(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs);
 
-    std::shared_ptr<QImage> getImage(std::shared_ptr<Interface::IActor> actor = nullptr, std::shared_ptr<Interface::IStop> place = nullptr);
-
-
-
+    std::shared_ptr<QImage> getActorImage(std::shared_ptr<Interface::IActor> actor = nullptr);
+    std::shared_ptr<QImage> getPlaceImage(std::shared_ptr<Interface::IStop> place = nullptr);
+   // void mouseClicked(std::shared_ptr<Interface::IStop> place);
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *portrait;

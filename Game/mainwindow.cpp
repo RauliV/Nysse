@@ -15,29 +15,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui(new Ui::MainWindow)
 {
-
     ui->setupUi(this);
     ui->StartButton->setDisabled(true);
-
     loadImages();
-
-
-
-
-
-
-    //TIMER
-
-
-
-    /* e_timer for elapsed timer if needed
-    auto e_timer = new QElapsedTimer();
-    e_timer->start();
-    std::string elapsed_str = std::to_string(e_timer->elapsed());
-    QString elapsed = QString::fromStdString(elapsed_str);
-    ui->travelTimeLcd->display(elapsed); */
-
-
 }
 
 MainWindow::~MainWindow()
@@ -74,7 +54,7 @@ void MainWindow::setTimer()
 
 void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interface::IActor> actor)
 {
-    std::shared_ptr<QImage> img = getImage(actor, nullptr);
+    std::shared_ptr<QImage> img = getActorImage(actor);
     ActorItem* nActor = new ActorItem(locX, locY, type, img, actor);
     actors_.push_back(nActor);
     map_scene->addItem(nActor);
@@ -85,8 +65,9 @@ void MainWindow::addStaticItem(int locX, int locY, std::shared_ptr<Interface::IS
 {
 
 
-    std::shared_ptr<QImage> img = getImage(nullptr,place);
-    StaticItem* nPlace = new StaticItem(locX, locY, 2, img, place); //Tästä tulee undefined reference
+    std::shared_ptr<QImage> img = getPlaceImage(place);
+    StaticItem* nPlace = new StaticItem(locX, locY, 2, img, place);
+    //connect(nPlace,&StaticItem::itemClicked, this, &MainWindow::mouseClicked);
     places_.push_back(nPlace);
     map_scene->addItem(nPlace);
     last_ = nPlace;
@@ -192,13 +173,6 @@ void MainWindow::createPlayerPortraits()
     }
 }
 
-
-void MainWindow::on_PortraitView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint)
-{
-
-}
-
-
 void MainWindow::on_SettingsButton_clicked()
 {
     settingsDialog sDialog;
@@ -237,44 +211,52 @@ void MainWindow::savePlayerInfo(int playerCount, std::vector<std::pair<std::stri
     playerSpecs_ = playerSpecs;
 }
 
-std::shared_ptr<QImage> MainWindow::getImage(std::shared_ptr<Interface::IActor> actor, std::shared_ptr<Interface::IStop> place)
+std::shared_ptr<QImage> MainWindow::getActorImage(std::shared_ptr<Interface::IActor> actor)
 {
+    //Actors
     if (std::dynamic_pointer_cast<Taxi>(actor) != 0){
         return taxiImg_;
     }
-
     else if (std::dynamic_pointer_cast<Scooter>(actor) != 0){
         return scooterImg_;
     }
-
     else if (std::dynamic_pointer_cast<CourseSide::Nysse>(actor) != 0){
         return nysseImg_;
     }
     else if (std::dynamic_pointer_cast<Player>(actor) != 0){
         return walkImg_;
     }
-
     else if (std::dynamic_pointer_cast<CourseSide::Passenger>(actor) != 0){
-        return nullptr;
+        return barImg_;
     }
-    else if (std::dynamic_pointer_cast<Atm>(place) != 0){
+    else return nullptr;
+}
+
+std::shared_ptr<QImage> MainWindow::getPlaceImage(std::shared_ptr<Interface::IStop> place)
+{
+    //Places
+    if (std::dynamic_pointer_cast<Atm>(place) != 0){
         return atmImg_;
     }
     else if (std::dynamic_pointer_cast<Bar>(place) != 0){
         return barImg_;
     }
-
-    else return nullptr;
+    else return stopImg_;
 }
+/*
+void MainWindow::mouseClicked(std::shared_ptr<Interface::IStop> place)
+{
+    qDebug() << place->getName();
 
+}
+*/
 void MainWindow::loadImages()
 {
-
     nysseImg_ = std::make_shared<QImage> (QImage(":/graphics/nysse_icon.png"));
     taxiImg_= std::make_shared<QImage> (QImage(":/graphics/taxi_icon.png"));
     scooterImg_= std::make_shared<QImage> (QImage(":/graphics/scooter_icon.png"));
     walkImg_= std::make_shared<QImage> (QImage(":/graphics/walk_or_passenger_icon.png"));
-    barImg_= std::make_shared<QImage> (QImage(":/graphics/bar_icon.png"));
+    barImg_= std::make_shared<QImage> (QImage(":/graphics/bar_icon_2.png"));
     atmImg_ = std::make_shared<QImage> (QImage(":/graphics/bus_stop_icon.png"));
-
+    stopImg_ = std::make_shared<QImage> (QImage(":/graphics/bus_stop_file_2.png"));
 }

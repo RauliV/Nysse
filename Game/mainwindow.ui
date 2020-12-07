@@ -102,7 +102,7 @@
     <property name="geometry">
      <rect>
       <x>530</x>
-      <y>360</y>
+      <y>350</y>
       <width>125</width>
       <height>171</height>
      </rect>
@@ -113,8 +113,8 @@
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>10</y>
+       <x>10</x>
+       <y>40</y>
        <width>98</width>
        <height>132</height>
       </rect>
@@ -130,7 +130,7 @@
       <item>
        <widget class="QPushButton" name="endTurn">
         <property name="text">
-         <string>SAVE GAME</string>
+         <string>NEW GAME</string>
         </property>
        </widget>
       </item>

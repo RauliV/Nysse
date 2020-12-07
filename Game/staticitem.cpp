@@ -5,6 +5,7 @@ StaticItem::StaticItem(int x, int y, int type, std::shared_ptr<QImage> icon, std
 {
     icon_  = icon;
     place_ = place;
+    this->setEnabled(true);
 }
 
 void StaticItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -20,6 +21,15 @@ void StaticItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
     else
     {
         painter->drawImage(bounds, *icon_);
+        this->setToolTip(place_->getName());
 
     }
 }
+/*
+void StaticItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    QGraphicsItem::mousePressEvent(event);
+    emit itemClicked(place_);
+
+}
+*/

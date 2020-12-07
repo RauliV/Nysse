@@ -53,7 +53,7 @@ std::pair<QLineEdit*, QComboBox*> settingsDialog::createPlayerOptions()
     widget->setMaximumSize(200, 80);
     widget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
     //Creating widgets for player options
-    QLineEdit *playerName = new QLineEdit();
+    QLineEdit *playerName = new QLineEdit("Name");
     QLabel *label = new QLabel("Player Name");
     QComboBox *playerColor = new QComboBox();
     QStringList colors = {"Red", "Blue", "Green", "Yellow"};
