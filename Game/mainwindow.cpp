@@ -185,7 +185,7 @@ void MainWindow::on_SettingsButton_clicked()
 void MainWindow::on_StartButton_clicked()
 {
     setTimer();
-    createPlayers(playerSpecs_);
+    setBoard(playerSpecs_);
     createPlayerPortraits();
     //addActor(200,200, 90);
    /*std::string nimi1 = "Jaakko";

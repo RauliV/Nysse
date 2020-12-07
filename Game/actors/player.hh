@@ -48,6 +48,9 @@ public:
 
     void takeStep();
     int getCurrentSteps ();
+    void enterBar();
+    void exitBar();
+    bool isInBar();
 
 
 
@@ -65,6 +68,7 @@ private:
     Interface::Location chosenLocation_;
     int currentSteps_;
     std::shared_ptr<std::vector<Interface::Location>> routeVector_;
+    bool isInBar_;
 
 
 };

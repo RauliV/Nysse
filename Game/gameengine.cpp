@@ -6,38 +6,27 @@
 std::shared_ptr<City> cityPtr;
 
 
+//Loppufanfaarit/Aika ym.
 void theEnd()
 {
 
 }
 
-void onTheTick(std::shared_ptr<Player>  player)
-{
-    if (cityPtr->isGameOver() == true)
-    {
-        theEnd();
-    }
-
-    if (player->giveLocation() == player->getChosenLocation())
-    {
-        //arriveDestination (player);
-    }
-
-
-}
-
-
 // Laskee reitin linnuntietä paikasta A paikkaan B jaettun STEPSiin osaan.
 std::shared_ptr<std::vector<Interface::Location>> calculatePlayerRoute (Interface::Location A,
                                                       Interface::Location B)
 {   std::vector<Interface::Location> returnVector;
+    double distance = Interface::Location::calcDistance(A, B);
+    int steps = distance/STEP_LENGTH; //Montako ihmisaskelta matka on
+
     int aX = A.giveX();
     int aY = A.giveY();
     double xMovement = B.giveX() - aX;
     double yMovement = B.giveY() - aY;
-    double xStep = xMovement / STEPS;
-    double yStep = yMovement / STEPS;
-    for (int it = 1; it < STEPS; it ++){
+    double xStep = xMovement / steps;  //Askelen pituus näytöllä koordinaateittain
+    double yStep = yMovement / steps;
+
+    for (int it = 1; it < steps; it ++){
 
 
         std::pair <int, int> coord = {aX + (it*xStep),
@@ -53,149 +42,244 @@ std::shared_ptr<std::vector<Interface::Location>> calculatePlayerRoute (Interfac
 
 }
 
-void bar(std::shared_ptr<Player> player)
+double calculateCost(std::shared_ptr<Player> player,
+                     std::shared_ptr<Interface::IVehicle> vehicle,
+                     Interface::Location targetLocation)
 {
 
-    // mitä tapahtuu, kun pelaaja saapuu baariin
-    // aika, rahat, känni
+    int cost = 0;
+    auto routeVector = calculatePlayerRoute(vehicle->giveLocation(),
+                                            targetLocation);
+    if (getSubClass(vehicle) == "scooter")
+    {
+        std::shared_ptr<Scooter> vehicleObject =
+                std::dynamic_pointer_cast<Scooter> (vehicle);
+        cost = routeVector->size() * vehicleObject->getCostPerTick();
+
+    }
+    else if (getSubClass(vehicle) == "taxi")
+    {
+        std::shared_ptr<Taxi> vehicleObject =
+                std::dynamic_pointer_cast<Taxi> (vehicle);
+        cost = routeVector->size() * vehicleObject->getCostPerTick();
+    }
+
+    return cost;
 
 }
 
 
-void atm(std::shared_ptr<Player> player)
+
+//Pelaaja baariin
+
+QString enterBar(std::shared_ptr<Player> player,
+              std::shared_ptr<Bar> bar)
 {
+    //tarkista onko rahee
+    if (player->getCash() < 6) // Tästä vakio!! 6 e tuoppi
+    {
+        return "cantDrinkCash";
+    }
+    else
+    {   player->drink(1);
+        player->spendCash(6);
+        if (bar->isPilotInBar())
+        {
+            //pilotIsFound();
+            //loppumatkashöy
+            // end(); -> game is over (jos vain voittaja haetaan)
+        }
 
-    // mitä tapahtuu, kun pelaaja saapuu automaatille
-    // jos ei vielä nostettu täältä, jos saldoa?
-
-
+        //Odotetaan baarissa tickejä/siirretään vain vuoro?
+        // tässä lopetetaan vuoro
+        player->enterBar();
+        player->setIdle(false); //Ota pois seuraavan vuoron jälkeen.
+        player->resetRoute();
+        return "Hyvvee kaliaa";
+    }
 }
 
 
-void stop(std::shared_ptr<Player> player)
+
+//Pelaaja siirtyy pysäkille odottamaan nysseä
+//Tässä versiossa bussia ei varsinaisesti odoteta, vaan matka alkaa
+//heti sen bussin kyydissä, joka pysähtyy pysäkille
+//Määränpää on bussin seuraava pysäkki
+//Palauttaa virheilmoitukset, jos ei matka onnistu ja "" jos ok.
+
+QString enterStop(std::shared_ptr<Player> player,
+                  std::shared_ptr<CourseSide::Stop> stop)
 {
+    std::shared_ptr<CourseSide::Nysse> nToWait;
 
-    // mitä tapahtuu, kun pelaaja saapuu pysäkille
+    //Käydään läpi actorit listasta
+    for (auto const& actor : cityPtr->getActors())
+    {
 
-}
+        //Jos actor on nysse
+        if (std::dynamic_pointer_cast<CourseSide::Nysse> (actor) != 0)
+        {
 
+           std::shared_ptr<CourseSide::Nysse> nysse =
+                   std::dynamic_pointer_cast<CourseSide::Nysse> (actor);
 
-//tämä voisi varmaan mennä ui:n puolelle, lähelle playerturndialogia
+           //Mikä bussi kulkee pysäkillä
+           auto const nTimeRoute = nysse->getTimeRoute();
+           for (auto const& nStop : nTimeRoute)
+           {
+               if (nStop.second.second.lock()  == stop)
+               {
+                   nToWait = nysse;
+                   break;
+               }
+               else nToWait = nullptr;
+           }
+        }
+    }
 
-void stepInVehicle(std::shared_ptr<Player> player,
-                   std::shared_ptr<Interface::IVehicle> vehicle)
-{
-    // astuu nysseen
-
-    if (getSubClass(vehicle) == "nysse")
-     {
-        std::shared_ptr<CourseSide::Nysse> nysse =
-                std::dynamic_pointer_cast<CourseSide::Nysse> (vehicle);
-
-        std::shared_ptr<CourseSide::Stop> nStop = nysse->getStop().lock();
-        std::shared_ptr<CourseSide::Stop> nFinalStop = nysse->getFinalStop().lock();
+    // Jos löytyi pysäkiltä kulkeva bussi
+    if (nToWait != nullptr)
+    {
+        std::shared_ptr<CourseSide::Stop> nFinalStop = nToWait->getFinalStop().lock();
         std::shared_ptr<CourseSide::Stop> nNextStop;
 
-
+        //Tutkitaan bussimatkustamisen ehdot
         if (player->getDrunkness() > 3)
          {
-             //emit cantMoveDrunk;
+             return "cantMoveDrunk";
 
          }
          else if (player->getCash() < BUSS_FARE)
          {
-             //emit cantMoveCash;
+             return "cantMoveCash";
          }
 
-         else if (nStop == nFinalStop)
+         else if (stop == nFinalStop)
          {
-            //emit cantMoveFinalStop
+            return "cantMoveFinalStop";
          }
+
          else
-         {  //Etsitään seuraava pysäkki
-            for (int it = 0; it < cityPtr->getStops().size(); it++)
+         {
+            //Bussilla voidaan matkustaa -> Etsitään seuraava pysäkki
+            for (unsigned int it = 0; it < cityPtr->getStops().size(); it++)
             {
-                if (cityPtr->getStops().at(it) == nStop)
+                if (cityPtr->getStops().at(it) == stop)
                 {
                     nNextStop = std::dynamic_pointer_cast<CourseSide::Stop>
                             (cityPtr->getStops().at(it+1));
                 }
              }
+
+             //Matka seuraavalle pysäkille voi alkaa
              Interface::Location nextLoc = nNextStop->getLocation();
              player->spendCash(BUSS_FARE);
              player->resetRoute();
-             player->getInVechile(vehicle); //pelaajan ikonin muutos
+             player->getInVechile(nToWait); //pelaajan ikonin muutos
              std::shared_ptr<CourseSide::Nysse> nysse =
-                     std::dynamic_pointer_cast<CourseSide::Nysse> (vehicle);
+                     std::dynamic_pointer_cast<CourseSide::Nysse> (nToWait);
              player->setChosenLocation(nextLoc);
              player->setIdle(false);
-
+             return "";
          }
-
      }
      else
     {
-
-        player->getInVechile(vehicle);
-        player->setIdle(false);
+        return "No buses will come today";
     }
-
-
-    //poista actori käytön jälkeen?
-
-    //Bussi -> jos ei jo ollut ja jos rahaa eikä liikaa kännissä - astu sisään
-    //Scooter -> jos akkua ja rahaa eikä liikaa kännissä
-    //Taksi -> jos rahaa eikä liikaa kännissä
 }
 
-void arriveDestination(std::shared_ptr<Player> player, Interface::Location dest)
 
+
+
+
+int calculateBatteryUsage(std::shared_ptr<Scooter> scooter,
+                          Interface::Location targetLocation)
 {
-    player->setIdle(true);
-    player->resetRoute();
-    //set playericon
-
-
-    //kutsu playerturnia?
-    //kulkuneuvolocation = playerlocation
-
-    // wantedlocation = "";
-    // jos wanted_destination on baari -> bar(player)
-    // jos wanted_destination on atm -> atm(player)
-    // jos wanted_destination on stop -> stop(player)
-
-    //movedActors remove(player)
-
-
+    auto routeVector = calculatePlayerRoute(scooter->giveLocation(),
+                                            targetLocation);
+    int batteryUsage = routeVector->size() * scooter->getBatteryPerTick();
+    return batteryUsage; //laskettava uudelleen
 }
 
-//voi klikata vain, jos player idle = ei baarissa tai matkalla
-void onTheClick(std::shared_ptr<Player> player, Interface::Location loc)
-{
-    std::vector<std::shared_ptr<Interface::IActor>> actorsNear =
-            cityPtr->getNearbyActors(loc);
 
-    if (actorsNear.size()==0)
-    {
-        qDebug() << "There's no one nearby";
-    }
-    else if (actorsNear.size()>1)
-    {
-        qDebug () << "Choose your poison Dialog";
+//Matkustetaan muuten kuin bussilla, eli määränpää annetu
+
+QString startJourney(std::shared_ptr<Player> player,
+                     std::shared_ptr<Interface::IVehicle> vehicle,
+                     Interface::Location targetLocation)
+{
+
+    if (getSubClass(vehicle) == "scooter")
+     {
+
+        std::shared_ptr<Scooter> scooter =
+                std::dynamic_pointer_cast<Scooter> (vehicle);
+
+
+        if (player->getDrunkness() > scooter->getMaxPromilleLevel())
+         {
+             return "cantMoveDrunk";
+
+         }
+         else if (player->getCash() < calculateCost(player, scooter, targetLocation))
+         {
+             return "cantMoveCash";
+         }
+
+         else if (scooter->getBatteryStatus() < calculateBatteryUsage(scooter, targetLocation))
+         {
+            return "cantMoveBattery";
+         }
+         else
+         {
+            //Aloitetaan matka - muista lisätä takeSteppiin myös rahan
+            //ja akun kuluminen
+            player->resetRoute();
+            player->getInVechile(scooter);
+            player->setIdle(false);
+            player->setChosenLocation(targetLocation);
+            player->setRouteVector(calculatePlayerRoute(player->giveLocation(),
+                                                        targetLocation));
+            return "matka kohteeseen alkaa";
+         }
+
+     }
+     else if (getSubClass(vehicle) == "taxi")
+     {
+
+       std::shared_ptr<Taxi> taxi =
+               std::dynamic_pointer_cast<Taxi> (vehicle);
+
+
+       if (player->getDrunkness() > taxi->getMaxPromilleLevel())
+        {
+            return "cantMoveDrunk";
+
+        }
+        else if (player->getCash() < calculateCost(player, taxi, targetLocation))
+        {
+            return "cantMoveCash";
+        }
+
+        else
+        {
+           //Aloitetaan matka
+           player->resetRoute();
+           player->getInVechile(taxi);
+           player->setIdle(false);
+           player->setChosenLocation(targetLocation);
+           player->setRouteVector(calculatePlayerRoute(player->giveLocation(),
+                                                       targetLocation));
+           return "Matka kohteeseen alkaa";
+        }
     }
     else
     {
-   //    if (onkosullarahee) Jos nyssessä vektori = bussivektori
-       Interface::Location aaa = player->giveLocation();
-       player->setChosenLocation(loc);
-       player->setRouteVector(calculatePlayerRoute(aaa, loc));
+        return "En tunnista kulkuneuvoa";
     }
-
-
 }
 
-
-//calculateTotalCosts
 
 //Liikuta pelaajaa reitillä
 void movePlayer(std::shared_ptr<Player> player){
@@ -207,13 +291,16 @@ void movePlayer(std::shared_ptr<Player> player){
     if (player->getRouteVector() != nullptr)
     {
         Interface::Location newLoc = player->getRouteVector()->at(cSteps);
-        //newLoc.setNorthEast(NorthFromY(newLoc.giveY()), EastFromX(newLoc.giveX()));
         player->move(newLoc);
         cityPtr->actorMoved(player);
-        if (cSteps == STEPS)
+
+
+        /* tätä kai ei tarvita, koska tick -runko testaa onko kohteessa
+         *
+         * if (cSteps == STEPS)
         {
             arriveDestination(player, player->getChosenLocation());
-        }
+        }*/
     } else
     {
         qDebug() << "Ei reittiä pelaajalla";
@@ -222,83 +309,37 @@ void movePlayer(std::shared_ptr<Player> player){
 }
 
 
-
-void teststuff()
+void onTheTick(std::shared_ptr<Player>  player)
 {
-    std::string nimi = "pekka";
-    std::string vari = "musta";
-    std::shared_ptr<Player> player = std::make_shared<Player> (nimi, vari);
-    //Testejä
-
-    // Playerdata
-/*
-    auto list = cityPtr->getPlayerList();
-    int it = 1;
-    for (auto const& player : list){
-        Interface::Location loc = player->giveLocation();
-        loc.setXY(xFromEast(player->giveLocation().giveEasternCoord()),
-                  yFromNorth(player->giveLocation().giveNorthernCoord()));
-        //Interface::Location y = loc.setXY(player->giveLocation().giveEasternCoord();
-
-
-        QString qname = QString::fromStdString(player->getName());
-        QString qcolour = QString::fromStdString(player->getColour());
-        qDebug() << "Pelaaja " << it << ": " << qname;
-        qDebug() << "Väri on: " << qcolour;
-        qDebug() << "Paikassa: ";
-        qDebug() << "Maali: " << cityPtr->getGoalLocation().giveX() << cityPtr->getGoalLocation().giveY();
-        qDebug() << "Pelaaja: " << loc.giveX() << loc.giveY();
-
-        it ++;
-    }
-*/
-
-    // Steps
-    /*auto ppl = cityPtr->getPlayerList().front();
-    onTheClick(ppl, cityPtr->getBarList().front()->getLocation());
-    while (ppl->getCurrentSteps() < STEPS - 5 )
+    if (cityPtr->isGameOver() == true)
     {
-        movePlayer(ppl);
-        qDebug() << ppl->getCurrentSteps()<< ppl->giveLocation().giveX() << ppl->giveLocation().giveY();
+        theEnd();
     }
 
-    //ppl->getInVechile(veh);
-    ppl->resetRoute();
-
-    while (ppl->getCurrentSteps() < STEPS - 5 )
+    //jos pelaaja baarissa - vuoro menee siinä.
+    if (player -> isInBar())
     {
-        movePlayer(ppl);
-        qDebug() << ppl->getCurrentSteps()<< ppl->giveLocation().giveX() << ppl->giveLocation().giveY();
+        player->exitBar();
+        player->setIdle(true);
     }
-*/
-
-     //Step in vehicle
-
-
-    std::shared_ptr<Taxi> taxi = std::make_shared<Taxi> ();
-    stepInVehicle(player, taxi);
-
-
-
-
-
-
-
-
+    else
+    {
+        //Jos pelaaja saapuu kohteeseen
+        if (player->giveLocation() == player->getChosenLocation())
+        {
+            player->setIdle(true);  //tästä seuraavaan vuoroon
+        }
+        else
+        {
+            movePlayer(player);
+        }
+    }
 }
+
 void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
 {
     cityPtr = std::dynamic_pointer_cast<City>(cPtr);
 
-
-    //Setboard funktioita
-    createAtmsBars();
-    createTaxisScooters();
-    addStaticItems();
-    addActorItems();
-    clearPassengers();
-    startingPointsSetup();
-    teststuff();
 
 }
 

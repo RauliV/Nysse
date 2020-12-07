@@ -28,6 +28,5 @@ std::shared_ptr<Interface::ICity> createGame()
 
     return icityPtr;
 
-    //pelilogiikkaolio omaan muuttujaan engineen
 }
 }

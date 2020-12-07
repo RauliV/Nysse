@@ -29,11 +29,16 @@ public:
 
     void removePassenger(std::shared_ptr<Interface::IPassenger> passenger);
 
-    int getSpeed();
+    int getSpeed() const;
 
-    double getCostPerTick();
+    double getCostPerTick() const;
 
-    int getMaxPromilleLevel();
+    double getBatteryPerTick() const;
+
+    int getMaxPromilleLevel() const;
+
+    int getBatteryStatus() const;
+
 
 
 
@@ -43,6 +48,8 @@ private:
     int battery_;
     int speed_;
     double costPerTick_;
+    double batteryPerTick_;
+
     int maxPromilleLevel_;
 
    };

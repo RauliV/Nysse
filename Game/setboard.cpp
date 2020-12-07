@@ -7,21 +7,17 @@ std::shared_ptr<City> cityPtrSet;
 
 
 // Koska Locationin rakentaja ei automaattisesti aseta pikselikoortinaatteja
-// karttakoordinaattien perusteella. Siksi röyhkeästi kopioitu Locationin
-// private metodit.
+// karttakoordinaattien perusteella, konversioapuohjelmat tässä.
+
 int xFromEast(int eastcoord)
 {
     return static_cast<int>((eastcoord - 3327034) * 0.333333);
 }
 
-
-
 int yFromNorth(int northcoord)
 {
     return static_cast<int>((northcoord - 6824642) * 0.333333);
 }
-
-
 
 int EastFromX(int x)
 {
@@ -104,7 +100,7 @@ void createTaxisScooters()
 {
 
 
-    for (int it = 0; it < 6; it++)
+    for (int it = 0; it < VEHICLE_COUNT; it++)
     {
         std::shared_ptr<Taxi> taxiPtr = std::make_shared<Taxi> ();
         std::shared_ptr<Scooter> scooterPtr = std::make_shared<Scooter> ();
@@ -226,11 +222,6 @@ void addActorItems ()
         int aX = actor->giveLocation().giveX();
         int aY = actor->giveLocation().giveY();
 
-        // olettamuksella, että ikonia ei välitetä funktioon parametrina
-        // koska sen osoitin on actorin (taksi ja scooter) sisällä.
-        // Jos ei ole taksi tai scooter, on nysse, koska matkustajat on
-        // räjäytetty
-
 
         cityPtrSet->getWindow()->addActor(aX, aY, 0, actor);
     }
@@ -252,10 +243,19 @@ void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
         cityPtrSet->addActor(playerPointer);
     }
 
-    addActorItems();
     //pelaajalista city-olioon
     cityPtrSet->setPlayerList(playerList);
 }
 
+void setBoard (std::vector<std::pair<std::string, std::string>> playerSpecs)
+{
+    createPlayers(playerSpecs);
+    createAtmsBars();
+    createTaxisScooters();
+    startingPointsSetup();
+    clearPassengers();
+    addActorItems();
+    addStaticItems();
 
+}
 

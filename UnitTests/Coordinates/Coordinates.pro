@@ -19,6 +19,7 @@ SOURCES +=  tst_cvalues.cpp \
             ../../Game/settingsdialog.cpp \
             ../../Game/playerturndialog.cpp \
             ../../Game/actoritem.cpp \
+            ../../Game/staticitem.cpp \
             ../../Course/CourseLib/errors/gameerror.cc \
             ../../Course/CourseLib/graphics/simpleactoritem.cpp \
             ../../Course/CourseLib/actors/nysse.cc \
