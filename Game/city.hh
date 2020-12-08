@@ -7,9 +7,12 @@
 #include "core/logic.hh"
 #include "actors/player.hh"
 #include "interfaces/icity.hh"
+#include <vector>
+#include "actors/stop.hh"
+#include "errors/gameerror.hh"
+#include <QDebug>
 #include <QTime>
 #include <memory>
-#include <vector>
 
 class City : public Interface::ICity
 {

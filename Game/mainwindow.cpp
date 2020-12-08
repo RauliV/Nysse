@@ -2,12 +2,11 @@
 #include "mainwindow.h"
 #include "setboard.hh"
 #include "ui_mainwindow.h"
-#include "QElapsedTimer"
 #include "QTime"
-
-#include <QDebug>
 #include <QLayout>
 #include <QWidget>
+
+
 const int PADDING = 10;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -40,17 +39,51 @@ void MainWindow::setTimer()
 {
     timer = new QTimer(this);
     timer->start(tick_);
-    connect(timer, &QTimer::timeout, map_scene, &QGraphicsScene::advance);
-    ui->travelTimeLcd->setPalette(Qt::red);
     timer->setInterval(1000);
-    connect(timer, &QTimer::timeout, [&]() {
-    QString time1 = QTime::currentTime().toString();
-    ui->travelTimeLcd->display(time1);
-    });
-    connect(timer, &QTimer::timeout, this, &MainWindow::updateActors);
-    //connect(timer, %QTimer::timeout, ,);
 
+    connect(timer, &QTimer::timeout, map_scene, &QGraphicsScene::advance);
+
+    connect(timer, &QTimer::timeout, this, &MainWindow::updateActors);
+
+    ui->travelTimeLcd->setPalette(Qt::red);
+    eTime_.start();
+    connect(timer, &QTimer::timeout, this, &MainWindow::tickClock);
 }
+
+
+void MainWindow::tickClock()
+{
+    int tSeconds = eTime_.elapsed()/1000;
+    int minutes = tSeconds/60;
+    int seconds = tSeconds % 60;
+    minutes = minutes % 60;
+    std::string minutesStr = "";
+    std::string secondsStr = "";
+
+
+    //muotoillaan näyttö halutunlaiseksi
+    if (minutes<10)
+    {
+        minutesStr = "0"+std::to_string(minutes);
+    }
+    else
+    {
+        minutesStr = std::to_string(minutes);
+    }
+
+    if (seconds<10)
+    {
+        secondsStr = "0"+std::to_string(seconds);
+    }
+    else
+    {
+        secondsStr = std::to_string(seconds);
+    }
+
+    QString elaplsedTime = QString::fromStdString(minutesStr +":" +secondsStr);
+    ui->travelTimeLcd->display(elaplsedTime);
+}
+
 
 void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interface::IActor> actor)
 {
@@ -259,4 +292,11 @@ void MainWindow::loadImages()
     barImg_= std::make_shared<QImage> (QImage(":/graphics/bar_icon_2.png"));
     atmImg_ = std::make_shared<QImage> (QImage(":/graphics/bus_stop_icon.png"));
     stopImg_ = std::make_shared<QImage> (QImage(":/graphics/bus_stop_file_2.png"));
+}
+
+void MainWindow::on_travelTimeLcd_overflow(int lkm)
+{
+    lkm ++;
+    ui->travelTimeLcd->display(lkm);
+    timer->intervalAsDuration();
 }

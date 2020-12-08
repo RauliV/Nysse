@@ -12,7 +12,8 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QTimer>
-#include <iostream>
+#include <QElapsedTimer>
+//#include <iostream>
 #include <memory>
 #include <QVector>
 #include <map>
@@ -48,9 +49,13 @@ public:
     void createPlayerPortraits();
     //Loads icons for items and assigns pointers to them
     void loadImages();
+    void tickClock();
 
 signals:
     void gameStarted();
+
+
+
 
 
 private slots:
@@ -65,6 +70,8 @@ private slots:
     std::shared_ptr<QImage> getActorImage(std::shared_ptr<Interface::IActor> actor = nullptr);
     std::shared_ptr<QImage> getPlaceImage(std::shared_ptr<Interface::IStop> place = nullptr);
    // void mouseClicked(std::shared_ptr<Interface::IStop> place);
+    void on_travelTimeLcd_overflow(int lkm);
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *portrait;
@@ -91,6 +98,9 @@ private:
     std::shared_ptr<QImage> barImg_;
     std::shared_ptr<QImage> atmImg_;
     std::shared_ptr<QImage> stopImg_;
+
+    QElapsedTimer eTime_;
+
 
 
 

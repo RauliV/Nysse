@@ -1,10 +1,5 @@
 #include "city.hh"
-#include "mainwindow.h"
-#include "actors/stop.hh"
-#include "errors/gameerror.hh"
-#include <QDebug>
-#include <QTime>
-#include <memory>
+
 
 
 

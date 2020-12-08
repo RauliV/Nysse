@@ -165,8 +165,6 @@ std::list <std::shared_ptr<Player>> getPlayers()
 void addStaticItems()
 {
 
-    //Vaatii ui:n puolelta addstaticactorin
-
     // Maalista punainen X ?
 
     for (auto const& stop : cityPtrSet->getStops())
