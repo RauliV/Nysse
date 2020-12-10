@@ -7,6 +7,7 @@
 #include "staticitem.hh"
 #include "actors/player.hh"
 #include "graphics/simpleactoritem.hh"
+#include "core/location.hh"
 
 #include <QGraphicsView>
 #include <QMainWindow>
@@ -51,6 +52,9 @@ public:
     void loadImages();
     void tickClock();
 
+public slots:
+        void mouseClicked(std::shared_ptr<Interface::IStop> place);
+
 signals:
     void gameStarted();
 
@@ -68,9 +72,22 @@ private slots:
     void savePlayerInfo(int playerCount, std::vector<std::pair<std::string, std::string>> playerSpecs);
 
     std::shared_ptr<QImage> getActorImage(std::shared_ptr<Interface::IActor> actor = nullptr);
+
     std::shared_ptr<QImage> getPlaceImage(std::shared_ptr<Interface::IStop> place = nullptr);
-    void mouseClicked(std::shared_ptr<Interface::IStop> place);
+
+
+
     void on_travelTimeLcd_overflow(int lkm);
+
+    void on_MovePushButton_clicked();
+
+    void on_WalkCheckBox_toggled(bool checked);
+
+    void on_NysseCheckBox_toggled(bool checked);
+
+    void on_TaxiCheckBox_toggled(bool checked);
+
+    void on_ScooterCheckBox_toggled(bool checked);
 
 private:
     Ui::MainWindow *ui;
@@ -88,6 +105,7 @@ private:
 
     int playerCount_;
     std::vector<std::pair<std::string, std::string>> playerSpecs_;
+    std::shared_ptr<Player> playerInTurn_;
 
     //actor images
     std::shared_ptr<QImage> nysseImg_;

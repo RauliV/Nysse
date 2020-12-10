@@ -84,6 +84,13 @@ void MainWindow::tickClock()
     ui->travelTimeLcd->display(elaplsedTime);
 }
 
+void MainWindow::mouseClicked(std::shared_ptr<Interface::IStop> place)
+{
+    qDebug() << place->getName();
+
+    ui->DestinationValueLabel->setText(place->getName());
+}
+
 
 void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interface::IActor> actor)
 {
@@ -96,11 +103,9 @@ void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interfac
 
 void MainWindow::addStaticItem(int locX, int locY, std::shared_ptr<Interface::IStop> place)
 {
-
-
     std::shared_ptr<QImage> img = getPlaceImage(place);
     StaticItem* nPlace = new StaticItem(locX, locY, 2, img, place);
-    //connect(nPlace,&StaticItem::itemClicked, this, &MainWindow::mouseClicked);
+    //QObject::connect(nPlace,&StaticItem::itemClicked, this, &MainWindow::mouseClicked);
     places_.push_back(nPlace);
     map_scene->addItem(nPlace);
     last_ = nPlace;
@@ -135,7 +140,7 @@ void MainWindow::setPicture(QImage &img)
 void MainWindow::createPlayerPortraits()
 {
     //Adding space to mainwindow for portraits based on player count
-    this->setFixedWidth(670 + 150*playerCount_);
+    this->setFixedWidth((820 + 150*playerCount_)-150);
     ui->horizontalLayout->setSizeConstraint(QLayout::SetFixedSize);
 
     std::list<std::shared_ptr<Player>> playerList = getPlayers();
@@ -265,12 +270,6 @@ std::shared_ptr<QImage> MainWindow::getPlaceImage(std::shared_ptr<Interface::ISt
     else return stopImg_;
 }
 
-void MainWindow::mouseClicked(std::shared_ptr<Interface::IStop> place)
-{
-    qDebug() << place->getName();
-
-}
-
 void MainWindow::loadImages()
 {
     nysseImg_ = std::make_shared<QImage> (QImage(":/graphics/nysse_icon.png"));
@@ -287,4 +286,49 @@ void MainWindow::on_travelTimeLcd_overflow(int lkm)
     lkm ++;
     ui->travelTimeLcd->display(lkm);
     timer->intervalAsDuration();
+}
+
+void MainWindow::on_MovePushButton_clicked()
+{
+    qDebug() << "Liikutaan " + ui->DestinationValueLabel->text();
+}
+
+void MainWindow::on_WalkCheckBox_toggled(bool checked)
+{
+    if(checked)
+    {
+        ui->NysseCheckBox->setCheckState(Qt::Unchecked);
+        ui->TaxiCheckBox->setCheckState(Qt::Unchecked);
+        ui->ScooterCheckBox->setCheckState(Qt::Unchecked);
+    }
+}
+
+void MainWindow::on_NysseCheckBox_toggled(bool checked)
+{
+    if(checked)
+    {
+        ui->WalkCheckBox->setCheckState(Qt::Unchecked);
+        ui->TaxiCheckBox->setCheckState(Qt::Unchecked);
+        ui->ScooterCheckBox->setCheckState(Qt::Unchecked);
+    }
+}
+
+void MainWindow::on_TaxiCheckBox_toggled(bool checked)
+{
+    if(checked)
+    {
+        ui->NysseCheckBox->setCheckState(Qt::Unchecked);
+        ui->WalkCheckBox->setCheckState(Qt::Unchecked);
+        ui->ScooterCheckBox->setCheckState(Qt::Unchecked);
+    }
+}
+
+void MainWindow::on_ScooterCheckBox_toggled(bool checked)
+{
+    if(checked)
+    {
+        ui->NysseCheckBox->setCheckState(Qt::Unchecked);
+        ui->TaxiCheckBox->setCheckState(Qt::Unchecked);
+        ui->WalkCheckBox->setCheckState(Qt::Unchecked);
+    }
 }

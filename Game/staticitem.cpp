@@ -29,7 +29,12 @@ void StaticItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 void StaticItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsItem::mousePressEvent(event);
-    //emit itemClicked(place_);
+    emitSignal(place_);
 
+}
+
+void StaticItem::emitSignal(std::shared_ptr<Interface::IStop> place)
+{
+   //emit itemClicked(place_);
 }
 
