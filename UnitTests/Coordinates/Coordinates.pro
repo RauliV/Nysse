@@ -17,7 +17,6 @@ SOURCES +=  tst_cvalues.cpp \
             ../../Game/mainwindow.cpp \
             ../../Game/gameengine.cpp \
             ../../Game/settingsdialog.cpp \
-            ../../Game/playerturndialog.cpp \
             ../../Game/actoritem.cpp \
             ../../Game/staticitem.cpp \
             ../../Course/CourseLib/errors/gameerror.cc \
@@ -29,7 +28,6 @@ SOURCES +=  tst_cvalues.cpp \
 
 HEADERS +=  \
             ../../Game/settingsdialog.hh \
-            ../../Game/playerturndialog.hh \
             ../../Game/actoritem.hh \
             ../../Game/setboard.hh \
             ../../Game/gameengine.h \
@@ -45,7 +43,6 @@ HEADERS +=  \
             ../../Course/CourseLib/core/location.hh
 
 FORMS += \
-            ../../Game/playerturndialog.ui \
             ../../Game/mainwindow.ui \
             ../../Game/settingsdialog.ui
 
