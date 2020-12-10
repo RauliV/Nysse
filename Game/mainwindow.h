@@ -69,7 +69,7 @@ private slots:
 
     std::shared_ptr<QImage> getActorImage(std::shared_ptr<Interface::IActor> actor = nullptr);
     std::shared_ptr<QImage> getPlaceImage(std::shared_ptr<Interface::IStop> place = nullptr);
-   // void mouseClicked(std::shared_ptr<Interface::IStop> place);
+    void mouseClicked(std::shared_ptr<Interface::IStop> place);
     void on_travelTimeLcd_overflow(int lkm);
 
 private:

@@ -17,7 +17,6 @@ SOURCES += \
     gameengine.cpp \
     main.cc \
     mainwindow.cpp \
-    playerturndialog.cpp \
     setboard.cpp \
     settingsdialog.cpp \
     staticitem.cpp \
@@ -59,7 +58,6 @@ HEADERS += \
     city.hh \
     gameengine.h \
     mainwindow.h \
-    playerturndialog.hh \
     setboard.hh \
     settingsdialog.hh \
     staticitem.hh \
@@ -68,7 +66,6 @@ HEADERS += \
     stops/bar.hh
 
 FORMS += \
-    playerturndialog.ui \
     mainwindow.ui \
     settingsdialog.ui
 

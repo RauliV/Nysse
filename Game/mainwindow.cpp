@@ -220,18 +220,6 @@ void MainWindow::on_StartButton_clicked()
     setTimer();
     setBoard(playerSpecs_);
     createPlayerPortraits();
-    //addActor(200,200, 90);
-   /*std::string nimi1 = "Jaakko";
-   std::string vari1 = "musta";
-   std::string nimi2 = "Teppo";
-   std::string vari2 = "vaaleanpunainen";
-
-   std::pair<std::string, std::string> pari1 = {nimi1,vari1};
-   std::pair<std::string, std::string> pari2 = {nimi2,vari2};
-
-   std::vector<std::pair<std::string, std::string>> vec = {pari1,pari2};
-   createPlayers(2,vec);*/
-
     ui->StartButton->setDisabled(true);
     ui->SettingsButton->setDisabled(true);
 
@@ -276,13 +264,13 @@ std::shared_ptr<QImage> MainWindow::getPlaceImage(std::shared_ptr<Interface::ISt
     }
     else return stopImg_;
 }
-/*
+
 void MainWindow::mouseClicked(std::shared_ptr<Interface::IStop> place)
 {
     qDebug() << place->getName();
 
 }
-*/
+
 void MainWindow::loadImages()
 {
     nysseImg_ = std::make_shared<QImage> (QImage(":/graphics/nysse_icon.png"));
