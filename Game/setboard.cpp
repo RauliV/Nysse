@@ -244,7 +244,7 @@ GameEngine createPlayers(std::vector<std::pair<std::string, std::string>> player
     addActorItems();
     addStaticItems();
 
-    GameEngine myGame(playerList.front(), cityPtrSet);
+    GameEngine myGame(playerList.front(), cityPtrSet, cityPtrSet->getGoalLocation());
     return myGame;
 
 }

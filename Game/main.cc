@@ -123,13 +123,6 @@ int main(int argc, char *argv[])
 
     std::shared_ptr<Interface::ICity> Tampere = Interface::createGame();
 
-    std::shared_ptr<City> cPtr = std::dynamic_pointer_cast<City>(Tampere);
-
-   // initScreen(Tampere);
-/*
-    std::shared_ptr<MainWindow> mainWindow = std::make_shared<MainWindow> ();
-    cPtr->setWindow(mainWindow);*/
-
 
     return a.exec();
 

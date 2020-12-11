@@ -2,18 +2,14 @@
 #include "setboard.hh"
 #include "mainwindow.h"
 
-/*
-//std::shared_ptr<City> cityPtr;
-QString enterBar(Bar& bar);  //Palauttaa virheilmoitustekstin
-QString enterStop(CourseSide::Stop stop);
-QString startJourney(Interface::IVehicle& vehicle, Interface::Location& location);
-GameEngine startGame(std::vector<std::pair<std::string, std::string>> playerSpecs);
-*/
+
 
 GameEngine::GameEngine(std::shared_ptr<Player>& playerInTurn,
-                       std::shared_ptr<City>& gameCity):
+                       std::shared_ptr<City>& gameCity,
+                       Interface::Location goalLocation):
     playerInTurn_(playerInTurn),
-    gameCity_(gameCity)
+    gameCity_(gameCity),
+    goalLocation_(goalLocation)
 
 {
 
@@ -24,6 +20,12 @@ GameEngine::~GameEngine()
 
 }
 //Loppufanfaarit/Aika ym.
+
+void GameEngine::setGoalLocation(Interface::Location location)
+{
+    goalLocation_ = location;
+}
+
 void theEnd()
 {
 
@@ -207,9 +209,6 @@ QString GameEngine::enterStop(
 }
 
 
-
-
-
 int calculateBatteryUsage(std::shared_ptr<Scooter> scooter,
                           Interface::Location targetLocation)
 {
@@ -324,32 +323,53 @@ void GameEngine::movePlayer(std::shared_ptr<Player> player){
 
 }
 
-
-void GameEngine::onTheTick(std::shared_ptr<Player>  player)
+void GameEngine::endTurn()
 {
-    if (gameCity_->isGameOver() == true)
+
+    if (playerInTurn_ == getPlayers().back())
+    {
+        playerInTurn_ = getPlayers().front();
+    }
+    else
+    {
+        for (std::list<std::shared_ptr<Player>>::iterator it = getPlayers().begin();
+             it != getPlayers().end(); it ++)
+        {
+
+            if (*it == playerInTurn_)
+            {
+                playerInTurn_ = *(it++);
+            }
+        }
+    }
+}
+
+void GameEngine::onTheTick()
+{
+    if (playerInTurn_->giveLocation() == goalLocation_)
     {
         theEnd();
     }
 
     //jos pelaaja baarissa - vuoro menee siinä.
-    if (player -> isInBar())
+    if (playerInTurn_ -> isInBar())
     {
-        player->exitBar();
-        player->setIdle(true);
+        playerInTurn_->exitBar();
+        playerInTurn_->setIdle(true);
     }
     else
     {
         //Jos pelaaja saapuu kohteeseen
-        if (player->giveLocation() == player->getChosenLocation())
+        if (playerInTurn_->giveLocation() == playerInTurn_->getChosenLocation())
         {
-            player->setIdle(true);  //tästä seuraavaan vuoroon
+            playerInTurn_->setIdle(true);  //tästä seuraavaan vuoroon
         }
         else
         {
-            movePlayer(player);
+            movePlayer(playerInTurn_);
         }
     }
+    endTurn();  //sewuraava oelaaja playerinturbisksi
 }
 
 
