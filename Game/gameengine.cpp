@@ -358,8 +358,11 @@ void GameEngine::onTheTick()
         playerInTurn_->setIdle(true);
     }
     else
-    {
-        //Jos pelaaja saapuu kohteeseen
+    {   if (playerInTurn_->isIdle())
+        {
+            emit nextTurn(playerInTurn_);
+        }
+        //Jos pelaaja saapunut kohteeseen
         if (playerInTurn_->giveLocation() == playerInTurn_->getChosenLocation())
         {
             playerInTurn_->setIdle(true);  //tästä seuraavaan vuoroon
@@ -369,8 +372,43 @@ void GameEngine::onTheTick()
             movePlayer(playerInTurn_);
         }
     }
-    endTurn();  //sewuraava oelaaja playerinturbisksi
+    endTurn();  //siirtyy seuraavaan pelaajaan
 }
+
+
+void GameEngine::addActorItems ()
+{
+    for (auto const& actor : gameCity_->getActors())
+    {
+        int aX = actor->giveLocation().giveX();
+        int aY = actor->giveLocation().giveY();
+
+        emit addActor(aX, aY, 0, actor);
+    }
+}
+
+void GameEngine::addStaticItems()
+{
+
+    // Maalista punainen X ?
+
+    for (auto const& stop : gameCity_->getStops())
+    {
+        Interface::Location aLoc = stop->getLocation();
+
+        emit addStaticItem(aLoc.giveX(), aLoc.giveY(), stop);
+    }
+
+
+    for (auto const& bar : gameCity_->getBarList())
+    {
+        Interface::Location aLoc = bar->getLocation();
+
+        //emit addStaticItem(aLoc.giveX(), aLoc.giveY(), bar);
+
+    }
+}
+
 
 
 

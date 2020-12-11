@@ -36,15 +36,14 @@ void initScreen(std::shared_ptr<Interface::ICity> city);
 Interface::Location getRandomLocation ();
 void startingPointsSetup();
 void createAtmsBars();
-GameEngine createPlayers(std::vector<std::pair<std::string,
-                   std::string>> playerSpecs);
+GameEngine createPlayers(std::vector<std::pair<std::string, std::string> > &playerSpecs);
 void setBoard(std::vector<std::pair<std::string,
               std::string>> playerSpecs);
 void createTaxisScooters();
 std::string getSubClass (std::shared_ptr<Interface::IActor> iActor );
 std::list <std::shared_ptr<Player>> getPlayers();
-void addActorItems ();
-void addStaticItems();
+/*void addActorItems ();
+void addStaticItems();*/
 int xFromEast(int eastcoord);
 int yFromNorth(int northcoord);
 int EastFromX(int x);

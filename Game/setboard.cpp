@@ -187,44 +187,10 @@ std::string getSubClass (std::shared_ptr<Interface::IActor> iActor )
 
 
 
-void addActorItems ()
-{
-    for (auto const& actor : cityPtrSet->getActors())
-    {
-        int aX = actor->giveLocation().giveX();
-        int aY = actor->giveLocation().giveY();
-
-        //emit addActor(aX, aY, 0, actor);
-    }
-}
-
-void addStaticItems()
-{
-
-    // Maalista punainen X ?
-
-    for (auto const& stop : cityPtrSet->getStops())
-    {
-        Interface::Location aLoc = stop->getLocation();
-
-        //emit addStaticItem(aLoc.giveX(), aLoc.giveY(), stop);
-    }
-
-
-    for (auto const& bar : cityPtrSet->getBarList())
-    {
-        Interface::Location aLoc = bar->getLocation();
-
-        //emit addStaticItem(aLoc.giveX(), aLoc.giveY(), stop);
-
-    }
-}
-
-
 
 // Luo pelaajaoliot "Game Start" signaalista.
 // Tallentaa kaupungin pelaajaolioiden osoitteet kaupungin pelaajaluetteloon
-GameEngine createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
+GameEngine createPlayers(std::vector<std::pair<std::string, std::string>>& playerSpecs)
 {
     std::list <std::shared_ptr<Player>> playerList = {};
 
@@ -240,11 +206,13 @@ GameEngine createPlayers(std::vector<std::pair<std::string, std::string>> player
     //pelaajalista city-olioon
     cityPtrSet->setPlayerList(playerList);
 
-    startingPointsSetup();
-    addActorItems();
-    addStaticItems();
+
 
     GameEngine myGame(playerList.front(), cityPtrSet, cityPtrSet->getGoalLocation());
+    startingPointsSetup();
+    myGame.addActorItems();
+    myGame.addStaticItems();
+
     return myGame;
 
 }
