@@ -3,8 +3,9 @@
 #include "stops/bar.hh"
 #include "stops/atm.hh"
 #include "core/logic.hh"
-#include "gameengine.h"
+#include "gameengine_old.h"
 #include "city.hh"
+#include "gameengine.hh"
 #include <random>
 
 
@@ -35,7 +36,7 @@ void initScreen(std::shared_ptr<Interface::ICity> city);
 Interface::Location getRandomLocation ();
 void startingPointsSetup();
 void createAtmsBars();
-void createPlayers(std::vector<std::pair<std::string,
+GameEngine createPlayers(std::vector<std::pair<std::string,
                    std::string>> playerSpecs);
 void setBoard(std::vector<std::pair<std::string,
               std::string>> playerSpecs);

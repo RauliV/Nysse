@@ -30,7 +30,7 @@ HEADERS +=  \
             ../../Game/settingsdialog.hh \
             ../../Game/actoritem.hh \
             ../../Game/setboard.hh \
-            ../../Game/gameengine.h \
+            ../../Game/gameengine.hh \
             ../../Game/city.hh \
             ../../Game/actors/taxi.hh \
             ../../Game/actors/scooter.hh \

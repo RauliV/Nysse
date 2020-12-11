@@ -108,7 +108,7 @@
 #include "creategame.hh"
 #include "city.hh"
 #include "setboard.hh"
-#include "gameengine.h"
+#include "gameengine_old.h"
 #include <QApplication>
 #include <QDebug>
 #include <memory>
@@ -125,12 +125,10 @@ int main(int argc, char *argv[])
 
     std::shared_ptr<City> cPtr = std::dynamic_pointer_cast<City>(Tampere);
 
+   // initScreen(Tampere);
+/*
     std::shared_ptr<MainWindow> mainWindow = std::make_shared<MainWindow> ();
-    cPtr->setWindow(mainWindow);
-    initScreen(Tampere);
-    cPtr->getGame()->finalizeGameStart();
-    startYourEngines(Tampere);
-
+    cPtr->setWindow(mainWindow);*/
 
 
     return a.exec();

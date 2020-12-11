@@ -1,28 +1,10 @@
 #include "gameengine.hh"
 #include "setboard.hh"
-#include "mainwindow.h"
+#include "actors/taxi.hh"
 
-/*
-//std::shared_ptr<City> cityPtr;
-QString enterBar(Bar& bar);  //Palauttaa virheilmoitustekstin
-QString enterStop(CourseSide::Stop stop);
-QString startJourney(Interface::IVehicle& vehicle, Interface::Location& location);
-GameEngine startGame(std::vector<std::pair<std::string, std::string>> playerSpecs);
-*/
+std::shared_ptr<City> cityPtr;
 
-GameEngine::GameEngine(std::shared_ptr<Player>& playerInTurn,
-                       std::shared_ptr<City>& gameCity):
-    playerInTurn_(playerInTurn),
-    gameCity_(gameCity)
 
-{
-
-}
-
-GameEngine::~GameEngine()
-{
-
-}
 //Loppufanfaarit/Aika ym.
 void theEnd()
 {
@@ -124,13 +106,13 @@ QString enterBar(std::shared_ptr<Player> player,
 //Määränpää on bussin seuraava pysäkki
 //Palauttaa virheilmoitukset, jos ei matka onnistu ja "" jos ok.
 
-QString GameEngine::enterStop(
+QString enterStop(std::shared_ptr<Player> player,
                   std::shared_ptr<CourseSide::Stop> stop)
 {
     std::shared_ptr<CourseSide::Nysse> nToWait;
 
     //Käydään läpi actorit listasta
-    for (auto const& actor : gameCity_->getActors())
+    for (auto const& actor : cityPtr->getActors())
     {
 
         //Jos actor on nysse
@@ -161,12 +143,12 @@ QString GameEngine::enterStop(
         std::shared_ptr<CourseSide::Stop> nNextStop;
 
         //Tutkitaan bussimatkustamisen ehdot
-        if (playerInTurn_->getDrunkness() > 3)
+        if (player->getDrunkness() > 3)
          {
              return "cantMoveDrunk";
 
          }
-         else if (playerInTurn_->getCash() < BUSS_FARE)
+         else if (player->getCash() < BUSS_FARE)
          {
              return "cantMoveCash";
          }
@@ -179,24 +161,24 @@ QString GameEngine::enterStop(
          else
          {
             //Bussilla voidaan matkustaa -> Etsitään seuraava pysäkki
-            for (unsigned int it = 0; it < gameCity_->getStops().size(); it++)
+            for (unsigned int it = 0; it < cityPtr->getStops().size(); it++)
             {
-                if (gameCity_->getStops().at(it) == stop)
+                if (cityPtr->getStops().at(it) == stop)
                 {
                     nNextStop = std::dynamic_pointer_cast<CourseSide::Stop>
-                            (gameCity_->getStops().at(it+1));
+                            (cityPtr->getStops().at(it+1));
                 }
              }
 
              //Matka seuraavalle pysäkille voi alkaa
              Interface::Location nextLoc = nNextStop->getLocation();
-             playerInTurn_->spendCash(BUSS_FARE);
-             playerInTurn_->resetRoute();
-             playerInTurn_->getInVechile(nToWait); //pelaajan ikonin muutos
+             player->spendCash(BUSS_FARE);
+             player->resetRoute();
+             player->getInVechile(nToWait); //pelaajan ikonin muutos
              std::shared_ptr<CourseSide::Nysse> nysse =
                      std::dynamic_pointer_cast<CourseSide::Nysse> (nToWait);
-             playerInTurn_->setChosenLocation(nextLoc);
-             playerInTurn_->setIdle(false);
+             player->setChosenLocation(nextLoc);
+             player->setIdle(false);
              return "";
          }
      }
@@ -222,23 +204,24 @@ int calculateBatteryUsage(std::shared_ptr<Scooter> scooter,
 
 //Matkustetaan muuten kuin bussilla, eli määränpää annetu
 
-QString GameEngine::startJourney (std::shared_ptr<Interface::IVehicle> vechile,
+QString startJourney(std::shared_ptr<Player> player,
+                     std::shared_ptr<Interface::IVehicle> vehicle,
                      Interface::Location targetLocation)
 {
 
-    if (getSubClass(vechile) == "scooter")
+    if (getSubClass(vehicle) == "scooter")
      {
 
         std::shared_ptr<Scooter> scooter =
-                std::dynamic_pointer_cast<Scooter> (vechile);
+                std::dynamic_pointer_cast<Scooter> (vehicle);
 
 
-        if (playerInTurn_->getDrunkness() > scooter->getMaxPromilleLevel())
+        if (player->getDrunkness() > scooter->getMaxPromilleLevel())
          {
              return "cantMoveDrunk";
 
          }
-         else if (playerInTurn_->getCash() < calculateCost(playerInTurn_, scooter, targetLocation))
+         else if (player->getCash() < calculateCost(player, scooter, targetLocation))
          {
              return "cantMoveCash";
          }
@@ -251,29 +234,29 @@ QString GameEngine::startJourney (std::shared_ptr<Interface::IVehicle> vechile,
          {
             //Aloitetaan matka - muista lisätä takeSteppiin myös rahan
             //ja akun kuluminen
-            playerInTurn_->resetRoute();
-            playerInTurn_->getInVechile(scooter);
-            playerInTurn_->setIdle(false);
-            playerInTurn_->setChosenLocation(targetLocation);
-            playerInTurn_->setRouteVector(calculatePlayerRoute(playerInTurn_->giveLocation(),
+            player->resetRoute();
+            player->getInVechile(scooter);
+            player->setIdle(false);
+            player->setChosenLocation(targetLocation);
+            player->setRouteVector(calculatePlayerRoute(player->giveLocation(),
                                                         targetLocation));
             return "matka kohteeseen alkaa";
          }
 
      }
-     else if (getSubClass(vechile) == "taxi")
+     else if (getSubClass(vehicle) == "taxi")
      {
 
        std::shared_ptr<Taxi> taxi =
-               std::dynamic_pointer_cast<Taxi> (vechile);
+               std::dynamic_pointer_cast<Taxi> (vehicle);
 
 
-       if (playerInTurn_->getDrunkness() > taxi->getMaxPromilleLevel())
+       if (player->getDrunkness() > taxi->getMaxPromilleLevel())
         {
             return "cantMoveDrunk";
 
         }
-        else if (playerInTurn_->getCash() < calculateCost(playerInTurn_, taxi, targetLocation))
+        else if (player->getCash() < calculateCost(player, taxi, targetLocation))
         {
             return "cantMoveCash";
         }
@@ -281,12 +264,12 @@ QString GameEngine::startJourney (std::shared_ptr<Interface::IVehicle> vechile,
         else
         {
            //Aloitetaan matka
-           playerInTurn_->resetRoute();
-           playerInTurn_->getInVechile(taxi);
-           playerInTurn_->setIdle(false);
-           playerInTurn_->setChosenLocation(targetLocation);
-           playerInTurn_->setRouteVector(calculatePlayerRoute(playerInTurn_
-                                         ->giveLocation(), targetLocation));
+           player->resetRoute();
+           player->getInVechile(taxi);
+           player->setIdle(false);
+           player->setChosenLocation(targetLocation);
+           player->setRouteVector(calculatePlayerRoute(player->giveLocation(),
+                                                       targetLocation));
            return "Matka kohteeseen alkaa";
         }
     }
@@ -298,7 +281,7 @@ QString GameEngine::startJourney (std::shared_ptr<Interface::IVehicle> vechile,
 
 
 //Liikuta pelaajaa reitillä
-void GameEngine::movePlayer(std::shared_ptr<Player> player){
+void movePlayer(std::shared_ptr<Player> player){
 
     player->takeStep(); //päivittää askeleet ja kustannukset
 
@@ -308,7 +291,7 @@ void GameEngine::movePlayer(std::shared_ptr<Player> player){
     {
         Interface::Location newLoc = player->getRouteVector()->at(cSteps);
         player->move(newLoc);
-        gameCity_->actorMoved(player);
+        cityPtr->actorMoved(player);
 
 
         /* tätä kai ei tarvita, koska tick -runko testaa onko kohteessa
@@ -325,9 +308,9 @@ void GameEngine::movePlayer(std::shared_ptr<Player> player){
 }
 
 
-void GameEngine::onTheTick(std::shared_ptr<Player>  player)
+void onTheTick(std::shared_ptr<Player>  player)
 {
-    if (gameCity_->isGameOver() == true)
+    if (cityPtr->isGameOver() == true)
     {
         theEnd();
     }
@@ -352,6 +335,10 @@ void GameEngine::onTheTick(std::shared_ptr<Player>  player)
     }
 }
 
+void startYourEngines(std::shared_ptr<Interface::ICity> cPtr)
+{
+    cityPtr = std::dynamic_pointer_cast<City>(cPtr);
 
 
+}
 

@@ -33,8 +33,8 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 
 void City::startGame()
 {
-
-mainWindowPtr_->show();
+    mainWindowPtr_ = std::make_shared<MainWindow> ();
+    mainWindowPtr_->show();
 
 };
 
