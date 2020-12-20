@@ -82,13 +82,24 @@ void MainWindow::tickClock()
 
     QString elaplsedTime = QString::fromStdString(minutesStr +":" +secondsStr);
     ui->travelTimeLcd->display(elaplsedTime);
+    emit tick();
 }
 
 void MainWindow::mouseClicked(std::shared_ptr<Interface::IStop> place)
 {
     qDebug() << place->getName();
-
     ui->DestinationValueLabel->setText(place->getName());
+}
+
+void MainWindow::newTurn(std::shared_ptr<Player> &player)
+{
+    playerInTurn_ = player;
+    timer->stop();
+    ui->WithdrawPushButton_2->setEnabled(true);
+    ui->NysseCheckBox->setEnabled(true);
+    ui->WalkCheckBox->setEnabled(true);
+    ui->TaxiCheckBox->setEnabled(true);
+    ui->ScooterCheckBox->setEnabled(true);
 }
 
 
@@ -104,11 +115,10 @@ void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interfac
 void MainWindow::addStaticItem(int locX, int locY, std::shared_ptr<Interface::IStop> place)
 {
     std::shared_ptr<QImage> img = getPlaceImage(place);
-    StaticItem* nPlace = new StaticItem(locX, locY, 2, img, place);
-    //QObject::connect(nPlace,&StaticItem::itemClicked, this, &MainWindow::mouseClicked);
+    LocationItem* nPlace = new LocationItem( nullptr, locX, locY, 2, img, place);
+    QObject::connect(nPlace,&LocationItem::itemClicked, this, &MainWindow::mouseClicked);
     places_.push_back(nPlace);
     map_scene->addItem(nPlace);
-    last_ = nPlace;
 }
 
 void MainWindow::updateCoords(int nX, int nY)
@@ -219,7 +229,6 @@ void MainWindow::on_SettingsButton_clicked()
     sDialog.exec();
 }
 
-
 void MainWindow::on_StartButton_clicked()
 {
     setTimer();
@@ -291,6 +300,9 @@ void MainWindow::on_travelTimeLcd_overflow(int lkm)
 void MainWindow::on_MovePushButton_clicked()
 {
     qDebug() << "Liikutaan " + ui->DestinationValueLabel->text();
+    timer->start(tick_);
+    ui->MovePushButton->setDisabled(true);
+    ui->WithdrawPushButton_2->setDisabled(true);
 }
 
 void MainWindow::on_WalkCheckBox_toggled(bool checked)
@@ -300,7 +312,16 @@ void MainWindow::on_WalkCheckBox_toggled(bool checked)
         ui->NysseCheckBox->setCheckState(Qt::Unchecked);
         ui->TaxiCheckBox->setCheckState(Qt::Unchecked);
         ui->ScooterCheckBox->setCheckState(Qt::Unchecked);
+        if(ui->DestinationValueLabel->text().size()>0)
+        {
+            ui->MovePushButton->setEnabled(true);
+            if(std::dynamic_pointer_cast<Bar>(destination_) != 0)
+            {
+                ui->EnterBarPushButton->setEnabled(true);
+            }
+        }
     }
+
 }
 
 void MainWindow::on_NysseCheckBox_toggled(bool checked)
@@ -310,6 +331,14 @@ void MainWindow::on_NysseCheckBox_toggled(bool checked)
         ui->WalkCheckBox->setCheckState(Qt::Unchecked);
         ui->TaxiCheckBox->setCheckState(Qt::Unchecked);
         ui->ScooterCheckBox->setCheckState(Qt::Unchecked);
+        if(ui->DestinationValueLabel->text().size()>0)
+        {
+            ui->MovePushButton->setEnabled(true);
+            if(std::dynamic_pointer_cast<Bar>(destination_) != 0)
+            {
+                ui->EnterBarPushButton->setEnabled(true);
+            }
+        }
     }
 }
 
@@ -320,6 +349,14 @@ void MainWindow::on_TaxiCheckBox_toggled(bool checked)
         ui->NysseCheckBox->setCheckState(Qt::Unchecked);
         ui->WalkCheckBox->setCheckState(Qt::Unchecked);
         ui->ScooterCheckBox->setCheckState(Qt::Unchecked);
+        if(ui->DestinationValueLabel->text().size()>0)
+        {
+            ui->MovePushButton->setEnabled(true);
+            if(std::dynamic_pointer_cast<Bar>(destination_) != 0)
+            {
+                ui->EnterBarPushButton->setEnabled(true);
+            }
+        }
     }
 }
 
@@ -330,5 +367,25 @@ void MainWindow::on_ScooterCheckBox_toggled(bool checked)
         ui->NysseCheckBox->setCheckState(Qt::Unchecked);
         ui->TaxiCheckBox->setCheckState(Qt::Unchecked);
         ui->WalkCheckBox->setCheckState(Qt::Unchecked);
+        if(ui->DestinationValueLabel->text().size()>0)
+        {
+            ui->MovePushButton->setEnabled(true);
+            if(std::dynamic_pointer_cast<Bar>(destination_) != 0)
+            {
+                ui->EnterBarPushButton->setEnabled(true);
+            }
+        }
     }
+}
+
+void MainWindow::on_EnterBarPushButton_clicked()
+{
+    timer->start(tick_);
+    emit enterBar(playerInTurn_, destination_);
+
+}
+
+void MainWindow::on_WithdrawPushButton_2_clicked()
+{
+    playerInTurn_->withdrawCash(20);
 }
