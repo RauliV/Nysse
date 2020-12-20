@@ -14,6 +14,7 @@ SOURCES +=  tst_cvalues.cpp \
             ../../Game/stops/bar.cpp \
             ../../Game/stops/atm.cpp \
             ../../Game/actors/scooter.cpp \
+            ../../Game/locationitem.cpp\
             ../../Game/mainwindow.cpp \
             ../../Game/gameengine.cpp \
             ../../Game/settingsdialog.cpp \
@@ -37,6 +38,7 @@ HEADERS +=  \
             ../../Game/actors/player.hh \
             ../../Game/stops/bar.hh \
             ../../Game/stops/atm.hh \
+            ../../Game/locationitem.hh\
             ../../Game/mainwindow.h \
             ../../Course/CourseLib/actors/passenger.hh \
             ../../Course/CourseLib/actors/nysse.hh \
