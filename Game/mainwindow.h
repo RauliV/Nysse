@@ -8,6 +8,7 @@
 #include "actors/player.hh"
 #include "graphics/simpleactoritem.hh"
 #include "core/location.hh"
+#include "locationitem.hh"
 
 #include <QGraphicsView>
 #include <QMainWindow>
@@ -54,9 +55,12 @@ public:
 
 public slots:
         void mouseClicked(std::shared_ptr<Interface::IStop> place);
+        void newTurn(std::shared_ptr<Player>& player);
 
 signals:
     void gameStarted();
+    void tick();
+    void enterBar(std::shared_ptr<Player> player, std::shared_ptr<Interface::IStop> bar);
 
 
 
@@ -89,6 +93,10 @@ private slots:
 
     void on_ScooterCheckBox_toggled(bool checked);
 
+    void on_EnterBarPushButton_clicked();
+
+    void on_WithdrawPushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *portrait;
@@ -96,7 +104,7 @@ private:
     QScrollArea *map;
     QTimer *timer;
     QVector<ActorItem*> actors_;
-    QVector<StaticItem*> places_;
+    QVector<LocationItem*> places_;
     CourseSide::SimpleActorItem* last_;
 
     int width_ = 500; //pxls
@@ -106,6 +114,7 @@ private:
     int playerCount_;
     std::vector<std::pair<std::string, std::string>> playerSpecs_;
     std::shared_ptr<Player> playerInTurn_;
+    std::shared_ptr<Interface::IStop> destination_;
 
     //actor images
     std::shared_ptr<QImage> nysseImg_;

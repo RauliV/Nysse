@@ -190,7 +190,7 @@ std::string getSubClass (std::shared_ptr<Interface::IActor> iActor )
 
 // Luo pelaajaoliot "Game Start" signaalista.
 // Tallentaa kaupungin pelaajaolioiden osoitteet kaupungin pelaajaluetteloon
-GameEngine createPlayers(std::vector<std::pair<std::string, std::string>>& playerSpecs)
+std::shared_ptr<GameEngine> createPlayers(std::vector<std::pair<std::string, std::string>>& playerSpecs)
 {
     std::list <std::shared_ptr<Player>> playerList = {};
 
@@ -208,10 +208,11 @@ GameEngine createPlayers(std::vector<std::pair<std::string, std::string>>& playe
 
 
 
-    GameEngine myGame(playerList.front(), cityPtrSet, cityPtrSet->getGoalLocation());
+    std::shared_ptr<GameEngine> myGame = std::make_shared<GameEngine>
+            (playerList.front(), cityPtrSet, cityPtrSet->getGoalLocation());
     startingPointsSetup();
-    myGame.addActorItems();
-    myGame.addStaticItems();
+    myGame->addActorItems();
+    myGame->addStaticItems();
 
     return myGame;
 

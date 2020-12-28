@@ -1,8 +1,12 @@
 #include "staticitem.hh"
 
-StaticItem::StaticItem(int x, int y, int type, std::shared_ptr<QImage> icon, std::shared_ptr<Interface::IStop> place)
-    :CourseSide::SimpleActorItem{x,y,type}
+
+
+
+StaticItem::StaticItem( int x, int y, int type, std::shared_ptr<QImage> icon, std::shared_ptr<Interface::IStop> place)
+    : CourseSide::SimpleActorItem{x,y,type}
 {
+
     icon_  = icon;
     place_ = place;
     this->setEnabled(true);
@@ -35,6 +39,6 @@ void StaticItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void StaticItem::emitSignal(std::shared_ptr<Interface::IStop> place)
 {
-   //emit itemClicked(place_);
+   //emit itemClicked(place);
 }
 

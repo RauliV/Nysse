@@ -1,7 +1,7 @@
 #ifndef GAMEENGINE_HH
 #define GAMEENGINE_HH
 
-//#include "mainwindow.h"
+#include "mainwindow.h"
 #include "actors/player.hh"
 #include "core/location.hh"
 #include "actors/stop.hh"
@@ -9,8 +9,9 @@
 #include <QtDebug>
 
 
-class GameEngine
+class GameEngine : public QObject
 {
+    Q_OBJECT
 public:
     GameEngine(std::shared_ptr<Player>& playerInTurn,
                std::shared_ptr<City>& gameCity,
@@ -18,7 +19,7 @@ public:
 
     ~GameEngine();
     void initScreen(std::shared_ptr<Interface::ICity> city);
-    std::list<std::shared_ptr<Player>> getPlayers();
+    //std::list<std::shared_ptr<Player>> getPlayers();
     void setGoalLocation(Interface::Location);
     void addActorItems();
     void addStaticItems();
@@ -44,9 +45,10 @@ private:
     void movePlayer(std::shared_ptr<Player> player);
     void endTurn();
 
-    std::shared_ptr<Player>& playerInTurn_;
     std::shared_ptr<City>& gameCity_;
     Interface::Location& goalLocation_;
+    std::shared_ptr<Player>& playerInTurn_;
+
 
 };
 #endif // GAMEENGINE_HH

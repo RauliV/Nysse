@@ -1,6 +1,6 @@
 #include "gameengine.hh"
 #include "setboard.hh"
-#include "mainwindow.h"
+//#include "mainwindow.h"
 
 
 
@@ -12,7 +12,7 @@ GameEngine::GameEngine(std::shared_ptr<Player>& playerInTurn,
     goalLocation_(goalLocation)
 
 {
-
+    //connect(gameCity_->getWindow().get(), &MainWindow::tick, this, onTheTick);
 }
 
 GameEngine::~GameEngine()
@@ -91,17 +91,17 @@ double calculateCost(std::shared_ptr<Player> player,
 
 //Pelaaja baariin
 
-QString enterBar(std::shared_ptr<Player> player,
-              std::shared_ptr<Bar> bar)
+QString GameEngine::enterBar(std::shared_ptr<Bar>& bar)
 {
     //tarkista onko rahee
-    if (player->getCash() < 6) // Tästä vakio!! 6 e tuoppi
+
+    if (playerInTurn_->getCash() < 6) // Tästä vakio!! 6 e tuoppi
     {
         return "cantDrinkCash";
     }
     else
-    {   player->drink(1);
-        player->spendCash(6);
+    {   playerInTurn_->drink(1);
+        playerInTurn_->spendCash(6);
         if (bar->isPilotInBar())
         {
             //pilotIsFound();
@@ -111,9 +111,9 @@ QString enterBar(std::shared_ptr<Player> player,
 
         //Odotetaan baarissa tickejä/siirretään vain vuoro?
         // tässä lopetetaan vuoro
-        player->enterBar();
-        player->setIdle(false); //Ota pois seuraavan vuoron jälkeen.
-        player->resetRoute();
+        playerInTurn_->enterBar();
+        playerInTurn_->setIdle(false); //Ota pois seuraavan vuoron jälkeen.
+        playerInTurn_->resetRoute();
         return "Hyvvee kaliaa";
     }
 }
@@ -324,7 +324,7 @@ void GameEngine::movePlayer(std::shared_ptr<Player> player){
 }
 
 void GameEngine::endTurn()
-{
+{   //         gameCity_->getPlayerList().back()
 
     if (playerInTurn_ == getPlayers().back())
     {
@@ -395,7 +395,7 @@ void GameEngine::addStaticItems()
     for (auto const& stop : gameCity_->getStops())
     {
         Interface::Location aLoc = stop->getLocation();
-
+        
         emit addStaticItem(aLoc.giveX(), aLoc.giveY(), stop);
     }
 

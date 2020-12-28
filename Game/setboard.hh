@@ -36,7 +36,7 @@ void initScreen(std::shared_ptr<Interface::ICity> city);
 Interface::Location getRandomLocation ();
 void startingPointsSetup();
 void createAtmsBars();
-GameEngine createPlayers(std::vector<std::pair<std::string, std::string> > &playerSpecs);
+std::shared_ptr<GameEngine> createPlayers(std::vector<std::pair<std::string, std::string> > &playerSpecs);
 void setBoard(std::vector<std::pair<std::string,
               std::string>> playerSpecs);
 void createTaxisScooters();

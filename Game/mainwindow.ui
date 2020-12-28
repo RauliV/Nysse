@@ -81,7 +81,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>40</y>
+       <y>20</y>
        <width>98</width>
        <height>132</height>
       </rect>
@@ -134,7 +134,7 @@
      <rect>
       <x>660</x>
       <y>300</y>
-      <width>121</width>
+      <width>151</width>
       <height>221</height>
      </rect>
     </property>
@@ -146,7 +146,7 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>93</width>
+       <width>131</width>
        <height>210</height>
       </rect>
      </property>
@@ -227,6 +227,51 @@
       <height>502</height>
      </rect>
     </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>219</y>
+      <width>151</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>131</width>
+       <height>64</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QPushButton" name="EnterBarPushButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Enter bar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="WithdrawPushButton_2">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Withdraw cash</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

@@ -2,12 +2,16 @@
 #define STATICITEM_HH
 #include "graphics/simpleactoritem.hh"
 #include "interfaces/istop.hh"
+#include <QObject>
 
-class StaticItem : public CourseSide::SimpleActorItem
+class StaticItem :  public QObject, public CourseSide::SimpleActorItem
 {
-
+   //Q_OBJECT
+    //Q_INTERFACES(SimpleActorItem)
 public:
-    StaticItem(int x, int y, int type, std::shared_ptr<QImage> icon, std::shared_ptr<Interface::IStop> place);
+    StaticItem( int x = 0, int y = 0, int type = 2, std::shared_ptr<QImage> icon = nullptr, std::shared_ptr<Interface::IStop> place = nullptr);
+    virtual ~StaticItem(){};
+
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 signals:
     void itemClicked(std::shared_ptr<Interface::IStop> place);

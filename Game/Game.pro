@@ -15,6 +15,7 @@ SOURCES += \
     city.cpp \
     creategame.cpp \
     gameengine.cpp \
+    locationitem.cpp \
     main.cc \
     mainwindow.cpp \
     setboard.cpp \
@@ -57,6 +58,7 @@ HEADERS += \
     actors/walk.hh \
     city.hh \
     gameengine.hh \
+    locationitem.hh \
     mainwindow.h \
     setboard.hh \
     settingsdialog.hh \
