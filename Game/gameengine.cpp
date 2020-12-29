@@ -12,7 +12,8 @@ GameEngine::GameEngine(std::shared_ptr<Player>& playerInTurn,
     goalLocation_(goalLocation)
 
 {
-    //connect(gameCity_->getWindow().get(), &MainWindow::tick, this, onTheTick);
+
+    connect(gameCity->getWindow().get(), &MainWindow::tick, this, &GameEngine::onTheTick);
 }
 
 GameEngine::~GameEngine()
