@@ -162,34 +162,6 @@ std::list <std::shared_ptr<Player>> getPlayers()
 }
 
 
-void addStaticItems()
-{
-
-    // Maalista punainen X ?
-
-    for (auto const& stop : cityPtrSet->getStops())
-    {
-        Interface::Location aLoc = stop->getLocation();
-
-        cityPtrSet->getWindow()->addStaticItem(aLoc.giveX(), aLoc.giveY(), stop);
-
-    }
-   /* for (auto const& atm : cityPtrSet->getAtmList())
-    {
-        Interface::Location aLoc = atm->getLocation();
-        cityPtrSet->getWindow()->addStaticItem(aLoc.giveX(), aLoc.giveY(), atm);
-
-    }*/
-
-    for (auto const& bar : cityPtrSet->getBarList())
-    {
-        Interface::Location aLoc = bar->getLocation();
-        //cityPtr->getWindow()->addActor(aLoc.giveX(), aLoc.giveY(),
-         //                      BAR_ICON_FILE, actor);
-
-    }
-
-}
 
 std::string getSubClass (std::shared_ptr<Interface::IActor> iActor )
 {
@@ -213,22 +185,12 @@ std::string getSubClass (std::shared_ptr<Interface::IActor> iActor )
         return "";
 }
 
-void addActorItems ()
-{
-    for (auto const& actor : cityPtrSet->getActors())
-    {
-        int aX = actor->giveLocation().giveX();
-        int aY = actor->giveLocation().giveY();
 
-
-        cityPtrSet->getWindow()->addActor(aX, aY, 0, actor);
-    }
-}
 
 
 // Luo pelaajaoliot "Game Start" signaalista.
 // Tallentaa kaupungin pelaajaolioiden osoitteet kaupungin pelaajaluetteloon
-void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
+std::shared_ptr<GameEngine> createPlayers(std::vector<std::pair<std::string, std::string>>& playerSpecs)
 {
     std::list <std::shared_ptr<Player>> playerList = {};
 
@@ -243,8 +205,19 @@ void createPlayers(std::vector<std::pair<std::string, std::string>> playerSpecs)
 
     //pelaajalista city-olioon
     cityPtrSet->setPlayerList(playerList);
-}
 
+
+
+    std::shared_ptr<GameEngine> myGame = std::make_shared<GameEngine>
+            (playerList.front(), cityPtrSet, cityPtrSet->getGoalLocation());
+    startingPointsSetup();
+    myGame->addActorItems();
+    myGame->addStaticItems();
+
+    return myGame;
+
+}
+/*
 void setBoard (std::vector<std::pair<std::string, std::string>> playerSpecs)
 {
     createPlayers(playerSpecs);
@@ -255,5 +228,5 @@ void setBoard (std::vector<std::pair<std::string, std::string>> playerSpecs)
     addActorItems();
     addStaticItems();
 
-}
+}*/
 

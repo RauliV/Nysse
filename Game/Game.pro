@@ -57,7 +57,7 @@ HEADERS += \
     actors/taxi.hh \
     actors/walk.hh \
     city.hh \
-    gameengine.h \
+    gameengine.hh \
     locationitem.hh \
     mainwindow.h \
     setboard.hh \

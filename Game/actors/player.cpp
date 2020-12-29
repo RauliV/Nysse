@@ -1,4 +1,4 @@
- #include "player.hh"
+#include "player.hh"
 #include "setboard.hh"
 
 Player::Player(std::string name, std::string colour):

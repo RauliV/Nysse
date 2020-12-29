@@ -128,7 +128,7 @@ void MainWindow::updateCoords(int nX, int nY)
 
 void MainWindow::updateActors()
 {
-    onTheTick(getPlayers().front());   //Tämä ehkä pitäisi saada järkevämpään paikkaan.
+    //onTheTick(getPlayers().front());   //Tämä ehkä pitäisi saada järkevämpään paikkaan.
 
     for( int i = 0; i < actors_.size();i++)
     {
@@ -232,7 +232,7 @@ void MainWindow::on_SettingsButton_clicked()
 void MainWindow::on_StartButton_clicked()
 {
     setTimer();
-    setBoard(playerSpecs_);
+    //setBoard(playerSpecs_);
     createPlayerPortraits();
     ui->StartButton->setDisabled(true);
     ui->SettingsButton->setDisabled(true);
