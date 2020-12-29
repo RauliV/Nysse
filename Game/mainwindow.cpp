@@ -300,6 +300,7 @@ void MainWindow::on_travelTimeLcd_overflow(int lkm)
 void MainWindow::on_MovePushButton_clicked()
 {
     qDebug() << "Liikutaan " + ui->DestinationValueLabel->text();
+    //emit endTurn();
     timer->start(tick_);
     ui->MovePushButton->setDisabled(true);
     ui->WithdrawPushButton_2->setDisabled(true);
