@@ -11,9 +11,11 @@ GameEngine::GameEngine(std::shared_ptr<Player>& playerInTurn,
     gameCity_(gameCity),
     goalLocation_(goalLocation)
 
-{
-
-    connect(gameCity->getWindow().get(), &MainWindow::tick, this, &GameEngine::onTheTick);
+{   MainWindow* window = gameCity->getWindow().get();
+    connect(window, &MainWindow::tick, this, &GameEngine::onTheTick);
+  //  connect(window, &MainWindow::enterBar, this, &GameEngine::enterBar);
+  //  connect(window, &MainWindow::enterStop, this, &GameEngine::enterStop);
+  //  connect(window, &MainWindow::startJourney, this, &GameEngine::startJourney);
 }
 
 GameEngine::~GameEngine()
