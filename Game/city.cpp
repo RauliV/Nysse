@@ -1,5 +1,5 @@
 #include "city.hh"
-
+#include "mainwindow.h"
 
 
 

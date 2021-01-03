@@ -3,6 +3,7 @@
 #include "setboard.hh"
 #include "ui_mainwindow.h"
 #include "QTime"
+#include "gameengine.hh"
 #include <QLayout>
 #include <QWidget>
 

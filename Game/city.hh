@@ -1,7 +1,7 @@
 #ifndef CITY_HH
 #define CITY_HH
 
-#include "mainwindow.h"
+
 #include "stops/bar.hh"
 #include "stops/atm.hh"
 #include "core/logic.hh"
@@ -13,6 +13,8 @@
 #include <QDebug>
 #include <QTime>
 #include <memory>
+
+class MainWindow; //forward declaration
 
 class City : public Interface::ICity
 {

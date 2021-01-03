@@ -8,7 +8,6 @@
 #include "city.hh"
 #include <QtDebug>
 
-
 class GameEngine : public QObject
 {
     Q_OBJECT

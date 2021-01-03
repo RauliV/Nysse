@@ -9,6 +9,7 @@
 #include "graphics/simpleactoritem.hh"
 #include "core/location.hh"
 #include "locationitem.hh"
+#include "gameengine.hh"
 
 #include <QGraphicsView>
 #include <QMainWindow>
@@ -49,7 +50,7 @@ public:
     //Sets the background map
     void setPicture(QImage &img);
     void createPlayerPortraits();
-    //Loads icons for items and assigns pointers to them
+    //Loads icons for items and assigns pointers to them Q_OBJECT
     void loadImages();
     void tickClock();
 
