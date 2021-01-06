@@ -10,6 +10,7 @@
 #include "core/location.hh"
 #include "locationitem.hh"
 #include "gameengine.hh"
+//#include "setboard.hh"
 
 #include <QGraphicsView>
 #include <QMainWindow>
@@ -61,7 +62,10 @@ public slots:
 signals:
     void gameStarted();
     void tick();
-    void enterBar(std::shared_ptr<Player> player, std::shared_ptr<Interface::IStop> bar);
+    void enterBar(std::shared_ptr<Bar> bar);
+    void enterStop(std::shared_ptr<CourseSide::Stop> stop);
+    void startJourney(std::shared_ptr<Interface::IVehicle> vechile,
+                      Interface::Location  location);
 
 
 
@@ -107,6 +111,7 @@ private:
     QVector<ActorItem*> actors_;
     QVector<LocationItem*> places_;
     CourseSide::SimpleActorItem* last_;
+    std::shared_ptr<GameEngine> engine_;
 
     int width_ = 500; //pxls
     int height_ = 500;

@@ -46,6 +46,7 @@ void MainWindow::setTimer()
 
     connect(timer, &QTimer::timeout, this, &MainWindow::updateActors);
 
+
     ui->travelTimeLcd->setPalette(Qt::red);
     eTime_.start();
     connect(timer, &QTimer::timeout, this, &MainWindow::tickClock);
@@ -83,6 +84,7 @@ void MainWindow::tickClock()
 
     QString elaplsedTime = QString::fromStdString(minutesStr +":" +secondsStr);
     ui->travelTimeLcd->display(elaplsedTime);
+    connect(engine_.get(), &GameEngine::nextTurn, this, &MainWindow::newTurn);
     emit tick();
 }
 
@@ -245,6 +247,8 @@ void MainWindow::savePlayerInfo(int playerCount, std::vector<std::pair<std::stri
     ui->StartButton->setEnabled(true);
     playerCount_ = playerCount;
     playerSpecs_ = playerSpecs;
+    std::shared_ptr<GameEngine> engine_ = createPlayers(playerSpecs_);
+
 }
 
 std::shared_ptr<QImage> MainWindow::getActorImage(std::shared_ptr<Interface::IActor> actor)
@@ -383,8 +387,8 @@ void MainWindow::on_ScooterCheckBox_toggled(bool checked)
 void MainWindow::on_EnterBarPushButton_clicked()
 {
     timer->start(tick_);
-    emit enterBar(playerInTurn_, destination_);
-
+    std::shared_ptr<Bar> bar = std::dynamic_pointer_cast<Bar>(destination_);
+    emit enterBar(bar);
 }
 
 void MainWindow::on_WithdrawPushButton_2_clicked()

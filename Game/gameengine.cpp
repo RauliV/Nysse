@@ -1,5 +1,6 @@
 #include "gameengine.hh"
 #include "setboard.hh"
+#include "mainwindow.h"
 
 //#include "mainwindow.h"
 
@@ -14,9 +15,9 @@ GameEngine::GameEngine(std::shared_ptr<Player>& playerInTurn,
 
 {   MainWindow* window = gameCity->getWindow().get();
     connect(window, &MainWindow::tick, this, &GameEngine::onTheTick);
-  //  connect(window, &MainWindow::enterBar, this, &GameEngine::enterBar);
-  //  connect(window, &MainWindow::enterStop, this, &GameEngine::enterStop);
-  //  connect(window, &MainWindow::startJourney, this, &GameEngine::startJourney);
+    connect(window, &MainWindow::enterBar, this, &GameEngine::enterBar);
+    connect(window, &MainWindow::enterStop, this, &GameEngine::enterStop);
+    connect(window, &MainWindow::startJourney, this, &GameEngine::startJourney);
 }
 
 GameEngine::~GameEngine()
@@ -95,7 +96,7 @@ double calculateCost(std::shared_ptr<Player> player,
 
 //Pelaaja baariin
 
-QString GameEngine::enterBar(std::shared_ptr<Bar>& bar)
+QString GameEngine::enterBar(std::shared_ptr<Bar> bar)
 {
     //tarkista onko rahee
 

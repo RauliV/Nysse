@@ -1,7 +1,6 @@
 #ifndef GAMEENGINE_HH
 #define GAMEENGINE_HH
 
-#include "mainwindow.h"
 #include "actors/player.hh"
 #include "core/location.hh"
 #include "actors/stop.hh"
@@ -27,7 +26,7 @@ public:
 public slots:
 
     void onTheTick();
-    QString enterBar(std::shared_ptr<Bar>& bar);  //Palauttaa virheilmoitustekstin
+    QString enterBar(std::shared_ptr<Bar> bar);  //Palauttaa virheilmoitustekstin
     QString enterStop(std::shared_ptr<CourseSide::Stop> stop);
     QString startJourney(std::shared_ptr<Interface::IVehicle> vechile,
                          Interface::Location  location);
