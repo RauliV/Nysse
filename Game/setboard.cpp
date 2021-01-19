@@ -193,24 +193,26 @@ std::string getSubClass (std::shared_ptr<Interface::IActor> iActor )
 std::shared_ptr<GameEngine> createPlayers(std::vector<std::pair<std::string, std::string>>& playerSpecs)
 {
     std::list <std::shared_ptr<Player>> playerList = {};
+    std::vector<std::shared_ptr<Player>> playerVec ={};
 
     for (auto const&  player : playerSpecs)
     {
         std::shared_ptr<Player> playerPointer =
                 std::make_shared<Player> (player.first, player.second);
-
+        //playerPointer->resetRoute();
         playerList.push_back(playerPointer);
+        playerVec.push_back(playerPointer);
         cityPtrSet->addActor(playerPointer);
     }
 
     //pelaajalista city-olioon
     cityPtrSet->setPlayerList(playerList);
 
-
-
+    startingPointsSetup();
+    auto gg = playerList.front();
     std::shared_ptr<GameEngine> myGame = std::make_shared<GameEngine>
             (playerList.front(), cityPtrSet, cityPtrSet->getGoalLocation());
-    startingPointsSetup();
+    myGame->addPlayerVec(playerVec);
     myGame->addActorItems();
     myGame->addStaticItems();
 

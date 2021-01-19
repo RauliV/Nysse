@@ -41,11 +41,7 @@ public:
     void setTick(int t);
     void setTimer();
 
-    //Function to add buses and players to the map
-    void addActor(int locX, int locY, int type = 0, std::shared_ptr<Interface::IActor> actor = nullptr);
-    //Function to add bars, atms and stops to the map
-    void addStaticItem(int locX, int locY, std::shared_ptr<Interface::IStop> place = nullptr);
-    void updateCoords(int nX, int nY);
+   void updateCoords(int nX, int nY);
     //Function to update item positions on the map
     void updateActors();
     //Sets the background map
@@ -56,6 +52,12 @@ public:
     void tickClock();
 
 public slots:
+
+        //Function to add buses and players to the map
+        void addActor(int locX, int locY, int type = 0, std::shared_ptr<Interface::IActor> actor = nullptr);
+        //Function to add bars, atms and stops to the map
+        void addStaticItem(int locX, int locY, std::shared_ptr<Interface::IStop> place = nullptr);
+
         void mouseClicked(std::shared_ptr<Interface::IStop> place);
         void newTurn(std::shared_ptr<Player>& player);
 

@@ -30,7 +30,7 @@ Interface::Location Player::giveLocation() const
 
 bool Player::isRemoved() const
 {
-
+    return false;
 }
 
 Player::~Player()

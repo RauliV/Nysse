@@ -9,11 +9,12 @@
 GameEngine::GameEngine(std::shared_ptr<Player>& playerInTurn,
                        std::shared_ptr<City>& gameCity,
                        Interface::Location goalLocation):
-    playerInTurn_(playerInTurn),
+    playerInT_(playerInTurn),
     gameCity_(gameCity),
     goalLocation_(goalLocation)
 
 {   MainWindow* window = gameCity->getWindow().get();
+
     connect(window, &MainWindow::tick, this, &GameEngine::onTheTick);
     connect(window, &MainWindow::enterBar, this, &GameEngine::enterBar);
     connect(window, &MainWindow::enterStop, this, &GameEngine::enterStop);
@@ -24,14 +25,18 @@ GameEngine::~GameEngine()
 {
 
 }
-//Loppufanfaarit/Aika ym.
+
+void GameEngine::addPlayerVec(std::vector<std::shared_ptr<Player> > playerVec)
+{
+    playerVec_ = playerVec;
+}
 
 void GameEngine::setGoalLocation(Interface::Location location)
 {
     goalLocation_ = location;
 }
 
-void theEnd()
+void GameEngine::theEnd()
 {
 
 }
@@ -66,7 +71,7 @@ std::shared_ptr<std::vector<Interface::Location>> calculatePlayerRoute (Interfac
 
 }
 
-double calculateCost(std::shared_ptr<Player> player,
+double GameEngine::calculateCost(std::shared_ptr<Player> player,
                      std::shared_ptr<Interface::IVehicle> vehicle,
                      Interface::Location targetLocation)
 {
@@ -100,13 +105,13 @@ QString GameEngine::enterBar(std::shared_ptr<Bar> bar)
 {
     //tarkista onko rahee
 
-    if (playerInTurn_->getCash() < 6) // Tästä vakio!! 6 e tuoppi
+    if (playerInT_->getCash() < 6) // Tästä vakio!! 6 e tuoppi
     {
         return "cantDrinkCash";
     }
     else
-    {   playerInTurn_->drink(1);
-        playerInTurn_->spendCash(6);
+    {   playerInT_->drink(1);
+        playerInT_->spendCash(6);
         if (bar->isPilotInBar())
         {
             //pilotIsFound();
@@ -116,9 +121,9 @@ QString GameEngine::enterBar(std::shared_ptr<Bar> bar)
 
         //Odotetaan baarissa tickejä/siirretään vain vuoro?
         // tässä lopetetaan vuoro
-        playerInTurn_->enterBar();
-        playerInTurn_->setIdle(false); //Ota pois seuraavan vuoron jälkeen.
-        playerInTurn_->resetRoute();
+        playerInT_->enterBar();
+        playerInT_->setIdle(false); //Ota pois seuraavan vuoron jälkeen.
+        playerInT_->resetRoute();
         return "Hyvvee kaliaa";
     }
 }
@@ -156,7 +161,7 @@ QString GameEngine::enterStop(
                    nToWait = nysse;
                    break;
                }
-               else nToWait = nullptr;
+               nToWait = nullptr;
            }
         }
     }
@@ -168,17 +173,17 @@ QString GameEngine::enterStop(
         std::shared_ptr<CourseSide::Stop> nNextStop;
 
         //Tutkitaan bussimatkustamisen ehdot
-        if (playerInTurn_->getDrunkness() > 3)
+        if (playerInT_->getDrunkness() > 3)
          {
              return "cantMoveDrunk";
 
          }
-         else if (playerInTurn_->getCash() < BUSS_FARE)
+         if (playerInT_->getCash() < BUSS_FARE)
          {
              return "cantMoveCash";
          }
 
-         else if (stop == nFinalStop)
+         if (stop == nFinalStop)
          {
             return "cantMoveFinalStop";
          }
@@ -197,13 +202,13 @@ QString GameEngine::enterStop(
 
              //Matka seuraavalle pysäkille voi alkaa
              Interface::Location nextLoc = nNextStop->getLocation();
-             playerInTurn_->spendCash(BUSS_FARE);
-             playerInTurn_->resetRoute();
-             playerInTurn_->getInVechile(nToWait); //pelaajan ikonin muutos
+             playerInT_->spendCash(BUSS_FARE);
+             playerInT_->resetRoute();
+             playerInT_->getInVechile(nToWait); //pelaajan ikonin muutos
              std::shared_ptr<CourseSide::Nysse> nysse =
                      std::dynamic_pointer_cast<CourseSide::Nysse> (nToWait);
-             playerInTurn_->setChosenLocation(nextLoc);
-             playerInTurn_->setIdle(false);
+             playerInT_->setChosenLocation(nextLoc);
+             playerInT_->setIdle(false);
              return "";
          }
      }
@@ -214,7 +219,7 @@ QString GameEngine::enterStop(
 }
 
 
-int calculateBatteryUsage(std::shared_ptr<Scooter> scooter,
+int GameEngine::calculateBatteryUsage(std::shared_ptr<Scooter> scooter,
                           Interface::Location targetLocation)
 {
     auto routeVector = calculatePlayerRoute(scooter->giveLocation(),
@@ -237,12 +242,12 @@ QString GameEngine::startJourney (std::shared_ptr<Interface::IVehicle> vechile,
                 std::dynamic_pointer_cast<Scooter> (vechile);
 
 
-        if (playerInTurn_->getDrunkness() > scooter->getMaxPromilleLevel())
+        if (playerInT_->getDrunkness() > scooter->getMaxPromilleLevel())
          {
              return "cantMoveDrunk";
 
          }
-         else if (playerInTurn_->getCash() < calculateCost(playerInTurn_, scooter, targetLocation))
+         else if (playerInT_->getCash() < calculateCost(playerInT_, scooter, targetLocation))
          {
              return "cantMoveCash";
          }
@@ -255,11 +260,11 @@ QString GameEngine::startJourney (std::shared_ptr<Interface::IVehicle> vechile,
          {
             //Aloitetaan matka - muista lisätä takeSteppiin myös rahan
             //ja akun kuluminen
-            playerInTurn_->resetRoute();
-            playerInTurn_->getInVechile(scooter);
-            playerInTurn_->setIdle(false);
-            playerInTurn_->setChosenLocation(targetLocation);
-            playerInTurn_->setRouteVector(calculatePlayerRoute(playerInTurn_->giveLocation(),
+            playerInT_->resetRoute();
+            playerInT_->getInVechile(scooter);
+            playerInT_->setIdle(false);
+            playerInT_->setChosenLocation(targetLocation);
+            playerInT_->setRouteVector(calculatePlayerRoute(playerInT_->giveLocation(),
                                                         targetLocation));
             return "matka kohteeseen alkaa";
          }
@@ -272,12 +277,12 @@ QString GameEngine::startJourney (std::shared_ptr<Interface::IVehicle> vechile,
                std::dynamic_pointer_cast<Taxi> (vechile);
 
 
-       if (playerInTurn_->getDrunkness() > taxi->getMaxPromilleLevel())
+       if (playerInT_->getDrunkness() > taxi->getMaxPromilleLevel())
         {
             return "cantMoveDrunk";
 
         }
-        else if (playerInTurn_->getCash() < calculateCost(playerInTurn_, taxi, targetLocation))
+        else if (playerInT_->getCash() < calculateCost(playerInT_, taxi, targetLocation))
         {
             return "cantMoveCash";
         }
@@ -285,11 +290,11 @@ QString GameEngine::startJourney (std::shared_ptr<Interface::IVehicle> vechile,
         else
         {
            //Aloitetaan matka
-           playerInTurn_->resetRoute();
-           playerInTurn_->getInVechile(taxi);
-           playerInTurn_->setIdle(false);
-           playerInTurn_->setChosenLocation(targetLocation);
-           playerInTurn_->setRouteVector(calculatePlayerRoute(playerInTurn_
+           playerInT_->resetRoute();
+           playerInT_->getInVechile(taxi);
+           playerInT_->setIdle(false);
+           playerInT_->setChosenLocation(targetLocation);
+           playerInT_->setRouteVector(calculatePlayerRoute(playerInT_
                                          ->giveLocation(), targetLocation));
            return "Matka kohteeseen alkaa";
         }
@@ -331,12 +336,29 @@ void GameEngine::movePlayer(std::shared_ptr<Player> player){
 void GameEngine::endTurn()
 {   //         gameCity_->getPlayerList().back()
 
-    if (playerInTurn_ == getPlayers().back())
+    QString qstrPlayer = QString::fromStdString(playerInT_->getName());
+    qDebug() << "1" << qstrPlayer;
+
+    if (playerInT_ == playerVec_.back())
     {
-        playerInTurn_ = getPlayers().front();
+        playerInT_ = getPlayers().front();
+        QString qstrPlayer = QString::fromStdString(playerInT_->getName());
+        qDebug() << "2" << qstrPlayer;
     }
     else
     {
+        for (unsigned long it = 0; it < playerVec_.size(); it++)
+        {
+            if (playerVec_.at(it) == playerInT_){
+                playerInT_ = playerVec_.at(it+1);
+                QString qstrPlayer = QString::fromStdString(playerInT_->getName());
+                qDebug() << "3" << qstrPlayer;
+                break;
+            }
+        }
+  /*      std::list<std::shared_ptr<Player>>::iterator it =
+                getPlayers().begin();
+
         for (std::list<std::shared_ptr<Player>>::iterator it = getPlayers().begin();
              it != getPlayers().end(); it ++)
         {
@@ -344,37 +366,44 @@ void GameEngine::endTurn()
             if (*it == playerInTurn_)
             {
                 playerInTurn_ = *(it++);
+                break;
             }
         }
+        */
     }
 }
 
 void GameEngine::onTheTick()
 {
-    if (playerInTurn_->giveLocation() == goalLocation_)
+    playerInT_->drink(7);  // TESTI - MUISTA POISTAA
+    auto trest = playerInT_->giveLocation();
+
+
+    auto test3 = goalLocation_;
+    if (playerInT_->giveLocation() == goalLocation_)
     {
         theEnd();
     }
 
     //jos pelaaja baarissa - vuoro menee siinä.
-    if (playerInTurn_ -> isInBar())
+    if (playerInT_ -> isInBar())
     {
-        playerInTurn_->exitBar();
-        playerInTurn_->setIdle(true);
+        playerInT_->exitBar();
+        playerInT_->setIdle(true);
     }
     else
-    {   if (playerInTurn_->isIdle())
+    {   if (playerInT_->isIdle())
         {
-            emit nextTurn(playerInTurn_);
+            emit nextTurn(playerInT_);
         }
         //Jos pelaaja saapunut kohteeseen
-        if (playerInTurn_->giveLocation() == playerInTurn_->getChosenLocation())
+        if (playerInT_->giveLocation() == playerInT_->getChosenLocation())
         {
-            playerInTurn_->setIdle(true);  //tästä seuraavaan vuoroon
+            playerInT_->setIdle(true);  //tästä seuraavaan vuoroon
         }
         else
         {
-            movePlayer(playerInTurn_);
+            movePlayer(playerInT_);
         }
     }
     endTurn();  //siirtyy seuraavaan pelaajaan

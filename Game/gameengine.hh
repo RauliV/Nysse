@@ -21,6 +21,8 @@ public:
     void setGoalLocation(Interface::Location);
     void addActorItems();
     void addStaticItems();
+    void addPlayerVec(std::vector<std::shared_ptr<Player>> playerVec);
+
 
 
 public slots:
@@ -38,14 +40,24 @@ signals:
     void addActor(int aX, int aY, int type,
                   std::shared_ptr<Interface::IActor> actor);
 
+
+
+
 private:
+
+    void theEnd();
+    double calculateCost(std::shared_ptr<Player> player,
+                         std::shared_ptr<Interface::IVehicle> vehicle,
+                         Interface::Location targetLocation);
+    int calculateBatteryUsage(std::shared_ptr<Scooter> scooter,
+                              Interface::Location targetLocation);
 
     void movePlayer(std::shared_ptr<Player> player);
     void endTurn();
-
+    std::shared_ptr<Player>& playerInT_;
     std::shared_ptr<City>& gameCity_;
     Interface::Location& goalLocation_;
-    std::shared_ptr<Player>& playerInTurn_;
+    std::vector<std::shared_ptr<Player>> playerVec_;
 
 
 };

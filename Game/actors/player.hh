@@ -54,13 +54,13 @@ public:
 
 
 
+    Interface::Location loc_;
 
 
 private:
     int cash_;
     int drunkness_;
     int bank_;
-    Interface::Location loc_;
     bool idle_ = true;
     std::string name_;
     std::string colour_;

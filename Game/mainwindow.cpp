@@ -84,8 +84,12 @@ void MainWindow::tickClock()
 
     QString elaplsedTime = QString::fromStdString(minutesStr +":" +secondsStr);
     ui->travelTimeLcd->display(elaplsedTime);
-    connect(engine_.get(), &GameEngine::nextTurn, this, &MainWindow::newTurn);
-    emit tick();
+
+
+    //tässä kohtaa engine rikki
+
+    engine_->onTheTick();
+
 }
 
 void MainWindow::mouseClicked(std::shared_ptr<Interface::IStop> place)
@@ -247,8 +251,12 @@ void MainWindow::savePlayerInfo(int playerCount, std::vector<std::pair<std::stri
     ui->StartButton->setEnabled(true);
     playerCount_ = playerCount;
     playerSpecs_ = playerSpecs;
-    std::shared_ptr<GameEngine> engine_ = createPlayers(playerSpecs_);
+    //std::shared_ptr<GameEngine>
+    engine_ = createPlayers(playerSpecs_);
 
+    connect(engine_.get(), &GameEngine::nextTurn, this, &MainWindow::newTurn);
+
+    // tässä kohtaa engine_ on vielä oikein
 }
 
 std::shared_ptr<QImage> MainWindow::getActorImage(std::shared_ptr<Interface::IActor> actor)
