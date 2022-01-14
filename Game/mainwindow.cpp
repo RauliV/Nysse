@@ -252,9 +252,10 @@ void MainWindow::savePlayerInfo(int playerCount, std::vector<std::pair<std::stri
     playerCount_ = playerCount;
     playerSpecs_ = playerSpecs;
     //std::shared_ptr<GameEngine>
-    engine_ = createPlayers(playerSpecs_);
+    //GameEngine* engine = new GameEngine(createPlayers(playerSpecs_));
+    engine_        = createPlayers(playerSpecs_);
 
-    connect(engine_.get(), &GameEngine::nextTurn, this, &MainWindow::newTurn);
+    //connect(engine_.get(), &GameEngine::nextTurn, this, &MainWindow::newTurn);
 
     // tässä kohtaa engine_ on vielä oikein
 }

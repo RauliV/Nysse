@@ -36,6 +36,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
 
     virtual ~MainWindow();
+    std::shared_ptr<GameEngine> engine_;
 
     void setSize(int w, int h);
     void setTick(int t);
@@ -113,7 +114,6 @@ private:
     QVector<ActorItem*> actors_;
     QVector<LocationItem*> places_;
     CourseSide::SimpleActorItem* last_;
-    std::shared_ptr<GameEngine> engine_;
 
     int width_ = 500; //pxls
     int height_ = 500;
